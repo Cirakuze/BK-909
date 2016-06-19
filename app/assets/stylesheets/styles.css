@@ -1,0 +1,721 @@
+* {
+  font-family: 'tr-909regular';
+  line-height: 0.8;
+}
+
+/*RESET*/
+body, h1, p, div {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #dcddc8;
+}
+
+/*HEADER*/
+.app {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  /*background-color: #789a8d;*/
+}
+
+.header {
+  z-index: 9999;
+  height: 130px;
+}
+
+.header .title {
+  width: 500px;
+  margin: auto;
+  text-align: center;
+  font-size: 100px;
+  position: relative;
+  top:10px;
+  color: #736C78;
+  background: transparent;
+}
+
+.header .inspiration {
+  font-size: 14px;
+  text-align: center;
+  position: relative;
+  top: 15px;
+}
+
+.header .creation {
+  font-size: 14px;
+  text-align: center;
+  position: relative;
+  top: 25px;
+  text-decoration: none;
+  z-index: 9999;
+}
+
+.header .creation a {
+  text-decoration: none;
+  color: #39bfdd;
+}
+
+/*DRUMSET*/
+
+.drumset {
+  height: 400px;
+  width: 500px;
+  margin: auto;
+  position: relative;
+  top: -150px;
+  z-index: 5;
+  /*background-color: #7002dd;*/
+}
+
+.rug {
+  position: relative;
+  top: -50px;
+  left: -25px;
+  border-bottom: 300px solid #383D39;
+	border-left: 50px solid transparent;
+	border-right: 50px solid transparent;
+	height: 0;
+	width: 460px;
+}
+
+.BK-909 {
+  position: relative;
+  z-index: 500;
+  top: -85px;
+  left: 0px;
+  background-color: #383D39;
+}
+
+.BK-909 a {
+  text-decoration: none;
+  color: #39bfdd;
+}
+
+div.app-title {
+  position: relative;
+  z-index: 500;
+  top: -85px;
+  left: 0px;
+  color: #cbc3d5;
+}
+
+.app-title {
+  top: 500px;
+}
+
+.drumpiece {
+  height: 100px;
+  width: 100px;
+  position: absolute;
+}
+
+.drum-head {
+  background-color: #ABA494;
+  border: solid 1px #b5a5b9;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  position: absolute;
+  z-index: 15;
+  transform: rotateX(50deg);
+}
+
+.drum-name {
+  margin-top: 35px;
+  text-align: center;
+}
+
+.drum-key-name {
+  text-align: center;
+}
+
+.drumpiece:nth-child(8) .drum-name,
+.drumpiece:nth-child(9) .drum-name {
+  margin-top: 75px;
+}
+
+.drum-body {
+  background-color: #483332;
+  border: solid 3px #D5DDE0;
+  width: 99px;
+  height: 99px;
+  border-bottom-left-radius:50%;
+  border-bottom-right-radius:50%;
+  position: absolute;
+  z-index: 10;
+  top: 35px;
+  transform: rotateX(50deg);
+}
+
+.drumpiece:first-child {
+  /*RIDE*/
+  /*background-color: #648eaa;*/
+  top: 100px;
+  right: 25px;
+}
+
+.ride-cymbal-struck {
+  animation: ride-cymbal-stricken 0.1s ease;
+}
+
+@keyframes ride-cymbal-stricken {
+  0% {
+    transform: skewY(0deg);
+  }
+  50% {
+    transform: skewY(-15deg);
+  }
+  100% {
+    transform: skewY(15deg);
+  }
+}
+
+.drumpiece:nth-child(2) {
+  /*CRASH*/
+  /*background-color: #64aa6d;*/
+  top: 100px;
+  left: 25px;
+}
+
+.crash-cymbal-struck {
+  animation: crash-cymbal-stricken 0.1s ease;
+}
+
+@keyframes crash-cymbal-stricken {
+  0% {
+    transform: skewY(0deg);
+  }
+  50% {
+    transform: skewY(-15deg);
+  }
+  100% {
+    transform: skewY(15deg);
+  }
+}
+
+.drumpiece:nth-child(3) {
+  /*HI*/
+  /*background-color: #c9aa9f;*/
+  top: 155px;
+  left: 125px;
+}
+
+.hi-tom-struck {
+  animation: hi-tom-stricken 0.3s ease;
+}
+
+@keyframes hi-tom-stricken {
+  50% {
+    top: 158px;
+  }
+}
+
+.drumpiece:nth-child(4) {
+  /*MID*/
+  /*background-color: #f09398;*/
+  top: 155px;
+  left: 280px;
+}
+
+.mid-tom-struck {
+  animation: mid-tom-stricken 0.3s ease;
+}
+
+@keyframes mid-tom-stricken {
+  50% {
+    top: 158px;
+  }
+}
+
+.drumpiece:nth-child(5) {
+  /*LOW*/
+  /*background-color: #52eea1;*/
+  top: 230px;
+  right: 50px;
+}
+
+.low-tom-struck {
+  animation: low-tom-stricken 0.3s ease;
+}
+
+@keyframes low-tom-stricken {
+  50% {
+    top: 233px;
+  }
+}
+
+.drumpiece:nth-child(6) {
+  /*HAT*/
+  /*background-color: #ac3c5f;*/
+  top: 230px;
+  left: 0;
+  z-index: 20;
+}
+
+.hi-hat-struck {
+  animation: hi-hat-stricken 0.1s ease;
+}
+
+@keyframes hi-hat-stricken {
+  0% {
+    transform: skewY(0deg);
+  }
+  50% {
+    transform: skewY(-15deg);
+  }
+  100% {
+    transform: skewY(15deg);
+  }
+}
+
+.drumpiece:nth-child(7) {
+  /*SNARE*/
+  /*background-color: #6d40fc;*/
+  top: 270px;
+  left: 110px;
+}
+
+.snare-struck {
+  animation: snare-stricken 0.3s ease;
+}
+
+@keyframes snare-stricken {
+  50% {
+    top: 273px;
+  }
+}
+
+.drumpiece:nth-child(8) {
+  /*BASSLEFT*/
+  /*background-color: #8b4627;*/
+  top: 310px;
+  left: 35px;
+}
+
+.bass-left-struck {
+  animation: bassleft-stricken 0.3s ease;
+}
+
+@keyframes bassleft-stricken {
+  50% {
+    top: 307px;
+  }
+}
+
+.drumpiece:nth-child(9) {
+  /*BASSRIGHT*/
+  /*background-color: #8b4627;*/
+  top: 310px;
+  left: 195px;
+}
+
+.bass-right-struck {
+  animation: bassright-stricken 0.3s ease;
+}
+
+@keyframes bassright-stricken {
+  50% {
+    top: 307px;
+  }
+}
+
+/*DRUM-SPECIFICS*/
+
+/*CYMBALS*/
+.drumpiece:first-child .drum-body,
+.drumpiece:nth-child(2) .drum-body,
+.drumpiece:nth-child(6) .drum-body,
+.drumpiece:first-child .drum-rim,
+.drumpiece:nth-child(2) .drum-rim,
+.drumpiece:nth-child(6) .drum-rim {
+  display: none;
+}
+
+.drumpiece:first-child .drum-head,
+.drumpiece:nth-child(2) .drum-head,
+.drumpiece:nth-child(6) .drum-head {
+  background-color: #e4a647;
+  border: solid 3px #cf9338;
+}
+
+.drumpiece:first-child .cymbal-stand,
+.drumpiece:nth-child(2) .cymbal-stand,
+.drumpiece:nth-child(6) .cymbal-stand {
+  width: 3px;
+  height: 175px;
+  background-color: #919896;
+  position: relative;
+  left: 50px;
+  top: 50px;
+}
+
+.cymbal-stand-legs {
+  position: relative;
+  z-index: 25;
+  top: 405px;
+}
+
+.cymbal-stand-legs-1,
+.cymbal-stand-legs-1,
+.cymbal-stand-legs-1 {
+  width: 3px;
+  height: 25px;
+  background-color: #919896;
+  position: relative;
+  left: 40px;
+  top: 45px;
+  transform: rotateZ(50deg);
+}
+
+.cymbal-stand-legs-2,
+.cymbal-stand-legs-2,
+.cymbal-stand-legs-2 {
+  width: 3px;
+  height: 25px;
+  background-color: #919896;
+  position: relative;
+  left: 60px;
+  top: 20px;
+  transform: rotateZ(-50deg);
+}
+
+.cymbal-stand-legs-3,
+.cymbal-stand-legs-3,
+.cymbal-stand-legs-3 {
+  width: 3px;
+  height: 25px;
+  background-color: #919896;
+  position: relative;
+  left: 50px;
+  top: 1px;
+}
+
+/*LOW-TOM*/
+.drumpiece:nth-child(5) .drum-head {
+  width: 125px;
+  height: 125px;
+  border-radius: 62.5px;
+}
+
+.drumpiece:nth-child(3) .drum-rim,
+.drumpiece:nth-child(4) .drum-rim {
+  position: absolute;
+  z-index: 16;
+  border: solid 3px #D5DDE0;
+  width: 98px;
+  height: 98px;
+  border-radius: 50px;
+  transform: rotateX(50deg);
+}
+
+.drumpiece:nth-child(5) .drum-rim {
+  position: absolute;
+  z-index: 16;
+  border: solid 3px #D5DDE0;
+  width: 123px;
+  height: 123px;
+  border-radius: 62.5px;
+  transform: rotateX(50deg);
+}
+
+.drumpiece:nth-child(5) .drum-body {
+  width: 123px;
+  height: 150px;
+}
+
+/*SNARE*/
+.drumpiece:nth-child(7) .drum-head {
+  width: 110px;
+  height: 110px;
+  border-radius: 55px;
+}
+
+.drumpiece:nth-child(7) .drum-rim {
+  position: absolute;
+  z-index: 16;
+  border: solid 3px #D5DDE0;
+  width: 108px;
+  height: 108px;
+  border-radius: 55px;
+  transform: rotateX(50deg);
+}
+
+.drumpiece:nth-child(7) .drum-body {
+  width: 109px;
+  height: 110px;
+}
+
+.snare-stand-legs {
+  position: relative;
+  z-index: 9;
+  top: 250px;
+  left: 165px;
+}
+
+.snare-stand {
+  width: 3px;
+  height: 150px;
+  background-color: #919896;
+  position: relative;
+}
+
+.snare-stand-legs-1,
+.snare-stand-legs-1,
+.snare-stand-legs-1 {
+  width: 3px;
+  height: 25px;
+  background-color: #919896;
+  position: relative;
+  left: -10px;
+  top: -5px;
+  transform: rotateZ(50deg);
+}
+
+.snare-stand-legs-2,
+.snare-stand-legs-2,
+.snare-stand-legs-2 {
+  width: 3px;
+  height: 25px;
+  background-color: #919896;
+  position: relative;
+  left: 10px;
+  top: -30px;
+  transform: rotateZ(-50deg);
+}
+
+.snare-stand-legs-3,
+.snare-stand-legs-3,
+.snare-stand-legs-3 {
+  width: 3px;
+  height: 25px;
+  background-color: #919896;
+  position: relative;
+  left: 0px;
+  top: -50px;
+}
+
+/*BASS*/
+.drumpiece:nth-child(8) .drum-head,
+.drumpiece:nth-child(9) .drum-head {
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+  z-index: 3;
+  transform: rotateX(10deg);
+}
+
+.drumpiece:nth-child(8) .drum-rim,
+.drumpiece:nth-child(9) .drum-rim {
+  position: absolute;
+  z-index: 3;
+  border: solid 3px #D5DDE0;
+  width: 148px;
+  height: 148px;
+  border-radius: 75px;
+  transform: rotateX(10deg);
+}
+
+.drumpiece:nth-child(8) .drum-body,
+.drumpiece:nth-child(9) .drum-body {
+  width:150px;
+  height:150px;
+  border-bottom-left-radius:25%;
+  border-bottom-right-radius:25%;
+  border-top-left-radius:50%;
+  border-top-right-radius:50%;
+  z-index: 2;
+  top: -50px;
+  transform: rotateX(10deg);
+}
+
+
+
+
+/*SEQUENCER*/
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.sequencer-wrapper {
+  width: 100%;
+  position: relative;
+  top: 105px;
+}
+
+.sequencer {
+  position: relative;
+  top: -150px;
+  width: 865px;
+  margin: auto;
+  perspective: 1000px;
+}
+
+.sequencer div {
+  float: left;
+  transform: rotateX(35deg);
+}
+
+.button {
+  width: 46px;
+  height: 75px;
+  background-color: #EEF1F6;
+  margin: 2px;
+  position: relative;
+  border: solid 2px #605e5e;
+  perspective: 1000px;
+}
+
+.button-led {
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #4e2929;
+  position: relative;
+  left: 20px;
+  top: 15px;
+}
+
+.button-led.LED-ON {
+  background-color: #de1616;
+}
+
+.button-led p {
+  margin-top: 35px;
+}
+
+div.step-led {
+  position: absolute;
+  top: 60px;
+  right: -2px;
+  margin-top: 3px;
+  width: 46px;
+  height: 25px;
+  background-color: #EEF1F6;
+  border: solid 2px #605e5e;
+  transform: rotateX(75deg);
+}
+
+.step-led.LED-ON {
+  background-color: #de1616;
+}
+
+
+
+
+
+/*CONTROLLS*/
+
+.sequencer-controlls-wrapper {
+  position: relative;
+  perspective: 1000px;
+  top: -140px;
+}
+
+.sequencer-controlls {
+  width: 844px;
+  position: relative;
+  margin: 0 auto;
+  margin-top: 35px;
+  transform: rotateX(-15deg);
+  border: solid 2px #605e5e;
+  background-color: #EEF1F6;
+}
+
+.sequencer-controlls * {
+  transform: rotateX(-15deg);
+}
+
+.sequencer-controlls > p {
+  margin-top: 15px;
+  margin-left: 25px;
+  position: relative;
+  top: 5px;
+}
+
+.start-sequence i:hover,
+.reset-sequence i:hover {
+  cursor: pointer;
+}
+
+.sequencer-controlls > input {
+  width: 50px;
+  font-size: 18px;
+  margin-left: 5px;
+  margin-top: 15px;
+  position: relative;
+  top: 3px;
+}
+
+.sequencer-controlls > * {
+  float: left;
+}
+
+.tempo-controlls i.fa {
+  width: 16px;
+  font-size: 12px;
+  border: solid 2px #383838;
+  text-align: center;
+  position: absolute;
+  z-index: 9000;
+  left: -15px;
+}
+
+div.tempo-controlls i.fa#vol-up {
+  z-index: 9999;
+  top: 10px;
+}
+
+div.tempo-controlls i.fa#vol-up:hover {
+  cursor: pointer;
+}
+
+div.tempo-controlls i.fa#vol-down {
+  top: 30px;
+}
+
+div.tempo-controlls i.fa#vol-down:hover {
+  cursor: pointer;
+}
+
+.sequencer-display {
+  width: 500px;
+  text-align: center;
+  font-size: 24px;
+  /*background-color: #0e3771;*/
+}
+
+.sequencer-display > div {
+  position: relative;
+  left: 50px;
+  top: 10px;
+  float: left;
+  width: 230px;
+  height: 30px;
+  /*background-color: #36e07a;*/
+}
+
+/*INSTRUCTIONS*/
+
+div.instructions {
+  width: 525px;
+  margin: auto;
+  border: solid 1px black;
+  margin: auto;
+  padding: 10px;
+  text-align: left;
+  position: relative;
+  top: -150px;
+  left: 0px;
+}
+
+i.fa {
+  font-size: 50px;
+  margin-left: 25px;
+}
