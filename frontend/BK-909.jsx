@@ -9,7 +9,7 @@ var App = React.createClass({
       <div className="app">
         <div className="header">
           <h1 className="title">
-            JS-909
+            BK-909
           </h1>
           <p className="inspiration">Inspired by TR-909</p>
           <p className="creation">created by

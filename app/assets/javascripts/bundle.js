@@ -62,7 +62,7 @@
 	        React.createElement(
 	          'h1',
 	          { className: 'title' },
-	          'JS-909'
+	          'BK-909'
 	        ),
 	        React.createElement(
 	          'p',
