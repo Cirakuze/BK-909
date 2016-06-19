@@ -1,3 +1,4 @@
 # BK-909
 
-is a browser drumset with sounds synthesized from WebAudioApi.
+Inspired by TR-909, coded by Bada Kim.
+Drums synthesized from WebAudioApi.
