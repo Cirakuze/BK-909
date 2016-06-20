@@ -31533,7 +31533,6 @@
 	    this.setState({ currentStep: 1 });
 	  },
 	  tempoUp: function () {
-	    console.log("UP");
 	    this.setState({ tempo: this.state.tempo + 4 });
 	    clearInterval(this.intervalID);
 	    if (this.state.playing) {

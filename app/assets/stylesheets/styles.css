@@ -667,20 +667,19 @@ div.step-led {
   left: -15px;
 }
 
-div.tempo-controlls i.fa#vol-up {
-  z-index: 9999;
+i#vol-up {
   top: 10px;
 }
 
-div.tempo-controlls i.fa#vol-up:hover {
+i#vol-up:hover {
   cursor: pointer;
 }
 
-div.tempo-controlls i.fa#vol-down {
+i#vol-down {
   top: 30px;
 }
 
-div.tempo-controlls i.fa#vol-down:hover {
+i#vol-down:hover {
   cursor: pointer;
 }
 
