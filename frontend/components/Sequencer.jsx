@@ -114,7 +114,7 @@ module.exports = React.createClass({
       if (this.selected && this.toggled) {
         $(this.selected).removeClass(this.toggled);
       }
-      
+
       if (this.bank[drum][this.state.currentStep - 1]) {
         Drums[drum](ctx).trigger(ctx.currentTime);
         $(Drums.select[drum]).addClass(Drums.toggle[drum]);
@@ -133,6 +133,7 @@ module.exports = React.createClass({
     this.setState({currentStep:1});
   },
   tempoUp: function () {
+    console.log("UP");
     this.setState({tempo: this.state.tempo + 4});
     clearInterval(this.intervalID);
     if (this.state.playing) {

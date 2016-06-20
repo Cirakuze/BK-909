@@ -31371,10 +31371,10 @@
 	    this.osc.frequency.value = this.fundamental * ratio;
 	    this.osc.connect(this.bandpass);
 	    this.gain.gain.setValueAtTime(0.1, now);
-	    this.gain.gain.linearRampToValueAtTime(0.01, now + 2.5);
+	    this.gain.gain.linearRampToValueAtTime(0.01, now + 1.0);
 	
 	    this.osc.start(now);
-	    this.osc.stop(now + 2.5);
+	    this.osc.stop(now + 1.0);
 	  }.bind(this));
 	};
 	
@@ -31533,6 +31533,7 @@
 	    this.setState({ currentStep: 1 });
 	  },
 	  tempoUp: function () {
+	    console.log("UP");
 	    this.setState({ tempo: this.state.tempo + 4 });
 	    clearInterval(this.intervalID);
 	    if (this.state.playing) {

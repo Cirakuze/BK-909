@@ -685,6 +685,8 @@ div.tempo-controlls i.fa#vol-down:hover {
 }
 
 .sequencer-display {
+  position: relative;
+  left: 40px;
   width: 500px;
   text-align: center;
   font-size: 24px;
@@ -693,7 +695,7 @@ div.tempo-controlls i.fa#vol-down:hover {
 
 .sequencer-display > div {
   position: relative;
-  left: 50px;
+  left: 25px;
   top: 10px;
   float: left;
   width: 230px;
