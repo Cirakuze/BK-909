@@ -3,6 +3,10 @@
 Inspired by TR-909, coded by Bada Kim.
 Drums synthesized from WebAudioApi.
 
+## Tech
+BK-909 is built on React and WebAudioAPI
+![Bass Code](./app/assets/images/bassCode.png?raw=true "Optional Title")
+
 ## Playing the Drums \m/
 Drums are played by pressing the keyboard key labeled on the drums.
 Some drums have two letters, and some one. Those with two letters are those that are often played rapidly in sucession.
