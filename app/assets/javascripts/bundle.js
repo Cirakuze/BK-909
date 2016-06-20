@@ -31684,6 +31684,11 @@
 	          'p',
 	          null,
 	          '-Switch banks by pressing tilde then a step key'
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          '-Banks 13 14 15 16 have preset rhythms'
 	        )
 	      )
 	    );

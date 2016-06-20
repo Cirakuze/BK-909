@@ -215,6 +215,7 @@ module.exports = React.createClass({
           <p>-Enter to reset the sequence</p>
           <p>-Up/Down arrow keys speed up/slow down tempo</p>
           <p>-Switch banks by pressing tilde then a step key</p>
+          <p>-Banks 13 14 15 16 have preset rhythms</p>
         </div>
       </div>
     );
