@@ -31509,17 +31509,14 @@
 	    this.setState({ playing: !this.state.playing });
 	  },
 	  stepTheSequence: function () {
+	    this.resetKlass();
+	
 	    this.bank = SequencerStore.bank(SequencerStore.currentBank());
 	    Object.keys(this.bank).forEach(function (drum) {
-	      if (this.selected && this.toggled) {
-	        $(this.selected).removeClass(this.toggled);
-	      }
 	
 	      if (this.bank[drum][this.state.currentStep - 1]) {
 	        Drums[drum](ctx).trigger(ctx.currentTime);
 	        $(Drums.select[drum]).addClass(Drums.toggle[drum]);
-	        this.selected = Drums.select[drum];
-	        this.toggled = Drums.toggle[drum];
 	      }
 	    }.bind(this));
 	
@@ -31528,6 +31525,11 @@
 	    } else {
 	      this.setState({ currentStep: 1 });
 	    }
+	  },
+	  resetKlass: function () {
+	    Object.keys(Drums.select).forEach(function (drum) {
+	      $(Drums.select[drum]).removeClass(Drums.toggle[drum]);
+	    });
 	  },
 	  resetSequence: function () {
 	    this.setState({ currentStep: 1 });
