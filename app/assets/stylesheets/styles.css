@@ -720,25 +720,3 @@ i.fa {
   font-size: 50px;
   margin-left: 25px;
 }
-
-
-
-
-/*DRUMS*/
-#BK-909DRUMS {
-}
-
-/*PIANO*/
-#BK-909-PIANO {
-  width: 900px;
-  height: 900px;
-  margin: auto;
-  background-color: #08fb40;
-  display: none;
-  position: absolute;
-  z-index: 99999;
-}
-
-div#BK-909-PIANO.show-piano {
-  display: block;
-}

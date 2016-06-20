@@ -2,18 +2,6 @@ var React = require('react');
 var ReactDom = require('react-dom');
 var Drumset = require('./components/Drumset');
 var Sequencer = require('./components/Sequencer');
-var Piano = require('./components/Piano');
-var $ = require('jquery');
-
-$(document).keydown(function (e) {
-  if (e.keyCode === 39) {
-    // MOVE RIGHT TO PIANO
-    $('#BK-909-PIANO').toggleClass('show-piano');
-  } else if (e.keyCode === 37) {
-    // MOVE LEFT TO DRUMS
-    $('#BK-909-PIANO').toggleClass('show-piano');
-  }
-});
 
 var App = React.createClass({
   render: function () {
@@ -30,9 +18,6 @@ var App = React.createClass({
           </div>
           <Drumset />
           <Sequencer />
-        </div>
-        <div id="BK-909-PIANO">
-          <Piano />
         </div>
       </div>
     );
