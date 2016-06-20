@@ -55,6 +55,12 @@ module.exports = React.createClass({
         this.resetSequence();
       }
 
+      if (e.keyCode === 38) {
+        this.tempoUp();
+      } else if (e.keyCode == 40) {
+        this.tempoDown();
+      }
+
       this.setState({error:""});
       if (this.state.switching) {
         var newBank = SequencerConstants.codeToBeat[e.keyCode];
@@ -110,7 +116,7 @@ module.exports = React.createClass({
   },
   stepTheSequence: function () {
     this.resetKlass();
-    
+
     this.bank = SequencerStore.bank(SequencerStore.currentBank());
     Object.keys(this.bank).forEach(function (drum) {
 
