@@ -208,14 +208,15 @@ module.exports = React.createClass({
           {buttons}
         </div>
         <div className="instructions">
-          Instructions
+          Instructions:
           <p>-Select a drum by pressing the key on the drum</p>
           <p>-Toggle a step by pressing the key on the step</p>
-          <p>-Space bar to start/stop the sequence</p>
-          <p>-Enter to reset the sequence</p>
+          <p>&nbsp;(red dot is on / brown dot is off)</p>
+          <p>-Space bar starts/stops the sequence</p>
+          <p>-Enter resets the sequence</p>
           <p>-Up/Down arrow keys speed up/slow down tempo</p>
           <p>-Switch banks by pressing tilde then a step key</p>
-          <p>-Banks 13 14 15 16 have preset rhythms</p>
+          <p>-Banks 13 (z), 14 (x), 15 (c), and 16 (v) have preset rhythms</p>
         </div>
       </div>
     );

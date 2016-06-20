@@ -31654,7 +31654,7 @@
 	      React.createElement(
 	        'div',
 	        { className: 'instructions' },
-	        'Instructions',
+	        'Instructions:',
 	        React.createElement(
 	          'p',
 	          null,
@@ -31668,12 +31668,17 @@
 	        React.createElement(
 	          'p',
 	          null,
-	          '-Space bar to start/stop the sequence'
+	          ' (red dot is on / brown dot is off)'
 	        ),
 	        React.createElement(
 	          'p',
 	          null,
-	          '-Enter to reset the sequence'
+	          '-Space bar starts/stops the sequence'
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          '-Enter resets the sequence'
 	        ),
 	        React.createElement(
 	          'p',
@@ -31688,7 +31693,7 @@
 	        React.createElement(
 	          'p',
 	          null,
-	          '-Banks 13 14 15 16 have preset rhythms'
+	          '-Banks 13 (z), 14 (x), 15 (c), and 16 (v) have preset rhythms'
 	        )
 	      )
 	    );

@@ -705,7 +705,7 @@ i#vol-down:hover {
 /*INSTRUCTIONS*/
 
 div.instructions {
-  width: 550px;
+  width: 450px;
   margin: auto;
   border: solid 1px black;
   margin: auto;
@@ -714,6 +714,12 @@ div.instructions {
   position: relative;
   top: -150px;
   left: 0px;
+}
+
+div.instructions,
+div.instructions * {
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
 }
 
 i.fa {
