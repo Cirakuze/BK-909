@@ -33,4 +33,5 @@ Banks can be switched by pressing the ~ (tilde) key,
 then pressing one of the sequencer step keys.
 
 ## Todos
-Implement option to increase pattern length from 16 steps to 32 steps.
+Option to increase pattern length from 16 steps to 32 steps.
+Different sets of drum sounds.
