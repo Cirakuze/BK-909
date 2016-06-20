@@ -4,7 +4,8 @@ Inspired by TR-909, coded by Bada Kim.
 Drums synthesized from WebAudioApi.
 
 ## Tech
-BK-909 is built on React and WebAudioAPI
+BK-909 is an app built on React.
+Drum sounds were synthesized using WebAudioAPI.
 ![Bass Code](./app/assets/images/bassCode.png?raw=true "Optional Title")
 
 ## Playing the Drums \m/
@@ -30,3 +31,6 @@ A pattern (a bank) stores the rhythm of 8 different drums.
 There are 16 banks in total, for access to 16 different rhythms instantly.
 Banks can be switched by pressing the ~ (tilde) key,
 then pressing one of the sequencer step keys.
+
+## Todos
+Implement option to increase pattern length from 16 steps to 32 steps.
