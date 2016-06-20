@@ -31658,6 +31658,32 @@
 	        React.createElement(
 	          'p',
 	          null,
+	          'Short version:'
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          '1) Press ~ (the key above the tab key)'
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          '2) Press z, x, c, or v'
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          '3) Press space bar'
+	        ),
+	        React.createElement('br', null),
+	        React.createElement(
+	          'p',
+	          null,
+	          'Long Version:'
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
 	          '-Select a drum by pressing the key on the drum'
 	        ),
 	        React.createElement(

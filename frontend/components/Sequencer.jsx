@@ -209,6 +209,12 @@ module.exports = React.createClass({
         </div>
         <div className="instructions">
           Instructions:
+          <p>Short version:</p>
+          <p>1) Press ~ (the key above the tab key)</p>
+          <p>2) Press z, x, c, or v</p>
+          <p>3) Press space bar</p>
+          <br />
+          <p>Long Version:</p>
           <p>-Select a drum by pressing the key on the drum</p>
           <p>-Toggle a step by pressing the key on the step</p>
           <p>&nbsp;(red dot is on / brown dot is off)</p>
