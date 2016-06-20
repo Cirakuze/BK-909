@@ -48,6 +48,18 @@
 	var ReactDom = __webpack_require__(38);
 	var Drumset = __webpack_require__(168);
 	var Sequencer = __webpack_require__(184);
+	var Piano = __webpack_require__(207);
+	var $ = __webpack_require__(176);
+	
+	$(document).keydown(function (e) {
+	  if (e.keyCode === 39) {
+	    // MOVE RIGHT TO PIANO
+	    $('#BK-909-PIANO').toggleClass('show-piano');
+	  } else if (e.keyCode === 37) {
+	    // MOVE LEFT TO DRUMS
+	    $('#BK-909-PIANO').toggleClass('show-piano');
+	  }
+	});
 	
 	var App = React.createClass({
 	  displayName: 'App',
@@ -58,30 +70,39 @@
 	      { className: 'app' },
 	      React.createElement(
 	        'div',
-	        { className: 'header' },
+	        { id: 'BK-909-DRUMS' },
 	        React.createElement(
-	          'h1',
-	          { className: 'title' },
-	          'BK-909'
-	        ),
-	        React.createElement(
-	          'p',
-	          { className: 'inspiration' },
-	          'Inspired by TR-909'
-	        ),
-	        React.createElement(
-	          'p',
-	          { className: 'creation' },
-	          'created by',
+	          'div',
+	          { className: 'header' },
 	          React.createElement(
-	            'a',
-	            { target: '_blank', href: 'http://www.bada.kim' },
-	            ' Bada Kim'
+	            'h1',
+	            { className: 'title' },
+	            'BK-909'
+	          ),
+	          React.createElement(
+	            'p',
+	            { className: 'inspiration' },
+	            'Inspired by TR-909'
+	          ),
+	          React.createElement(
+	            'p',
+	            { className: 'creation' },
+	            'created by',
+	            React.createElement(
+	              'a',
+	              { target: '_blank', href: 'http://www.bada.kim' },
+	              ' Bada Kim'
+	            )
 	          )
-	        )
+	        ),
+	        React.createElement(Drumset, null),
+	        React.createElement(Sequencer, null)
 	      ),
-	      React.createElement(Drumset, null),
-	      React.createElement(Sequencer, null)
+	      React.createElement(
+	        'div',
+	        { id: 'BK-909-PIANO' },
+	        React.createElement(Piano, null)
+	      )
 	    );
 	  }
 	});
@@ -38504,6 +38525,24 @@
 	    crash: 'crash-cymbal-struck'
 	  }
 	};
+
+/***/ },
+/* 207 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	
+	module.exports = React.createClass({
+	  displayName: "exports",
+	
+	  render: function () {
+	    return React.createElement(
+	      "div",
+	      { className: "PIANO" },
+	      "PIANO :D"
+	    );
+	  }
+	});
 
 /***/ }
 /******/ ]);
