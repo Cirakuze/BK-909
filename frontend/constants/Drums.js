@@ -29,5 +29,25 @@ module.exports = {
   },
   crash: function (ctx) {
     return new CrashCymbal(ctx);
+  },
+  select: {
+    bass: '#Right-Bass',
+    snare: '#Snare',
+    hitom: '#Hi-Tom',
+    midtom: '#Mid-Tom',
+    lowtom: '#Low-Tom',
+    hihat: '#Hi-Hat',
+    ride: '#Ride-Cymbal',
+    crash: '#Crash-Cymbal'
+  },
+  toggle: {
+    bass: 'bass-right-struck',
+    snare: 'snare-struck',
+    hitom: 'hi-tom-struck',
+    midtom: 'mid-tom-struck',
+    lowtom: 'low-tom-struck',
+    hihat: 'hi-hat-struck',
+    ride: 'ride-cymbal-struck',
+    crash: 'crash-cymbal-struck'
   }
 };

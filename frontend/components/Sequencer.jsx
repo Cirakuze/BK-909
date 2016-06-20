@@ -111,9 +111,15 @@ module.exports = React.createClass({
   stepTheSequence: function () {
     this.bank = SequencerStore.bank(SequencerStore.currentBank());
     Object.keys(this.bank).forEach(function (drum) {
+      if (this.selected && this.toggled) {
+        $(this.selected).removeClass(this.toggled);
+      }
+      
       if (this.bank[drum][this.state.currentStep - 1]) {
-        var thing = Drums[drum](ctx);
-        thing.trigger(ctx.currentTime);
+        Drums[drum](ctx).trigger(ctx.currentTime);
+        $(Drums.select[drum]).addClass(Drums.toggle[drum]);
+        this.selected = Drums.select[drum];
+        this.toggled = Drums.toggle[drum];
       }
     }.bind(this));
 
