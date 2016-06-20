@@ -31654,9 +31654,13 @@
 	      React.createElement(
 	        'div',
 	        { className: 'instructions' },
-	        'Instructions:',
 	        React.createElement(
-	          'p',
+	          'h1',
+	          null,
+	          'Instructions:'
+	        ),
+	        React.createElement(
+	          'h3',
 	          null,
 	          'Short version:'
 	        ),
@@ -31677,9 +31681,9 @@
 	        ),
 	        React.createElement('br', null),
 	        React.createElement(
-	          'p',
+	          'h3',
 	          null,
-	          'Long Version:'
+	          'Long version:'
 	        ),
 	        React.createElement(
 	          'p',

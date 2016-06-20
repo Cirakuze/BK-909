@@ -706,20 +706,16 @@ i#vol-down:hover {
 
 div.instructions {
   width: 450px;
-  margin: auto;
-  border: solid 1px black;
-  margin: auto;
-  padding: 10px;
   text-align: left;
-  position: relative;
-  top: -150px;
-  left: 0px;
+  position: absolute;;
+  top: -550px;
+  right: 200px;
 }
 
 div.instructions,
 div.instructions * {
   font-family: Arial, sans-serif;
-  line-height: 1.5;
+  line-height: 1.25;
 }
 
 i.fa {
