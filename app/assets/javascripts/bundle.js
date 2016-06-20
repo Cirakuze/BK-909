@@ -31664,17 +31664,22 @@
 	        React.createElement(
 	          'p',
 	          null,
-	          '-Switch banks by pressing tilde then a step key'
-	        ),
-	        React.createElement(
-	          'p',
-	          null,
 	          '-Space bar to start/stop the sequence'
 	        ),
 	        React.createElement(
 	          'p',
 	          null,
 	          '-Enter to reset the sequence'
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          '-Up/Down arrow keys speed up/slow down tempo'
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          '-Switch banks by pressing tilde then a step key'
 	        )
 	      )
 	    );

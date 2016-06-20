@@ -211,9 +211,10 @@ module.exports = React.createClass({
           Instructions
           <p>-Select a drum by pressing the key on the drum</p>
           <p>-Toggle a step by pressing the key on the step</p>
-          <p>-Switch banks by pressing tilde then a step key</p>
           <p>-Space bar to start/stop the sequence</p>
           <p>-Enter to reset the sequence</p>
+          <p>-Up/Down arrow keys speed up/slow down tempo</p>
+          <p>-Switch banks by pressing tilde then a step key</p>
         </div>
       </div>
     );
