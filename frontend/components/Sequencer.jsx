@@ -207,22 +207,24 @@ module.exports = React.createClass({
         <div className="sequencer clearfix">
           {buttons}
         </div>
-        <div className="instructions">
-          <h1>Instructions:</h1>
-          <h3>Short version:</h3>
-          <p>1) Press ~ (the key above the tab key)</p>
-          <p>2) Press z, x, c, or v</p>
-          <p>3) Press space bar</p>
-          <br />
-          <h3>Long version:</h3>
-          <p>-Select a drum by pressing the key on the drum</p>
-          <p>-Toggle a step by pressing the key on the step</p>
-          <p>&nbsp;(red dot is on / brown dot is off)</p>
-          <p>-Space bar starts/stops the sequence</p>
-          <p>-Enter resets the sequence</p>
-          <p>-Up/Down arrow keys speed up/slow down tempo</p>
-          <p>-Switch banks by pressing tilde then a step key</p>
-          <p>-Banks 13 (z), 14 (x), 15 (c), and 16 (v) have preset rhythms</p>
+        <div className="instructions-wrapper">
+          <div className="instructions">
+            <h1>Instructions:</h1>
+            <h3>Short version:</h3>
+            <p>1) Press ~ (the key above the tab key)</p>
+            <p>2) Press z, x, c, or v</p>
+            <p>3) Press space bar</p>
+            <br />
+            <h3>Long version:</h3>
+            <p>-Select a drum by pressing the key on the drum</p>
+            <p>-Toggle a step by pressing the key on the step</p>
+            <p>&nbsp;(red dot is on / brown dot is off)</p>
+            <p>-Space bar starts/stops the sequence</p>
+            <p>-Enter resets the sequence</p>
+            <p>-Up/Down arrow keys speed up/slow down tempo</p>
+            <p>-Switch banks by pressing tilde then a step key</p>
+            <p>-Banks 13 (z), 14 (x), 15 (c), and 16 (v) have preset rhythms</p>
+          </div>
         </div>
       </div>
     );

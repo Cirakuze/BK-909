@@ -31653,77 +31653,81 @@
 	      ),
 	      React.createElement(
 	        'div',
-	        { className: 'instructions' },
+	        { className: 'instructions-wrapper' },
 	        React.createElement(
-	          'h1',
-	          null,
-	          'Instructions:'
-	        ),
-	        React.createElement(
-	          'h3',
-	          null,
-	          'Short version:'
-	        ),
-	        React.createElement(
-	          'p',
-	          null,
-	          '1) Press ~ (the key above the tab key)'
-	        ),
-	        React.createElement(
-	          'p',
-	          null,
-	          '2) Press z, x, c, or v'
-	        ),
-	        React.createElement(
-	          'p',
-	          null,
-	          '3) Press space bar'
-	        ),
-	        React.createElement('br', null),
-	        React.createElement(
-	          'h3',
-	          null,
-	          'Long version:'
-	        ),
-	        React.createElement(
-	          'p',
-	          null,
-	          '-Select a drum by pressing the key on the drum'
-	        ),
-	        React.createElement(
-	          'p',
-	          null,
-	          '-Toggle a step by pressing the key on the step'
-	        ),
-	        React.createElement(
-	          'p',
-	          null,
-	          ' (red dot is on / brown dot is off)'
-	        ),
-	        React.createElement(
-	          'p',
-	          null,
-	          '-Space bar starts/stops the sequence'
-	        ),
-	        React.createElement(
-	          'p',
-	          null,
-	          '-Enter resets the sequence'
-	        ),
-	        React.createElement(
-	          'p',
-	          null,
-	          '-Up/Down arrow keys speed up/slow down tempo'
-	        ),
-	        React.createElement(
-	          'p',
-	          null,
-	          '-Switch banks by pressing tilde then a step key'
-	        ),
-	        React.createElement(
-	          'p',
-	          null,
-	          '-Banks 13 (z), 14 (x), 15 (c), and 16 (v) have preset rhythms'
+	          'div',
+	          { className: 'instructions' },
+	          React.createElement(
+	            'h1',
+	            null,
+	            'Instructions:'
+	          ),
+	          React.createElement(
+	            'h3',
+	            null,
+	            'Short version:'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '1) Press ~ (the key above the tab key)'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '2) Press z, x, c, or v'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '3) Press space bar'
+	          ),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'h3',
+	            null,
+	            'Long version:'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '-Select a drum by pressing the key on the drum'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '-Toggle a step by pressing the key on the step'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            ' (red dot is on / brown dot is off)'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '-Space bar starts/stops the sequence'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '-Enter resets the sequence'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '-Up/Down arrow keys speed up/slow down tempo'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '-Switch banks by pressing tilde then a step key'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '-Banks 13 (z), 14 (x), 15 (c), and 16 (v) have preset rhythms'
+	          )
 	        )
 	      )
 	    );

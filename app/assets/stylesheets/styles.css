@@ -704,12 +704,16 @@ i#vol-down:hover {
 
 /*INSTRUCTIONS*/
 
-div.instructions {
+div.instructions-wrapper {
   width: 450px;
-  text-align: left;
-  position: absolute;;
-  top: -550px;
-  right: 200px;
+  margin: auto;
+  position: relative;
+}
+
+div.instructions {
+  position: absolute;
+  right: -500px;
+  top: -700px;
 }
 
 div.instructions,
