@@ -6,16 +6,18 @@ Drums synthesized from WebAudioApi.
 ## Tech
 BK-909 is an app built on React.
 Drum sounds were synthesized using WebAudioAPI.
-![Bass Code](./app/assets/images/bassCode.png?raw=true "Optional Title")
+![Bass code](./app/assets/images/bassCode.png?raw=true "Bass code")
 
 ## Playing the Drums \m/
 Drums are played by pressing the keyboard key labeled on the drums.
 Some drums have two letters, and some one. Those with two letters are those that are often played rapidly in sucession.
+![Drum keys](./app/assets/images/drumKeys.png?raw=true "Drum keys")
 
 ## Setting the Sequence
 The white keys below the drum set are the keys for the sequencer.
 Toggle a sequencer step by pressing the key labeled on the step.
 Red dot is on, brown dot is off.
+![Step keys](./app/assets/images/stepKeys.png?raw=true "Step keys")
 
 ## Playing back the sequence
 Press the space bar to start the play back.
