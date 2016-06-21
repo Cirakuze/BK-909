@@ -2,6 +2,7 @@ var React = require('react');
 var ReactDom = require('react-dom');
 var Drumset = require('./components/Drumset');
 var Sequencer = require('./components/Sequencer');
+var Piano = require('./components/Piano');
 
 var App = React.createClass({
   render: function () {
@@ -19,6 +20,7 @@ var App = React.createClass({
           <Drumset />
           <Sequencer />
         </div>
+        <Piano />
       </div>
     );
   }

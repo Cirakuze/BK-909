@@ -12,97 +12,113 @@ var DrumActions = require('../actions/DrumActions');
 var ctx = new (window.AudioContext || window.webkitAudioContext);
 
 module.exports = React.createClass({
+  getInitialState: function () {
+    return ({
+      piano: false
+    });
+  },
   componentDidMount: function () {
+    document.addEventListener('keydown', function (e) {
+      if (e.keycode === 39) {
+        this.setState({piano: !this.state.piano});
+      } else if (e.keyCode === 37) {
+        this.setState({piano: !this.state.piano});
+      }
+    });
 
     $(document).keydown(function (e) {
-      var now = ctx.currentTime;
-      var drum;
+      if (this.state.piano === false) {
+        var now = ctx.currentTime;
+        var drum;
 
-      if ([66, 78].includes(e.keyCode)) { // B, N
-        if (e.keyCode === 66) {
-          $('#Left-Bass').toggleClass('bfass-left-struck');
-          drum = new Bass(ctx);
-        } else if (e.keyCode === 78) {
-          $('#Right-Bass').toggleClass('bass-right-struck');
-          drum = new Bass(ctx);
+        if ([66, 78].includes(e.keyCode)) { // B, N
+          if (e.keyCode === 66) {
+            $('#Left-Bass').toggleClass('bfass-left-struck');
+            drum = new Bass(ctx);
+          } else if (e.keyCode === 78) {
+            $('#Right-Bass').toggleClass('bass-right-struck');
+            drum = new Bass(ctx);
+          }
         }
-      }
 
-      if ([84, 89].includes(e.keyCode)) { // T, Y
-        $('#Snare').toggleClass('snare-struck');
-        drum = new Snare(ctx);
-      }
+        if ([84, 89].includes(e.keyCode)) { // T, Y
+          $('#Snare').toggleClass('snare-struck');
+          drum = new Snare(ctx);
+        }
 
-      if ([85, 73].includes(e.keyCode)) { // U, I
-        $('#Hi-Hat').toggleClass('hi-hat-struck');
-        drum = new HiHat(ctx);
-      }
+        if ([85, 73].includes(e.keyCode)) { // U, I
+          $('#Hi-Hat').toggleClass('hi-hat-struck');
+          drum = new HiHat(ctx);
+        }
 
-      if ([71, 72].includes(e.keyCode)) { // G, H
-        $('#Hi-Tom').toggleClass('hi-tom-struck');
-        drum = new Toms(ctx, "high");
-      }
+        if ([71, 72].includes(e.keyCode)) { // G, H
+          $('#Hi-Tom').toggleClass('hi-tom-struck');
+          drum = new Toms(ctx, "high");
+        }
 
-      if ([74, 75].includes(e.keyCode)) { // J, K
-        $('#Mid-Tom').toggleClass('mid-tom-struck');
-        drum = new Toms(ctx, "mid");
-      }
+        if ([74, 75].includes(e.keyCode)) { // J, K
+          $('#Mid-Tom').toggleClass('mid-tom-struck');
+          drum = new Toms(ctx, "mid");
+        }
 
-      if ([76, 186].includes(e.keyCode)) { // L, ;
-        $('#Low-Tom').toggleClass('low-tom-struck');
-        drum = new Toms(ctx, "low");
-      }
+        if ([76, 186].includes(e.keyCode)) { // L, ;
+          $('#Low-Tom').toggleClass('low-tom-struck');
+          drum = new Toms(ctx, "low");
+        }
 
-      if ([79].includes(e.keyCode)) { // O
-        $('#Ride-Cymbal').toggleClass('ride-cymbal-struck');
-        drum = new RideCymbal(ctx);
-      }
+        if ([79].includes(e.keyCode)) { // O
+          $('#Ride-Cymbal').toggleClass('ride-cymbal-struck');
+          drum = new RideCymbal(ctx);
+        }
 
-      if (e.keyCode === 80) { // P
-        $('#Crash-Cymbal').toggleClass('crash-cymbal-struck');
-        drum = new CrashCymbal(ctx);
-      }
-      if (drum) {
-        DrumActions.receiveDrum(drum);
-        drum.trigger(now);
+        if (e.keyCode === 80) { // P
+          $('#Crash-Cymbal').toggleClass('crash-cymbal-struck');
+          drum = new CrashCymbal(ctx);
+        }
+        if (drum) {
+          DrumActions.receiveDrum(drum);
+          drum.trigger(now);
+        }
       }
     });
 
     $(document).keyup(function (e) {
-      if ([66, 78].includes(e.keyCode)) { // B, N
-        if (e.keyCode === 66) {
-          $('#Left-Bass').toggleClass('bass-left-struck');
-        } else if (e.keyCode === 78) {
-          $('#Right-Bass').toggleClass('bass-right-struck');
+      if (this.state.piano === false) {
+        if ([66, 78].includes(e.keyCode)) { // B, N
+          if (e.keyCode === 66) {
+            $('#Left-Bass').toggleClass('bass-left-struck');
+          } else if (e.keyCode === 78) {
+            $('#Right-Bass').toggleClass('bass-right-struck');
+          }
         }
-      }
 
-      if ([84, 89].includes(e.keyCode)) { // T, Y
-        $('#Snare').toggleClass('snare-struck');
-      }
+        if ([84, 89].includes(e.keyCode)) { // T, Y
+          $('#Snare').toggleClass('snare-struck');
+        }
 
-      if ([85, 73].includes(e.keyCode)) { // U, I
-        $('#Hi-Hat').toggleClass('hi-hat-struck');
-      }
+        if ([85, 73].includes(e.keyCode)) { // U, I
+          $('#Hi-Hat').toggleClass('hi-hat-struck');
+        }
 
-      if ([71, 72].includes(e.keyCode)) { // G, H
-        $('#Hi-Tom').toggleClass('hi-tom-struck');
-      }
+        if ([71, 72].includes(e.keyCode)) { // G, H
+          $('#Hi-Tom').toggleClass('hi-tom-struck');
+        }
 
-      if ([74, 75].includes(e.keyCode)) { // J, K
-        $('#Mid-Tom').toggleClass('mid-tom-struck');
-      }
+        if ([74, 75].includes(e.keyCode)) { // J, K
+          $('#Mid-Tom').toggleClass('mid-tom-struck');
+        }
 
-      if ([76, 186].includes(e.keyCode)) { // L, ;
-        $('#Low-Tom').toggleClass('low-tom-struck');
-      }
+        if ([76, 186].includes(e.keyCode)) { // L, ;
+          $('#Low-Tom').toggleClass('low-tom-struck');
+        }
 
-      if ([79].includes(e.keyCode)) { // O
-        $('#Ride-Cymbal').toggleClass('ride-cymbal-struck');
-      }
+        if ([79].includes(e.keyCode)) { // O
+          $('#Ride-Cymbal').toggleClass('ride-cymbal-struck');
+        }
 
-      if (e.keyCode === 80) { // P
-        $('#Crash-Cymbal').toggleClass('crash-cymbal-struck');
+        if (e.keyCode === 80) { // P
+          $('#Crash-Cymbal').toggleClass('crash-cymbal-struck');
+        }
       }
     });
   },

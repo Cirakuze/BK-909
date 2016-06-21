@@ -726,3 +726,22 @@ i.fa {
   font-size: 50px;
   margin-left: 25px;
 }
+
+
+
+
+/*PIANO*/
+
+div.piano-wrapper {
+  width: 100%;
+  background-color: #dd5d49;
+  height: 900px;
+  display: none;
+}
+
+div.piano-wrapper.shown {
+  display: block;
+  position: absolute;
+  top: 0;
+  z-index: 999999;
+}

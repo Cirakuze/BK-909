@@ -37,7 +37,8 @@ module.exports = React.createClass({
       drum: "",
       tempo: 120,
       playing: false,
-      error: ""
+      error: "",
+      piano: false
     });
   },
   componentDidMount: function () {
@@ -46,42 +47,49 @@ module.exports = React.createClass({
     this.sListener = SequencerStore.addListener(this.manageLEDs);
 
     document.addEventListener('keydown', function (e) {
-      if (e.keyCode === 32) {
-        // spacebar
-        this.togglePlayBack();
-      } else if (e.keyCode === 13) {
-        // enter
-        this.resetSequence();
+      if (e.keycode === 39) {
+        this.setState({piano: !this.state.piano});
+      } else if (e.keyCode === 37) {
+        this.setState({piano: !this.state.piano});
       }
-
-      if (e.keyCode === 38) {
-        this.tempoUp();
-      } else if (e.keyCode == 40) {
-        this.tempoDown();
-      }
-
-      this.setState({error:""});
-      if (this.state.switching) {
-        var newBank = SequencerConstants.codeToBeat[e.keyCode];
-        if (!newBank) {
-          // this.setState({error:"That bank does not exist!"});
-        } else {
-          SequencerActions.switchBank(newBank);
-          this.manageLEDs();
-          this.setState({switching:false});
+      if (this.state.piano === false) {
+        if (e.keyCode === 32) {
+          // spacebar
+          this.togglePlayBack();
+        } else if (e.keyCode === 13) {
+          // enter
+          this.resetSequence();
         }
-      } else {
-        if (e.keyCode === 192) {
-          this.setState({switching:true});
-        } else {
-          if ( (!DrumStore.empty()) &&
-            SequencerConstants.codeToName.hasOwnProperty(e.keyCode) ) {
 
-            SequencerActions.updateBank(
-              SequencerConstants.codeToBeat[e.keyCode]
-            );
-          } else if (DrumKeyConstants.codes.includes(e.keyCode)) {
-            // console.log(e.keyCode);
+        if (e.keyCode === 38) {
+          this.tempoUp();
+        } else if (e.keyCode == 40) {
+          this.tempoDown();
+        }
+
+        this.setState({error:""});
+        if (this.state.switching) {
+          var newBank = SequencerConstants.codeToBeat[e.keyCode];
+          if (!newBank) {
+            // this.setState({error:"That bank does not exist!"});
+          } else {
+            SequencerActions.switchBank(newBank);
+            this.manageLEDs();
+            this.setState({switching:false});
+          }
+        } else {
+          if (e.keyCode === 192) {
+            this.setState({switching:true});
+          } else {
+            if ( (!DrumStore.empty()) &&
+              SequencerConstants.codeToName.hasOwnProperty(e.keyCode) ) {
+
+              SequencerActions.updateBank(
+                SequencerConstants.codeToBeat[e.keyCode]
+              );
+            } else if (DrumKeyConstants.codes.includes(e.keyCode)) {
+              // console.log(e.keyCode);
+            }
           }
         }
       }
