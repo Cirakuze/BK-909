@@ -6,7 +6,6 @@ var SequencerActions = require('../actions/SequencerActions');
 var SequencerStore = require('../stores/SequencerStore');
 var $ = require('jquery');
 var Drums = require('../constants/Drums');
-
 var ctx = new (window.AudioContext || window.webkitAudioContext);
 
 var stepKeys = {
