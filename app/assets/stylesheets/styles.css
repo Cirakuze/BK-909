@@ -725,16 +725,33 @@ div.instructions-wrapper {
   position: relative;
 }
 
+h1#instructions-header {
+  position: absolute;
+  right: -370px;
+  top: -630px;
+}
+
+h1#instructions-header:hover {
+  cursor: pointer;
+}
+
 div.instructions {
   position: absolute;
-  right: -500px;
+  right: -550px;
   top: -600px;
+  height: 0px;
+  border: solid 1px black;
+  border-radius: 10px;
+  padding-right: 15px;
+  padding-left: 15px;
+  transition: all 2s ease;
 }
 
 div.instructions,
 div.instructions * {
   font-family: Arial, sans-serif;
   line-height: 1.25;
+  overflow: hidden;
 }
 
 i.fa {
@@ -742,6 +759,9 @@ i.fa {
   margin-left: 25px;
 }
 
+div.instructions.show-instructions {
+  height: 445px;
+}
 
 
 

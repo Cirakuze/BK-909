@@ -235,6 +235,9 @@ module.exports = React.createClass({
       $('#tempo').addClass('tempo-limit');
     }
   },
+  showInstructions: function () {
+    $('.instructions').toggleClass('show-instructions');
+  },
   render: function () {
     var buttons = this.state.leds.map(function (button, key) {
       var klass = this.state.leds[key] ? "button-led LED-ON" : "button-led";
@@ -250,24 +253,34 @@ module.exports = React.createClass({
     return (
       <div className="sequencer-wrapper">
         <div className="instructions-wrapper">
+          <h1
+            id="instructions-header"
+            onClick={this.showInstructions}>
+            Instructions:
+          </h1>
           <div className="instructions">
-            <h1>Instructions:</h1>
             <h3>Short version:</h3>
             <p>1) Press ~ (the key above the tab key)</p>
             <p>2) Press v</p>
             <p>3) Press space bar</p>
             <h3>Long version:</h3>
-            <p>-Select a drum by pressing the key on the drum</p>
-            <p>-Toggle a step by pressing the key on the step</p>
-            <p>&nbsp;(red dot is on / brown dot is off)</p>
-            <p>-Space bar starts/stops the sequence</p>
-            <p>-Enter resets the sequence</p>
-            <p>-Up/Down arrow keys speed up/slow down tempo</p>
-            <p>-Switch banks by pressing tilde then a step key</p>
-            <p>-Press +/- to lengthen/shorten pattern</p>
-            <p>-Press tab to cycle through rows of pattern</p>
-            <p>-Banks 13 (z), 14 (x), 15 (c), and 16 (v) are presets</p>
-            <p>-Press the right arrow key to access piano (left to come back)</p>
+            <p>1) Pick a drum</p>
+            <p>&nbsp;&nbsp;&nbsp;-Select a drum by pressing the key on the drum</p>
+            <p>2) Set a pattern</p>
+            <p>&nbsp;&nbsp;&nbsp;-Toggle a step by pressing the key on the step</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;(red dot is on / brown dot is off)</p>
+            <p>3) Start the sequence</p>
+            <p>&nbsp;&nbsp;&nbsp;-Space bar starts/stops the sequence</p>
+            <p>&nbsp;&nbsp;&nbsp;-Enter resets the sequence</p>
+            <p>&nbsp;&nbsp;&nbsp;-Up/Down arrow keys speed up/slow down tempo</p>
+            <p>4) Switch patterns</p>
+            <p>&nbsp;&nbsp;&nbsp;-Switch banks by pressing tilde then a step key</p>
+            <p>&nbsp;&nbsp;&nbsp;-Press +/- to lengthen/shorten pattern</p>
+            <p>&nbsp;&nbsp;&nbsp;-Press tab to cycle through rows of pattern</p>
+            <p>5) Patterns auto-save</p>
+            <p>&nbsp;&nbsp;&nbsp;-Banks 13 (z), 14 (x), 15 (c), and 16 (v) are presets</p>
+            <p>6) Add piano</p>
+            <p>&nbsp;&nbsp;&nbsp;-Press the right arrow key to access piano (left to come back)</p>
           </div>
         </div>
         <div className="sequencer-controlls-wrapper">

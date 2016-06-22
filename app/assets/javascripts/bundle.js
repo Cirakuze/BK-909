@@ -31598,6 +31598,9 @@
 	      $('#tempo').addClass('tempo-limit');
 	    }
 	  },
+	  showInstructions: function () {
+	    $('.instructions').toggleClass('show-instructions');
+	  },
 	  render: function () {
 	    var buttons = this.state.leds.map(function (button, key) {
 	      var klass = this.state.leds[key] ? "button-led LED-ON" : "button-led";
@@ -31625,13 +31628,15 @@
 	        'div',
 	        { className: 'instructions-wrapper' },
 	        React.createElement(
+	          'h1',
+	          {
+	            id: 'instructions-header',
+	            onClick: this.showInstructions },
+	          'Instructions:'
+	        ),
+	        React.createElement(
 	          'div',
 	          { className: 'instructions' },
-	          React.createElement(
-	            'h1',
-	            null,
-	            'Instructions:'
-	          ),
 	          React.createElement(
 	            'h3',
 	            null,
@@ -31660,57 +31665,87 @@
 	          React.createElement(
 	            'p',
 	            null,
-	            '-Select a drum by pressing the key on the drum'
+	            '1) Pick a drum'
 	          ),
 	          React.createElement(
 	            'p',
 	            null,
-	            '-Toggle a step by pressing the key on the step'
+	            '   -Select a drum by pressing the key on the drum'
 	          ),
 	          React.createElement(
 	            'p',
 	            null,
-	            ' (red dot is on / brown dot is off)'
+	            '2) Set a pattern'
 	          ),
 	          React.createElement(
 	            'p',
 	            null,
-	            '-Space bar starts/stops the sequence'
+	            '   -Toggle a step by pressing the key on the step'
 	          ),
 	          React.createElement(
 	            'p',
 	            null,
-	            '-Enter resets the sequence'
+	            '    (red dot is on / brown dot is off)'
 	          ),
 	          React.createElement(
 	            'p',
 	            null,
-	            '-Up/Down arrow keys speed up/slow down tempo'
+	            '3) Start the sequence'
 	          ),
 	          React.createElement(
 	            'p',
 	            null,
-	            '-Switch banks by pressing tilde then a step key'
+	            '   -Space bar starts/stops the sequence'
 	          ),
 	          React.createElement(
 	            'p',
 	            null,
-	            '-Press +/- to lengthen/shorten pattern'
+	            '   -Enter resets the sequence'
 	          ),
 	          React.createElement(
 	            'p',
 	            null,
-	            '-Press tab to cycle through rows of pattern'
+	            '   -Up/Down arrow keys speed up/slow down tempo'
 	          ),
 	          React.createElement(
 	            'p',
 	            null,
-	            '-Banks 13 (z), 14 (x), 15 (c), and 16 (v) are presets'
+	            '4) Switch patterns'
 	          ),
 	          React.createElement(
 	            'p',
 	            null,
-	            '-Press the right arrow key to access piano (left to come back)'
+	            '   -Switch banks by pressing tilde then a step key'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '   -Press +/- to lengthen/shorten pattern'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '   -Press tab to cycle through rows of pattern'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '5) Patterns auto-save'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '   -Banks 13 (z), 14 (x), 15 (c), and 16 (v) are presets'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '6) Add piano'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '   -Press the right arrow key to access piano (left to come back)'
 	          )
 	        )
 	      ),
