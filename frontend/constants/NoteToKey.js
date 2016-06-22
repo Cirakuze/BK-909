@@ -14,7 +14,7 @@ module.exports = {
   E4: "N",
   F4: "M",
   Gb4: "K",
-  G4: ",",
+  G4: "<",
   Ab4: "L",
   A4: ">",
   Bb4: ":",
@@ -44,7 +44,7 @@ module.exports = {
   Ab6: 9,
   A6: 0,
   Bb6: "-",
-  B6: "=",
+  B6: "+",
 
   C7: "-d"
 };
