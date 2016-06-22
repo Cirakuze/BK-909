@@ -13,7 +13,7 @@ module.exports = React.createClass({
     });
   },
   componentDidMount: function () {
-    document.addEventListener('keydown', function (e) {
+    $(document).keydown(function(e){
       if (e.keyCode === 39) {
         $('#piano-wrapper').addClass('shown');
         this.setState({piano: !this.state.piano});
@@ -21,9 +21,7 @@ module.exports = React.createClass({
         $('#piano-wrapper').removeClass('shown');
         this.setState({piano: !this.state.piano});
       }
-    }.bind(this));
 
-    $(document).keydown(function(e){
       if (e.keyCode === 8) {
         e.preventDefault();
       }
