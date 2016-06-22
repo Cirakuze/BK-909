@@ -57,6 +57,12 @@ module.exports = React.createClass({
       <div className="piano-wrapper" id="piano-wrapper">
         <div className="piano clearfix">
           <div className="octave clearfix">
+            <PianoKey noteName={"F3"} />
+            <PianoKey noteName={"Gb3"} />
+            <PianoKey noteName={"G3"} />
+            <PianoKey noteName={"Ab3"} />
+            <PianoKey noteName={"A3"} />
+            <PianoKey noteName={"Bb3"} />
             <PianoKey noteName={"B3"} />
           </div>
 
@@ -101,6 +107,9 @@ module.exports = React.createClass({
             <PianoKey noteName={"G6"} />
             <PianoKey noteName={"Ab6"} />
             <PianoKey noteName={"A6"} />
+            <PianoKey noteName={"Bb6"} />
+            <PianoKey noteName={"B6"} />
+            <PianoKey noteName={"C7"} />
           </div>
 
         </div>

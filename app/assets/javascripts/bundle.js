@@ -38718,6 +38718,12 @@
 	        React.createElement(
 	          'div',
 	          { className: 'octave clearfix' },
+	          React.createElement(PianoKey, { noteName: "F3" }),
+	          React.createElement(PianoKey, { noteName: "Gb3" }),
+	          React.createElement(PianoKey, { noteName: "G3" }),
+	          React.createElement(PianoKey, { noteName: "Ab3" }),
+	          React.createElement(PianoKey, { noteName: "A3" }),
+	          React.createElement(PianoKey, { noteName: "Bb3" }),
 	          React.createElement(PianoKey, { noteName: "B3" })
 	        ),
 	        React.createElement(
@@ -38764,7 +38770,10 @@
 	          React.createElement(PianoKey, { noteName: "Gb6" }),
 	          React.createElement(PianoKey, { noteName: "G6" }),
 	          React.createElement(PianoKey, { noteName: "Ab6" }),
-	          React.createElement(PianoKey, { noteName: "A6" })
+	          React.createElement(PianoKey, { noteName: "A6" }),
+	          React.createElement(PianoKey, { noteName: "Bb6" }),
+	          React.createElement(PianoKey, { noteName: "B6" }),
+	          React.createElement(PianoKey, { noteName: "C7" })
 	        )
 	      )
 	    );
@@ -38881,9 +38890,15 @@
 /***/ function(module, exports) {
 
 	module.exports = {
+	  F3: 174.61, // shift
+	  Gb3: 185.00,
+	  G3: 196.00,
+	  Ab3: 207.65,
+	  A3: 220.00,
+	  Bb3: 233.08,
 	  B3: 246.94,
 	
-	  C4: 261.63,
+	  C4: 261.63, // V
 	  Db4: 277.18,
 	  D4: 293.66,
 	  Eb4: 311.13,
@@ -38896,7 +38911,7 @@
 	  Bb4: 466.16,
 	  B4: 493.88,
 	
-	  C5: 523.25,
+	  C5: 523.25, // Q
 	  Db5: 554.37,
 	  D5: 587.33,
 	  Eb5: 622.25,
@@ -38909,7 +38924,7 @@
 	  Bb5: 932.33,
 	  B5: 987.77,
 	
-	  C6: 1046.50,
+	  C6: 1046.50, // 1
 	  Db6: 1108.73,
 	  D6: 1174.66,
 	  Eb6: 1244.51,
@@ -38918,7 +38933,11 @@
 	  Gb6: 1479.98,
 	  G6: 1567.98,
 	  Ab6: 1661.22,
-	  A6: 1760.00
+	  A6: 1760.00,
+	  Bb6: 1864.66,
+	  B6: 1975.53,
+	
+	  C7: 2093.00 // delete
 	};
 
 /***/ },
@@ -38998,44 +39017,54 @@
 /***/ function(module, exports) {
 
 	module.exports = {
-	  B3: "A",
+	  F3: "-s",
+	  Gb3: "A",
+	  G3: "Z",
+	  Ab3: "S",
+	  A3: "X",
+	  Bb3: "D",
+	  B3: "C",
 	
-	  C4: "Z",
-	  Db4: "S",
-	  D4: "X",
-	  Eb4: "D",
-	  E4: "C",
-	  F4: "V",
-	  Gb4: "G",
-	  G4: "B",
-	  Ab4: "H",
-	  A4: "N",
-	  Bb4: "J",
-	  B4: "M",
+	  C4: "V",
+	  Db4: "G",
+	  D4: "B",
+	  Eb4: "H",
+	  E4: "N",
+	  F4: "M",
+	  Gb4: "K",
+	  G4: ",",
+	  Ab4: "L",
+	  A4: ">",
+	  Bb4: ":",
+	  B4: "/",
 	
 	  C5: "Q",
-	  Db5: "2",
-	  D5: "W",
-	  Eb5: "3",
-	  E5: "E",
-	  F5: "R",
-	  Gb5: "5",
-	  G5: "T",
-	  Ab5: "6",
-	  A5: "Y",
-	  Bb5: "7",
-	  B5: "U",
+	  Db5: "W",
+	  D5: "E",
+	  Eb5: "R",
+	  E5: "T",
+	  F5: "Y",
+	  Gb5: "U",
+	  G5: "I",
+	  Ab5: "O",
+	  A5: "P",
+	  Bb5: "[",
+	  B5: "]",
 	
-	  C6: "I",
-	  Db6: "9",
-	  D6: "O",
-	  Eb6: "0",
-	  E6: "P",
-	  F6: "[",
-	  Gb6: "=",
-	  G6: "]",
-	  Ab6: "-d",
-	  A6: "\\"
+	  C6: 1,
+	  Db6: 2,
+	  D6: 3,
+	  Eb6: 4,
+	  E6: 5,
+	  F6: 6,
+	  Gb6: 7,
+	  G6: 8,
+	  Ab6: 9,
+	  A6: 0,
+	  Bb6: "-",
+	  B6: "=",
+	
+	  C7: "-d"
 	};
 
 /***/ },
@@ -39043,52 +39072,55 @@
 /***/ function(module, exports) {
 
 	module.exports = {
-	  65: 'B3',
+	  16: 'F3', // shift
+	  65: 'Gb3',
+	  90: 'G3',
+	  83: 'Ab3',
+	  88: 'A3',
+	  68: 'Bb3',
+	  67: 'B3',
 	
-	  90: 'C4',
-	  83: 'Db4',
-	  88: 'D4',
-	  68: 'Eb4',
-	  67: 'E4',
-	  86: 'F4',
-	  71: 'Gb4',
-	  66: 'G4',
-	  72: 'Ab4',
-	  78: 'A4',
-	  74: 'Bb4',
-	  77: 'B4',
+	  86: 'C4', // V
+	  71: 'Db4',
+	  66: 'D4',
+	  72: 'Eb4',
+	  78: 'E4',
+	  77: 'F4', // M
+	  75: 'Gb4',
+	  188: 'G4', // ,
+	  76: 'Ab4',
+	  190: 'A4',
+	  186: 'Bb4',
+	  191: 'B4',
+	  222: 'C5',
 	
-	  49: 'B4',
-	  188: 'C5',
-	  76: 'Db5',
-	  190: 'D5',
-	  186: 'Eb5',
-	  191: 'E5',
-	  222: 'F5',
+	  81: 'C5', // Q
+	  87: 'Db5',
+	  69: 'D5',
+	  82: 'Eb5',
+	  84: 'E5',
+	  89: 'F5',
+	  85: 'Gb5',
+	  73: 'G5', // I
+	  79: 'Ab5',
+	  80: 'A5',
+	  219: 'Bb5',
+	  221: 'B5',
+	  220: 'C6',
 	
-	  81: 'C5',
-	  50: 'Db5',
-	  87: 'D5',
-	  51: 'Eb5',
-	  69: 'E5',
-	  82: 'F5',
-	  53: 'Gb5',
-	  84: 'G5',
-	  54: 'Ab5',
-	  89: 'A5',
-	  55: 'Bb5',
-	  85: 'B5',
-	
-	  73: 'C6',
-	  57: 'Db6',
-	  79: 'D6',
-	  48: 'Eb6',
-	  80: 'E6',
-	  219: 'F6',
-	  187: 'Gb6',
-	  221: 'G6',
-	  8: 'Ab6',
-	  220: 'A6'
+	  49: 'C6', // 1
+	  50: 'Db6',
+	  51: 'D6',
+	  52: 'Eb6',
+	  53: 'E6',
+	  54: 'F6',
+	  55: 'Gb6',
+	  56: 'G6', // 8
+	  57: 'Ab6',
+	  48: 'A6',
+	  189: 'Bb6',
+	  187: 'B6',
+	  8: 'C7'
 	};
 
 /***/ }

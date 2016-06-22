@@ -762,7 +762,7 @@ div.piano-wrapper.shown {
 }
 
 .piano {
-  width: 1090px;
+  width: 1352px;
   margin: auto;
   background-color: #78091c;
   transform: rotateX(25deg);
@@ -779,7 +779,7 @@ div.piano-wrapper.shown {
 }
 
 .octave:nth-child(1) {
-  width: 50px;
+  width: 208px;
 }
 
 .octave:nth-child(2),
@@ -788,7 +788,7 @@ div.piano-wrapper.shown {
 }
 
 .octave:nth-child(4) {
-  width: 312px;
+  width: 416px;
 }
 
 .octave > * {
