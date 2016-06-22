@@ -25,6 +25,10 @@ SequencerStore.__onDispatch = function (payload) {
       updateBank(payload.bank, payload.drum, payload.beat);
       this.__emitChange();
       break;
+    case "UPDATE_LENGTH":
+      updateLength(payload.length);
+      this.__emitChange();
+      break;
     case "SWITCH_BANK":
       switchBank(payload.bank);
       this.__emitChange();
@@ -45,6 +49,27 @@ function updateBank(beat) {
   var drum = DrumStore.drum().name;
 
   _banks[bank][drum][beat - 1] = !_banks[bank][drum][beat - 1];
+}
+
+function updateLength(length) {
+  var newBeats = length * 16;
+  Object.keys(_banks[_currentBank]).forEach(function (drum) {
+    var oldBeats = _banks[_currentBank][drum].length;
+    if (newBeats == oldBeats) {
+      console.log("NO CHANGE");
+    } else if (newBeats > oldBeats) {
+      var last16 = _banks[_currentBank][drum].slice(-16);
+
+      _banks[_currentBank][drum] =
+        _banks[_currentBank][drum]
+          .concat(last16);
+      // console.log(_banks[_currentBank][drum]);
+    } else if (newBeats < oldBeats) {
+      _banks[_currentBank][drum]
+        .splice(-(oldBeats - newBeats));
+      // console.log(_banks[_currentBank][drum]);
+    }
+  });
 }
 
 function updateTempo(tempo) {

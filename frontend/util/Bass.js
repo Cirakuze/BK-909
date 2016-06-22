@@ -5,7 +5,7 @@ var Bass = function (ctx) {
 
 Bass.prototype.setup = function() {
   this.osc = this.ctx.createOscillator();
-  this.osc.type = "triangle";
+  this.osc.type = "sine";
   this.gain = this.ctx.createGain();
   this.osc.connect(this.gain);
   this.gain.connect(this.ctx.destination);

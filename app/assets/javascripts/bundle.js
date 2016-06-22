@@ -31047,7 +31047,7 @@
 	
 	Bass.prototype.setup = function () {
 	  this.osc = this.ctx.createOscillator();
-	  this.osc.type = "triangle";
+	  this.osc.type = "sine";
 	  this.gain = this.ctx.createGain();
 	  this.osc.connect(this.gain);
 	  this.gain.connect(this.ctx.destination);
@@ -31113,7 +31113,7 @@
 	  this.noiseEnvelope.connect(this.ctx.destination);
 	
 	  this.osc = this.ctx.createOscillator();
-	  this.osc.type = 'triangle';
+	  this.osc.type = 'sine';
 	  this.oscEnvelope = this.ctx.createGain();
 	
 	  this.osc.connect(this.oscEnvelope);
@@ -31385,7 +31385,18 @@
 	var Drums = __webpack_require__(206);
 	var ctx = new (window.AudioContext || window.webkitAudioContext)();
 	
-	var stepKeys = { 0: 1, 1: 2, 2: 3, 3: 4, 4: "Q", 5: "W", 6: "E", 7: "R", 8: "A", 9: "S", 10: "D", 11: "F", 12: "Z", 13: "X", 14: "C", 15: "V" };
+	var steps = { 0: 1, 1: 2, 2: 3, 3: 4, 4: "Q", 5: "W", 6: "E", 7: "R", 8: "A", 9: "S", 10: "D", 11: "F", 12: "Z", 13: "X", 14: "C", 15: "V" };
+	
+	function stepKeys(key) {
+	  if (key > 47) {
+	    key -= 48;
+	  } else if (key > 31) {
+	    key -= 32;
+	  } else if (key > 15) {
+	    key -= 16;
+	  }
+	  return steps[key];
+	}
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -31393,6 +31404,7 @@
 	  getInitialState: function () {
 	    return {
 	      leds: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	      rows: 1,
 	      currentStep: 1,
 	      switching: false,
 	      drum: "",
@@ -31418,6 +31430,20 @@
 	        $('.drumset').removeClass('hidden');
 	      } else {
 	        if (this.state.piano === false) {
+	          if (e.keyCode === 187) {
+	            // 187 +
+	            if (this.state.rows < 4) {
+	              this.setState({ rows: this.state.rows + 1 });
+	              SequencerActions.updateLength(this.state.rows);
+	            }
+	          } else if (e.keyCode === 189) {
+	            // 189 -
+	            if (this.state.rows > 1) {
+	              this.setState({ rows: this.state.rows - 1 });
+	              SequencerActions.updateLength(this.state.rows);
+	            }
+	          }
+	
 	          if (e.keyCode === 32) {
 	            // spacebar
 	            this.togglePlayBack();
@@ -31497,7 +31523,7 @@
 	      }
 	    }.bind(this));
 	
-	    if (this.state.currentStep < 16) {
+	    if (this.state.currentStep < this.state.leds.length) {
 	      this.setState({ currentStep: this.state.currentStep += 1 });
 	    } else {
 	      this.setState({ currentStep: 1 });
@@ -31552,7 +31578,7 @@
 	          React.createElement(
 	            'p',
 	            null,
-	            stepKeys[key]
+	            stepKeys(key)
 	          )
 	        ),
 	        React.createElement('div', { className: klass2, key: key })
@@ -31561,74 +31587,6 @@
 	    return React.createElement(
 	      'div',
 	      { className: 'sequencer-wrapper' },
-	      React.createElement(
-	        'div',
-	        { className: 'sequencer-controlls-wrapper' },
-	        React.createElement(
-	          'div',
-	          { className: 'sequencer-controlls clearfix' },
-	          React.createElement(
-	            'div',
-	            { className: 'start-sequence', onClick: this.togglePlayBack },
-	            this.state.playing ? React.createElement('i', { className: 'fa fa-pause-circle', 'aria-hidden': 'true' }) : React.createElement('i', { className: 'fa fa-play-circle', 'aria-hidden': 'true' })
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'reset-sequence', onClick: this.resetSequence },
-	            React.createElement('i', { className: 'fa fa-stop-circle', 'aria-hidden': 'true' })
-	          ),
-	          React.createElement(
-	            'p',
-	            null,
-	            'Tempo'
-	          ),
-	          React.createElement('input', {
-	            id: 'tempo',
-	            type: 'text',
-	            disabled: 'disabled',
-	            value: this.state.tempo,
-	            onChange: this.updateTempo }),
-	          React.createElement(
-	            'div',
-	            { className: 'tempo-controlls' },
-	            React.createElement('i', { className: 'fa fa-angle-up',
-	              id: 'vol-up',
-	              'aria-hidden': 'true',
-	              onClick: this.tempoUp }),
-	            React.createElement('i', { className: 'fa fa-angle-down',
-	              id: 'vol-down',
-	              'aria-hidden': 'true',
-	              onClick: this.tempoDown })
-	          ),
-	          React.createElement(
-	            'div',
-	            null,
-	            this.state.error
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'sequencer-display clearfix' },
-	            React.createElement(
-	              'div',
-	              null,
-	              'Current Bank ',
-	              SequencerStore.currentBank(),
-	              '/16'
-	            ),
-	            React.createElement(
-	              'div',
-	              null,
-	              'Current Drum ',
-	              this.state.drum
-	            )
-	          )
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'sequencer clearfix' },
-	        buttons
-	      ),
 	      React.createElement(
 	        'div',
 	        { className: 'instructions-wrapper' },
@@ -31711,6 +31669,74 @@
 	            '-Press the right arrow key to access piano (left to come back)'
 	          )
 	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'sequencer-controlls-wrapper' },
+	        React.createElement(
+	          'div',
+	          { className: 'sequencer-controlls clearfix' },
+	          React.createElement(
+	            'div',
+	            { className: 'start-sequence', onClick: this.togglePlayBack },
+	            this.state.playing ? React.createElement('i', { className: 'fa fa-pause-circle', 'aria-hidden': 'true' }) : React.createElement('i', { className: 'fa fa-play-circle', 'aria-hidden': 'true' })
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'reset-sequence', onClick: this.resetSequence },
+	            React.createElement('i', { className: 'fa fa-stop-circle', 'aria-hidden': 'true' })
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            'Tempo'
+	          ),
+	          React.createElement('input', {
+	            id: 'tempo',
+	            type: 'text',
+	            disabled: 'disabled',
+	            value: this.state.tempo,
+	            onChange: this.updateTempo }),
+	          React.createElement(
+	            'div',
+	            { className: 'tempo-controlls' },
+	            React.createElement('i', { className: 'fa fa-angle-up',
+	              id: 'vol-up',
+	              'aria-hidden': 'true',
+	              onClick: this.tempoUp }),
+	            React.createElement('i', { className: 'fa fa-angle-down',
+	              id: 'vol-down',
+	              'aria-hidden': 'true',
+	              onClick: this.tempoDown })
+	          ),
+	          React.createElement(
+	            'div',
+	            null,
+	            this.state.error
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'sequencer-display clearfix' },
+	            React.createElement(
+	              'div',
+	              null,
+	              'Current Bank ',
+	              SequencerStore.currentBank(),
+	              '/16'
+	            ),
+	            React.createElement(
+	              'div',
+	              null,
+	              'Current Drum ',
+	              this.state.drum
+	            )
+	          )
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'sequencer clearfix' },
+	        buttons
 	      )
 	    );
 	  }
@@ -38257,6 +38283,12 @@
 	      beat: beatNum
 	    });
 	  },
+	  updateLength: function (newLength) {
+	    BankDispatcher.dispatch({
+	      actionType: "UPDATE_LENGTH",
+	      length: newLength
+	    });
+	  },
 	  switchBank: function (bankNum) {
 	    BankDispatcher.dispatch({
 	      actionType: "SWITCH_BANK",
@@ -38302,6 +38334,10 @@
 	      updateBank(payload.bank, payload.drum, payload.beat);
 	      this.__emitChange();
 	      break;
+	    case "UPDATE_LENGTH":
+	      updateLength(payload.length);
+	      this.__emitChange();
+	      break;
 	    case "SWITCH_BANK":
 	      switchBank(payload.bank);
 	      this.__emitChange();
@@ -38322,6 +38358,24 @@
 	  var drum = DrumStore.drum().name;
 	
 	  _banks[bank][drum][beat - 1] = !_banks[bank][drum][beat - 1];
+	}
+	
+	function updateLength(length) {
+	  var newBeats = length * 16;
+	  Object.keys(_banks[_currentBank]).forEach(function (drum) {
+	    var oldBeats = _banks[_currentBank][drum].length;
+	    if (newBeats == oldBeats) {
+	      console.log("NO CHANGE");
+	    } else if (newBeats > oldBeats) {
+	      var last16 = _banks[_currentBank][drum].slice(-16);
+	
+	      _banks[_currentBank][drum] = _banks[_currentBank][drum].concat(last16);
+	      // console.log(_banks[_currentBank][drum]);
+	    } else if (newBeats < oldBeats) {
+	        _banks[_currentBank][drum].splice(-(oldBeats - newBeats));
+	        // console.log(_banks[_currentBank][drum]);
+	      }
+	  });
 	}
 	
 	function updateTempo(tempo) {

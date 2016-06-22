@@ -9,6 +9,12 @@ module.exports = {
       beat: beatNum
     });
   },
+  updateLength: function (newLength) {
+    BankDispatcher.dispatch({
+      actionType: "UPDATE_LENGTH",
+      length: newLength
+    });
+  },
   switchBank: function (bankNum) {
     BankDispatcher.dispatch({
       actionType: "SWITCH_BANK",

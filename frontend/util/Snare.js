@@ -26,7 +26,7 @@ Snare.prototype.setup = function () {
   this.noiseEnvelope.connect(this.ctx.destination);
 
   this.osc = this.ctx.createOscillator();
-  this.osc.type = 'triangle';
+  this.osc.type = 'sine';
   this.oscEnvelope = this.ctx.createGain();
 
   this.osc.connect(this.oscEnvelope);

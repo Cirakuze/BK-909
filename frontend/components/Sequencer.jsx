@@ -8,13 +8,25 @@ var $ = require('jquery');
 var Drums = require('../constants/Drums');
 var ctx = new (window.AudioContext || window.webkitAudioContext);
 
-var stepKeys = { 0: 1, 1: 2, 2: 3, 3: 4, 4: "Q", 5: "W", 6: "E", 7: "R", 8: "A", 9: "S", 10: "D", 11: "F", 12: "Z", 13: "X", 14: "C", 15: "V" };
+var steps = { 0: 1, 1: 2, 2: 3, 3: 4, 4: "Q", 5: "W", 6: "E", 7: "R", 8: "A", 9: "S", 10: "D", 11: "F", 12: "Z", 13: "X", 14: "C", 15: "V" };
+
+function stepKeys(key) {
+  if (key > 47) {
+    key -= 48;
+  } else if (key > 31) {
+    key -= 32;
+  } else if (key > 15) {
+    key -= 16;
+  }
+  return steps[key];
+}
 
 module.exports = React.createClass({
   getInitialState: function () {
     return ({
       leds: [false,false,false,false,false,false,false,false,
         false,false,false,false,false,false,false,false],
+      rows: 1,
       currentStep: 1,
       switching: false,
       drum: "",
@@ -40,6 +52,20 @@ module.exports = React.createClass({
         $('.drumset').removeClass('hidden');
       } else {
         if (this.state.piano === false) {
+          if (e.keyCode === 187) {
+            // 187 +
+            if (this.state.rows < 4) {
+              this.setState({rows: this.state.rows + 1});
+              SequencerActions.updateLength(this.state.rows);
+            }
+          } else if (e.keyCode === 189) {
+            // 189 -
+            if (this.state.rows > 1) {
+              this.setState({rows: this.state.rows - 1});
+              SequencerActions.updateLength(this.state.rows);
+            }
+          }
+
           if (e.keyCode === 32) {
             // spacebar
             this.togglePlayBack();
@@ -122,7 +148,7 @@ module.exports = React.createClass({
       }
     }.bind(this));
 
-    if (this.state.currentStep  < 16) {
+    if (this.state.currentStep  < this.state.leds.length) {
       this.setState({currentStep: this.state.currentStep += 1});
     } else {
       this.setState({currentStep: 1});
@@ -170,13 +196,32 @@ module.exports = React.createClass({
       var klass2 = (this.state.currentStep === key + 1) ? "step-led LED-ON" : "step-led";
       return <div className="button" key={key}>
               <div className={klass}>
-                <p>{stepKeys[key]}</p>
+                <p>{stepKeys(key)}</p>
               </div>
               <div className={klass2} key={key}></div>
             </div>;
     }.bind(this));
     return (
       <div className="sequencer-wrapper">
+        <div className="instructions-wrapper">
+          <div className="instructions">
+            <h1>Instructions:</h1>
+            <h3>Short version:</h3>
+            <p>1) Press ~ (the key above the tab key)</p>
+            <p>2) Press v</p>
+            <p>3) Press space bar</p>
+            <h3>Long version:</h3>
+            <p>-Select a drum by pressing the key on the drum</p>
+            <p>-Toggle a step by pressing the key on the step</p>
+            <p>&nbsp;(red dot is on / brown dot is off)</p>
+            <p>-Space bar starts/stops the sequence</p>
+            <p>-Enter resets the sequence</p>
+            <p>-Up/Down arrow keys speed up/slow down tempo</p>
+            <p>-Switch banks by pressing tilde then a step key</p>
+            <p>-Banks 13 (z), 14 (x), 15 (c), and 16 (v) are presets</p>
+            <p>-Press the right arrow key to access piano (left to come back)</p>
+          </div>
+        </div>
         <div className="sequencer-controlls-wrapper">
           <div className="sequencer-controlls clearfix">
             <div className="start-sequence" onClick={this.togglePlayBack}>
@@ -213,25 +258,6 @@ module.exports = React.createClass({
         </div>
         <div className="sequencer clearfix">
           {buttons}
-        </div>
-        <div className="instructions-wrapper">
-          <div className="instructions">
-            <h1>Instructions:</h1>
-            <h3>Short version:</h3>
-            <p>1) Press ~ (the key above the tab key)</p>
-            <p>2) Press v</p>
-            <p>3) Press space bar</p>
-            <h3>Long version:</h3>
-            <p>-Select a drum by pressing the key on the drum</p>
-            <p>-Toggle a step by pressing the key on the step</p>
-            <p>&nbsp;(red dot is on / brown dot is off)</p>
-            <p>-Space bar starts/stops the sequence</p>
-            <p>-Enter resets the sequence</p>
-            <p>-Up/Down arrow keys speed up/slow down tempo</p>
-            <p>-Switch banks by pressing tilde then a step key</p>
-            <p>-Banks 13 (z), 14 (x), 15 (c), and 16 (v) are presets</p>
-            <p>-Press the right arrow key to access piano (left to come back)</p>
-          </div>
         </div>
       </div>
     );

@@ -723,7 +723,7 @@ div.instructions-wrapper {
 div.instructions {
   position: absolute;
   right: -500px;
-  top: -700px;
+  top: -500px;
 }
 
 div.instructions,
