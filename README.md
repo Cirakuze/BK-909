@@ -26,9 +26,15 @@ Press the space bar to start the play back.
 Press the space bar again to pause.
 Press enter to reset to the beginning.
 
+## Extending the pattern
+Press +/- keys to lengthen or shorten the pattern.
+Press tab to cycle through the rows for edit.
+![Pattern Rows](./app/assets/images/patternRows.png?raw=true "Pattern Rows")
+
 ## Changing the tempo
 The up/down arrow keys change the tempo of the sequencer.
 This can be done during playback as well.
+![Tempo change](./app/assets/images/tempoChange.png?raw=true "Tempo change")
 
 ## Changing the patterns
 A pattern (a bank) stores the rhythm of 8 different drums.
@@ -39,6 +45,7 @@ then pressing one of the sequencer step keys.
 ## BONUS: piano
 Press the right arrow key to access the piano.
 Space bar sustains notes.
+![Piano Roll](./app/assets/images/pianoRoll.png?raw=true "Piano Roll")
 
 ## Todos
 Option to increase pattern length from 16 steps to 32 steps.
