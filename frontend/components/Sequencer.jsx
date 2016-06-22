@@ -265,6 +265,7 @@ module.exports = React.createClass({
             <p>-Up/Down arrow keys speed up/slow down tempo</p>
             <p>-Switch banks by pressing tilde then a step key</p>
             <p>-Press +/- to lengthen/shorten pattern</p>
+            <p>-Press tab to cycle through rows of pattern</p>
             <p>-Banks 13 (z), 14 (x), 15 (c), and 16 (v) are presets</p>
             <p>-Press the right arrow key to access piano (left to come back)</p>
           </div>

@@ -31714,6 +31714,11 @@
 	          React.createElement(
 	            'p',
 	            null,
+	            '-Press tab to cycle through rows of pattern'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
 	            '-Banks 13 (z), 14 (x), 15 (c), and 16 (v) are presets'
 	          ),
 	          React.createElement(
