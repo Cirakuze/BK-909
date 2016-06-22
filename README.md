@@ -36,6 +36,10 @@ There are 16 banks in total, for access to 16 different rhythms instantly.
 Banks can be switched by pressing the ~ (tilde) key,
 then pressing one of the sequencer step keys.
 
+## BONUS: piano
+Press the right arrow key to access the piano.
+Space bar sustains notes.
+
 ## Todos
 Option to increase pattern length from 16 steps to 32 steps.
 Different sets of drum sounds.

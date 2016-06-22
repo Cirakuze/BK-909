@@ -38587,6 +38587,9 @@
 	    }.bind(this));
 	
 	    $(document).keydown(function (e) {
+	      if (e.keyCode === 8) {
+	        e.preventDefault();
+	      }
 	      if (this.state.piano) {
 	        if (e.keyCode === 32) {
 	          this.setState({ sustain: true });
@@ -38619,6 +38622,11 @@
 	      React.createElement(
 	        'div',
 	        { className: 'piano clearfix' },
+	        React.createElement(
+	          'div',
+	          { className: 'octave clearfix' },
+	          React.createElement(PianoKey, { noteName: "B3" })
+	        ),
 	        React.createElement(
 	          'div',
 	          { className: 'octave clearfix' },
@@ -38661,7 +38669,9 @@
 	          React.createElement(PianoKey, { noteName: "E6" }),
 	          React.createElement(PianoKey, { noteName: "F6" }),
 	          React.createElement(PianoKey, { noteName: "Gb6" }),
-	          React.createElement(PianoKey, { noteName: "G6" })
+	          React.createElement(PianoKey, { noteName: "G6" }),
+	          React.createElement(PianoKey, { noteName: "Ab6" }),
+	          React.createElement(PianoKey, { noteName: "A6" })
 	        )
 	      )
 	    );
@@ -38778,6 +38788,8 @@
 /***/ function(module, exports) {
 
 	module.exports = {
+	  B3: 246.94,
+	
 	  C4: 261.63,
 	  Db4: 277.18,
 	  D4: 293.66,
@@ -38811,7 +38823,9 @@
 	  E6: 1318.51,
 	  F6: 1396.91,
 	  Gb6: 1479.98,
-	  G6: 1567.98
+	  G6: 1567.98,
+	  Ab6: 1661.22,
+	  A6: 1760.00
 	};
 
 /***/ },
@@ -38891,6 +38905,8 @@
 /***/ function(module, exports) {
 
 	module.exports = {
+	  B3: "A",
+	
 	  C4: "Z",
 	  Db4: "S",
 	  D4: "X",
@@ -38924,7 +38940,9 @@
 	  E6: "P",
 	  F6: "[",
 	  Gb6: "=",
-	  G6: "]"
+	  G6: "]",
+	  Ab6: "-d",
+	  A6: "\\"
 	};
 
 /***/ },
@@ -38932,6 +38950,8 @@
 /***/ function(module, exports) {
 
 	module.exports = {
+	  65: 'B3',
+	
 	  90: 'C4',
 	  83: 'Db4',
 	  88: 'D4',
@@ -38945,11 +38965,13 @@
 	  74: 'Bb4',
 	  77: 'B4',
 	
+	  49: 'B4',
 	  188: 'C5',
 	  76: 'Db5',
 	  190: 'D5',
 	  186: 'Eb5',
 	  191: 'E5',
+	  222: 'F5',
 	
 	  81: 'C5',
 	  50: 'Db5',
@@ -38971,8 +38993,9 @@
 	  80: 'E6',
 	  219: 'F6',
 	  187: 'Gb6',
-	  221: 'G6'
-	
+	  221: 'G6',
+	  8: 'Ab6',
+	  220: 'A6'
 	};
 
 /***/ }

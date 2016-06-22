@@ -757,7 +757,7 @@ div.piano-wrapper.shown {
 }
 
 .piano {
-  width: 988px;
+  width: 1090px;
   margin: auto;
   background-color: #78091c;
   transform: rotateX(25deg);
@@ -773,13 +773,17 @@ div.piano-wrapper.shown {
   background-color: #7dcf0b;
 }
 
-.octave:first-child,
-.octave:nth-child(2) {
+.octave:nth-child(1) {
+  width: 50px;
+}
+
+.octave:nth-child(2),
+.octave:nth-child(3) {
   width: 364px;
 }
 
-.octave:nth-child(3) {
-  width: 260px;
+.octave:nth-child(4) {
+  width: 312px;
 }
 
 .octave > * {

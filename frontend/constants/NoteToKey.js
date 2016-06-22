@@ -1,4 +1,6 @@
 module.exports = {
+  B3: "A",
+
   C4: "Z",
   Db4: "S",
   D4: "X",
@@ -32,5 +34,7 @@ module.exports = {
   E6: "P",
   F6: "[",
   Gb6: "=",
-  G6: "]"
+  G6: "]",
+  Ab6: "-d",
+  A6: "\\"
 };

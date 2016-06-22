@@ -24,6 +24,9 @@ module.exports = React.createClass({
     }.bind(this));
 
     $(document).keydown(function(e){
+      if (e.keyCode === 8) {
+        e.preventDefault();
+      }
       if (this.state.piano) {
         if (e.keyCode === 32) {
           this.setState({sustain: true});
@@ -55,6 +58,9 @@ module.exports = React.createClass({
     return (
       <div className="piano-wrapper" id="piano-wrapper">
         <div className="piano clearfix">
+          <div className="octave clearfix">
+            <PianoKey noteName={"B3"} />
+          </div>
 
           <div className="octave clearfix">
             <PianoKey noteName={"C4"} />
@@ -95,6 +101,8 @@ module.exports = React.createClass({
             <PianoKey noteName={"F6"} />
             <PianoKey noteName={"Gb6"} />
             <PianoKey noteName={"G6"} />
+            <PianoKey noteName={"Ab6"} />
+            <PianoKey noteName={"A6"} />
           </div>
 
         </div>
