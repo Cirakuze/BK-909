@@ -31653,7 +31653,7 @@
 	          React.createElement(
 	            'p',
 	            null,
-	            '2) Press z, x, c, or v'
+	            '2) Press v'
 	          ),
 	          React.createElement(
 	            'p',
@@ -38563,7 +38563,8 @@
 	var PianoKey = __webpack_require__(208);
 	var $ = __webpack_require__(176);
 	var KeyAction = __webpack_require__(212);
-	var Mapping = __webpack_require__(213);
+	var Mapping = __webpack_require__(214);
+	var KeyStore = __webpack_require__(209);
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -38591,11 +38592,10 @@
 	          this.setState({ sustain: true });
 	        }
 	
-	        if (this.state.sustain && e.keyCode !== 32) {
-	          KeyAction.replayNote(Mapping[e.keyCode]);
-	        } else {
-	          KeyAction.keyPressed(Mapping[e.keyCode]);
+	        if (this.state.sustain && e.keyCode !== 32 && KeyStore.allNotes().includes(Mapping[e.keyCode])) {
+	          KeyAction.keyDepressed(Mapping[e.keyCode]);
 	        }
+	        KeyAction.keyPressed(Mapping[e.keyCode]);
 	      }
 	    }.bind(this));
 	
@@ -38622,110 +38622,46 @@
 	        React.createElement(
 	          'div',
 	          { className: 'octave clearfix' },
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "C4" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "Db4" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "D4" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "Eb4" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "E4" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "F4" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "Gb4" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "G4" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "Ab4" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "A4" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "Bb4" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "B4" })
+	          React.createElement(PianoKey, { noteName: "C4" }),
+	          React.createElement(PianoKey, { noteName: "Db4" }),
+	          React.createElement(PianoKey, { noteName: "D4" }),
+	          React.createElement(PianoKey, { noteName: "Eb4" }),
+	          React.createElement(PianoKey, { noteName: "E4" }),
+	          React.createElement(PianoKey, { noteName: "F4" }),
+	          React.createElement(PianoKey, { noteName: "Gb4" }),
+	          React.createElement(PianoKey, { noteName: "G4" }),
+	          React.createElement(PianoKey, { noteName: "Ab4" }),
+	          React.createElement(PianoKey, { noteName: "A4" }),
+	          React.createElement(PianoKey, { noteName: "Bb4" }),
+	          React.createElement(PianoKey, { noteName: "B4" })
 	        ),
 	        React.createElement(
 	          'div',
 	          { className: 'octave clearfix' },
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "C5" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "Db5" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "D5" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "Eb5" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "E5" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "F5" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "Gb5" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "G5" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "Ab5" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "A5" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "Bb5" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "B5" })
+	          React.createElement(PianoKey, { noteName: "C5" }),
+	          React.createElement(PianoKey, { noteName: "Db5" }),
+	          React.createElement(PianoKey, { noteName: "D5" }),
+	          React.createElement(PianoKey, { noteName: "Eb5" }),
+	          React.createElement(PianoKey, { noteName: "E5" }),
+	          React.createElement(PianoKey, { noteName: "F5" }),
+	          React.createElement(PianoKey, { noteName: "Gb5" }),
+	          React.createElement(PianoKey, { noteName: "G5" }),
+	          React.createElement(PianoKey, { noteName: "Ab5" }),
+	          React.createElement(PianoKey, { noteName: "A5" }),
+	          React.createElement(PianoKey, { noteName: "Bb5" }),
+	          React.createElement(PianoKey, { noteName: "B5" })
 	        ),
 	        React.createElement(
 	          'div',
 	          { className: 'octave clearfix' },
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "C6" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "Db6" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "D6" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "Eb6" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "E6" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "F6" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "Gb6" }),
-	          React.createElement(PianoKey, {
-	            sustain: this.state.sustain,
-	            noteName: "G6" })
+	          React.createElement(PianoKey, { noteName: "C6" }),
+	          React.createElement(PianoKey, { noteName: "Db6" }),
+	          React.createElement(PianoKey, { noteName: "D6" }),
+	          React.createElement(PianoKey, { noteName: "Eb6" }),
+	          React.createElement(PianoKey, { noteName: "E6" }),
+	          React.createElement(PianoKey, { noteName: "F6" }),
+	          React.createElement(PianoKey, { noteName: "Gb6" }),
+	          React.createElement(PianoKey, { noteName: "G6" })
 	        )
 	      )
 	    );
@@ -38740,7 +38676,7 @@
 	var KeyStore = __webpack_require__(209);
 	var Tones = __webpack_require__(210);
 	var Note = __webpack_require__(211);
-	var NoteToKey = __webpack_require__(214);
+	var NoteToKey = __webpack_require__(213);
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -38760,12 +38696,7 @@
 	  checkForNotes: function () {
 	    if (KeyStore.allNotes().includes(this.props.noteName)) {
 	      this.setState({ selected: true });
-	      if (this.props.sustain) {
-	        this.note.stop();
-	        setTimeout(this.note.start(), 1000);
-	      } else {
-	        this.note.start();
-	      }
+	      this.note.start();
 	    } else {
 	      this.setState({ selected: false });
 	      this.note.stop();
@@ -38813,10 +38744,6 @@
 	      removeNote(payload.keyName);
 	      KeyStore.__emitChange();
 	      break;
-	    case "REPLAY_NOTE":
-	      replayNote(payload.keyName);
-	      KeyStore.__emitChange();
-	      break;
 	    case "REMOVE_ALL_NOTES":
 	      removeAllNotes();
 	      KeyStore.__emitChange();
@@ -38838,13 +38765,6 @@
 	
 	function removeNote(keyName) {
 	  _notes.splice(_notes.indexOf(keyName), 1);
-	}
-	
-	function replayNote(keyName) {
-	  if (_notes.includes(keyName)) {
-	    removeNote(keyName);
-	  }
-	  addNote(keyName);
 	}
 	
 	function removeAllNotes() {
@@ -38903,7 +38823,7 @@
 	
 	var createOscillator = function (freq) {
 	  var osc = ctx.createOscillator();
-	  osc.type = "square";
+	  osc.type = "sawtooth";
 	  osc.frequency.value = freq;
 	  osc.detune.value = 0;
 	  osc.start(ctx.currentTime);
@@ -38926,7 +38846,7 @@
 	Note.prototype = {
 	  start: function () {
 	    // can't explain 0.3, it is a reasonable value
-	    this.gainNode.gain.value = 0.1;
+	    this.gainNode.gain.value = 0.09;
 	  },
 	
 	  stop: function () {
@@ -38957,12 +38877,6 @@
 	      keyName: keyName
 	    });
 	  },
-	  replayNote: function (keyName) {
-	    Dispatcher.dispatch({
-	      actionType: "REPLAY_NOTE",
-	      keyName: keyName
-	    });
-	  },
 	  removeAllNotes: function () {
 	    Dispatcher.dispatch({
 	      actionType: "REMOVE_ALL_NOTES"
@@ -38974,6 +38888,47 @@
 
 /***/ },
 /* 213 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  C4: "Z",
+	  Db4: "S",
+	  D4: "X",
+	  Eb4: "D",
+	  E4: "C",
+	  F4: "V",
+	  Gb4: "G",
+	  G4: "B",
+	  Ab4: "H",
+	  A4: "N",
+	  Bb4: "J",
+	  B4: "M",
+	
+	  C5: "Q",
+	  Db5: "2",
+	  D5: "W",
+	  Eb5: "3",
+	  E5: "E",
+	  F5: "R",
+	  Gb5: "5",
+	  G5: "T",
+	  Ab5: "6",
+	  A5: "Y",
+	  Bb5: "7",
+	  B5: "U",
+	
+	  C6: "I",
+	  Db6: "9",
+	  D6: "O",
+	  Eb6: "0",
+	  E6: "P",
+	  F6: "[",
+	  Gb6: "=",
+	  G6: "]"
+	};
+
+/***/ },
+/* 214 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -39018,47 +38973,6 @@
 	  187: 'Gb6',
 	  221: 'G6'
 	
-	};
-
-/***/ },
-/* 214 */
-/***/ function(module, exports) {
-
-	module.exports = {
-	  C4: "Z",
-	  Db4: "S",
-	  D4: "X",
-	  Eb4: "D",
-	  E4: "C",
-	  F4: "V",
-	  Gb4: "G",
-	  G4: "B",
-	  Ab4: "H",
-	  A4: "N",
-	  Bb4: "J",
-	  B4: "M",
-	
-	  C5: "Q",
-	  Db5: "2",
-	  D5: "W",
-	  Eb5: "3",
-	  E5: "E",
-	  F5: "R",
-	  Gb5: "5",
-	  G5: "T",
-	  Ab5: "6",
-	  A5: "Y",
-	  Bb5: "7",
-	  B5: "U",
-	
-	  C6: "I",
-	  Db6: "9",
-	  D6: "O",
-	  Eb6: "0",
-	  E6: "P",
-	  F6: "[",
-	  Gb6: "=",
-	  G6: "]"
 	};
 
 /***/ }

@@ -13,12 +13,6 @@ var KeyAction = {
       keyName: keyName
     });
   },
-  replayNote: function (keyName) {
-    Dispatcher.dispatch({
-      actionType: "REPLAY_NOTE",
-      keyName: keyName
-    });
-  },
   removeAllNotes: function () {
     Dispatcher.dispatch({
       actionType: "REMOVE_ALL_NOTES"

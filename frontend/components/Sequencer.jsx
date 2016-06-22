@@ -219,7 +219,7 @@ module.exports = React.createClass({
             <h1>Instructions:</h1>
             <h3>Short version:</h3>
             <p>1) Press ~ (the key above the tab key)</p>
-            <p>2) Press z, x, c, or v</p>
+            <p>2) Press v</p>
             <p>3) Press space bar</p>
             <h3>Long version:</h3>
             <p>-Select a drum by pressing the key on the drum</p>

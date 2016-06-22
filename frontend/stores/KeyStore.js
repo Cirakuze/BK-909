@@ -16,10 +16,6 @@ KeyStore.__onDispatch = function (payload) {
       removeNote(payload.keyName);
       KeyStore.__emitChange();
       break;
-    case "REPLAY_NOTE":
-      replayNote(payload.keyName);
-      KeyStore.__emitChange();
-      break;
     case "REMOVE_ALL_NOTES":
       removeAllNotes();
       KeyStore.__emitChange();
@@ -41,13 +37,6 @@ function addNote(keyName) {
 
 function removeNote(keyName) {
   _notes.splice(_notes.indexOf(keyName), 1);
-}
-
-function replayNote(keyName) {
-  if (_notes.includes(keyName)) {
-    removeNote(keyName);
-  }
-  addNote(keyName);
 }
 
 function removeAllNotes() {
