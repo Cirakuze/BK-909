@@ -49,8 +49,12 @@ module.exports = React.createClass({
     document.addEventListener('keydown', function (e) {
       if (e.keyCode === 39) {
         this.setState({piano: true});
+        $('.sequencer-wrapper').addClass('hidden');
+        $('.drumset').addClass('hidden');
       } else if (e.keyCode === 37) {
         this.setState({piano: false});
+        $('.sequencer-wrapper').removeClass('hidden');
+        $('.drumset').removeClass('hidden');
       } else {
         if (this.state.piano === false) {
           if (e.keyCode === 32) {
