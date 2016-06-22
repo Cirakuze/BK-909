@@ -221,7 +221,6 @@ module.exports = React.createClass({
             <p>1) Press ~ (the key above the tab key)</p>
             <p>2) Press z, x, c, or v</p>
             <p>3) Press space bar</p>
-            <br />
             <h3>Long version:</h3>
             <p>-Select a drum by pressing the key on the drum</p>
             <p>-Toggle a step by pressing the key on the step</p>
@@ -231,6 +230,7 @@ module.exports = React.createClass({
             <p>-Up/Down arrow keys speed up/slow down tempo</p>
             <p>-Switch banks by pressing tilde then a step key</p>
             <p>-Banks 13 (z), 14 (x), 15 (c), and 16 (v) are presets</p>
+            <p>-Press the right arrow key to access piano (left to come back)</p>
           </div>
         </div>
       </div>

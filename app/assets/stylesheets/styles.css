@@ -4,7 +4,7 @@
 }
 
 /*RESET*/
-body, h1, p, div {
+body, h1, h3, p, div {
   margin: 0;
   border: 0;
   padding: 0;
@@ -788,6 +788,25 @@ div.piano-wrapper.shown {
 
 .key {
   border: solid 1px black;
+  position: relative;
+}
+
+.key-name-white {
+  margin: auto;
+  position: relative;
+  left: 20px;
+  top: 175px;
+  color: black;
+  font-family: Arial, sans-serif;
+}
+
+.key-name-black {
+  margin: auto;
+  position: relative;
+  left: 15px;
+  top: 100px;
+  color: white;
+  font-family: Arial, sans-serif;
 }
 
 .white {

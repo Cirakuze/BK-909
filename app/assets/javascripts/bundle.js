@@ -31660,7 +31660,6 @@
 	            null,
 	            '3) Press space bar'
 	          ),
-	          React.createElement('br', null),
 	          React.createElement(
 	            'h3',
 	            null,
@@ -31705,6 +31704,11 @@
 	            'p',
 	            null,
 	            '-Banks 13 (z), 14 (x), 15 (c), and 16 (v) are presets'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '-Press the right arrow key to access piano (left to come back)'
 	          )
 	        )
 	      )
@@ -38618,46 +38622,110 @@
 	        React.createElement(
 	          'div',
 	          { className: 'octave clearfix' },
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "C4" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "Db4" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "D4" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "Eb4" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "E4" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "F4" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "Gb4" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "G4" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "Ab4" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "A4" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "Bb4" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "B4" })
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "C4" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "Db4" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "D4" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "Eb4" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "E4" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "F4" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "Gb4" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "G4" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "Ab4" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "A4" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "Bb4" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "B4" })
 	        ),
 	        React.createElement(
 	          'div',
 	          { className: 'octave clearfix' },
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "C5" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "Db5" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "D5" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "Eb5" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "E5" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "F5" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "Gb5" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "G5" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "Ab5" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "A5" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "Bb5" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "B5" })
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "C5" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "Db5" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "D5" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "Eb5" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "E5" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "F5" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "Gb5" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "G5" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "Ab5" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "A5" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "Bb5" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "B5" })
 	        ),
 	        React.createElement(
 	          'div',
 	          { className: 'octave clearfix' },
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "C6" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "Db6" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "D6" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "Eb6" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "E6" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "F6" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "Gb6" }),
-	          React.createElement(PianoKey, { sustain: this.state.sustain, noteName: "G6" })
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "C6" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "Db6" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "D6" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "Eb6" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "E6" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "F6" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "Gb6" }),
+	          React.createElement(PianoKey, {
+	            sustain: this.state.sustain,
+	            noteName: "G6" })
 	        )
 	      )
 	    );
@@ -38672,6 +38740,7 @@
 	var KeyStore = __webpack_require__(209);
 	var Tones = __webpack_require__(210);
 	var Note = __webpack_require__(211);
+	var NoteToKey = __webpack_require__(214);
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -38709,8 +38778,16 @@
 	    } else {
 	      keyFlat = false;
 	    }
-	    return React.createElement('div', { className: keyFlat ? "key black" : "key white",
-	      id: this.state.selected ? "selected" : "" });
+	    return React.createElement(
+	      'div',
+	      { className: keyFlat ? "key black" : "key white",
+	        id: this.state.selected ? "selected" : "" },
+	      React.createElement(
+	        'div',
+	        { className: keyFlat ? "key-name-black" : "key-name-white" },
+	        NoteToKey[this.props.noteName]
+	      )
+	    );
 	  }
 	});
 
@@ -38849,7 +38926,7 @@
 	Note.prototype = {
 	  start: function () {
 	    // can't explain 0.3, it is a reasonable value
-	    this.gainNode.gain.value = 0.3;
+	    this.gainNode.gain.value = 0.1;
 	  },
 	
 	  stop: function () {
@@ -38940,6 +39017,48 @@
 	  219: 'F6',
 	  187: 'Gb6',
 	  221: 'G6'
+	
+	};
+
+/***/ },
+/* 214 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  C4: "Z",
+	  Db4: "S",
+	  D4: "X",
+	  Eb4: "D",
+	  E4: "C",
+	  F4: "V",
+	  Gb4: "G",
+	  G4: "B",
+	  Ab4: "H",
+	  A4: "N",
+	  Bb4: "J",
+	  B4: "M",
+	
+	  C5: "Q",
+	  Db5: "2",
+	  D5: "W",
+	  Eb5: "3",
+	  E5: "E",
+	  F5: "R",
+	  Gb5: "5",
+	  G5: "T",
+	  Ab5: "6",
+	  A5: "Y",
+	  Bb5: "7",
+	  B5: "U",
+	
+	  C6: "I",
+	  Db6: "9",
+	  D6: "O",
+	  Eb6: "0",
+	  E6: "P",
+	  F6: "[",
+	  Gb6: "=",
+	  G6: "]"
 	};
 
 /***/ }

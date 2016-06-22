@@ -2,6 +2,7 @@ var React = require('react');
 var KeyStore = require('../stores/KeyStore');
 var Tones = require('../constants/Tones');
 var Note = require('../util/Note');
+var NoteToKey = require('../constants/NoteToKey');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -40,6 +41,9 @@ module.exports = React.createClass({
     return (
       <div className={ keyFlat ? "key black" : "key white" }
           id={ this.state.selected ? "selected" : ""}>
+          <div className={ keyFlat ? "key-name-black" : "key-name-white" }>
+            {NoteToKey[this.props.noteName]}
+          </div>
       </div>
     );
   }

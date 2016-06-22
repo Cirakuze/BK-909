@@ -27,7 +27,7 @@ module.exports = React.createClass({
         if (e.keyCode === 32) {
           this.setState({sustain: true});
         }
-        
+
         if (this.state.sustain && (e.keyCode !== 32)) {
           KeyAction.replayNote(Mapping[e.keyCode]);
         } else {
@@ -55,44 +55,108 @@ module.exports = React.createClass({
         <div className="piano clearfix">
 
           <div className="octave clearfix">
-            <PianoKey sustain={this.state.sustain} noteName={"C4"} />
-            <PianoKey sustain={this.state.sustain} noteName={"Db4"} />
-            <PianoKey sustain={this.state.sustain} noteName={"D4"} />
-            <PianoKey sustain={this.state.sustain} noteName={"Eb4"} />
-            <PianoKey sustain={this.state.sustain} noteName={"E4"} />
-            <PianoKey sustain={this.state.sustain} noteName={"F4"} />
-            <PianoKey sustain={this.state.sustain} noteName={"Gb4"} />
-            <PianoKey sustain={this.state.sustain} noteName={"G4"} />
-            <PianoKey sustain={this.state.sustain} noteName={"Ab4"} />
-            <PianoKey sustain={this.state.sustain} noteName={"A4"} />
-            <PianoKey sustain={this.state.sustain} noteName={"Bb4"} />
-            <PianoKey sustain={this.state.sustain} noteName={"B4"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"C4"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"Db4"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"D4"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"Eb4"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"E4"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"F4"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"Gb4"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"G4"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"Ab4"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"A4"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"Bb4"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"B4"} />
           </div>
 
           <div className="octave clearfix">
-            <PianoKey sustain={this.state.sustain} noteName={"C5"} />
-            <PianoKey sustain={this.state.sustain} noteName={"Db5"} />
-            <PianoKey sustain={this.state.sustain} noteName={"D5"} />
-            <PianoKey sustain={this.state.sustain} noteName={"Eb5"} />
-            <PianoKey sustain={this.state.sustain} noteName={"E5"} />
-            <PianoKey sustain={this.state.sustain} noteName={"F5"} />
-            <PianoKey sustain={this.state.sustain} noteName={"Gb5"} />
-            <PianoKey sustain={this.state.sustain} noteName={"G5"} />
-            <PianoKey sustain={this.state.sustain} noteName={"Ab5"} />
-            <PianoKey sustain={this.state.sustain} noteName={"A5"} />
-            <PianoKey sustain={this.state.sustain} noteName={"Bb5"} />
-            <PianoKey sustain={this.state.sustain} noteName={"B5"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"C5"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"Db5"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"D5"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"Eb5"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"E5"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"F5"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"Gb5"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"G5"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"Ab5"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"A5"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"Bb5"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"B5"} />
           </div>
 
           <div className="octave clearfix">
-            <PianoKey sustain={this.state.sustain} noteName={"C6"} />
-            <PianoKey sustain={this.state.sustain} noteName={"Db6"} />
-            <PianoKey sustain={this.state.sustain} noteName={"D6"} />
-            <PianoKey sustain={this.state.sustain} noteName={"Eb6"} />
-            <PianoKey sustain={this.state.sustain} noteName={"E6"} />
-            <PianoKey sustain={this.state.sustain} noteName={"F6"} />
-            <PianoKey sustain={this.state.sustain} noteName={"Gb6"} />
-            <PianoKey sustain={this.state.sustain} noteName={"G6"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"C6"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"Db6"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"D6"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"Eb6"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"E6"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"F6"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"Gb6"} />
+            <PianoKey
+              sustain={this.state.sustain}
+              noteName={"G6"} />
           </div>
 
         </div>
