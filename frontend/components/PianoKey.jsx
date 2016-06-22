@@ -19,7 +19,12 @@ module.exports = React.createClass({
   checkForNotes: function () {
     if (KeyStore.allNotes().includes(this.props.noteName)) {
       this.setState({selected: true});
-      this.note.start();
+      if (this.props.sustain) {
+        this.note.stop();
+        setTimeout(this.note.start(), 1000);
+      } else {
+        this.note.start();
+      }
     } else {
       this.setState({selected: false});
       this.note.stop();

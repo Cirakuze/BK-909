@@ -16,8 +16,12 @@ KeyStore.__onDispatch = function (payload) {
       removeNote(payload.keyName);
       KeyStore.__emitChange();
       break;
-    case "REPLACE_NOTES":
-      replaceNotes(payload.notes);
+    case "REPLAY_NOTE":
+      replayNote(payload.keyName);
+      KeyStore.__emitChange();
+      break;
+    case "REMOVE_ALL_NOTES":
+      removeAllNotes();
       KeyStore.__emitChange();
       break;
   }
@@ -29,19 +33,25 @@ KeyStore.allNotes = function () {
 
 var _notes = [];
 
-var addNote = function (keyName) {
+function addNote(keyName) {
   if (!_notes.includes(keyName)) {
     _notes.push(keyName);
   }
-};
+}
 
-var removeNote = function (keyName) {
-  var idx = _notes.indexOf(keyName);
-  _notes.splice(idx, 1);
-};
+function removeNote(keyName) {
+  _notes.splice(_notes.indexOf(keyName), 1);
+}
 
-var replaceNotes = function (notes) {
-  _notes = notes;
-};
+function replayNote(keyName) {
+  if (_notes.includes(keyName)) {
+    removeNote(keyName);
+  }
+  addNote(keyName);
+}
+
+function removeAllNotes() {
+  _notes = [];
+}
 
 module.exports = KeyStore;

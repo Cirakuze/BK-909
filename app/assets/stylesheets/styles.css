@@ -738,7 +738,7 @@ div.piano-wrapper {
   background-color: #dcddc8;
   display: none;
   position: absolute;
-  top: 0;
+  top: 90px;
   z-index: 999999;
   perspective: 1000px;
 }
@@ -748,9 +748,10 @@ div.piano-wrapper.shown {
 }
 
 .piano {
-  width: 1664px;
+  width: 988px;
   margin: auto;
   background-color: #78091c;
+  transform: rotateX(25deg);
 }
 
 .piano > * {
@@ -763,9 +764,17 @@ div.piano-wrapper.shown {
   background-color: #7dcf0b;
 }
 
+.octave:first-child,
+.octave:nth-child(2) {
+  width: 364px;
+}
+
+.octave:nth-child(3) {
+  width: 260px;
+}
+
 .octave > * {
   float: left;
-  transform: rotateX(25deg);
 }
 
 .key {
@@ -785,9 +794,11 @@ div.piano-wrapper.shown {
   height: 125px;
   position: relative;
   z-index: 1000002;
-  width: 50px;
+  margin-left: -45px;
+  left: 25px;
+  width: 40px;
 }
 
 #selected {
-  box-shadow: 0 0 50px white;
+  background-color: #a2b8ae;
 }

@@ -1,22 +1,27 @@
-var Dispatch = require('../dispatcher/Dispatcher.js');
+var Dispatcher = require('../dispatcher/Dispatcher.js');
 
 var KeyAction = {
   keyPressed: function (keyName) {
-    Dispatch.dispatch({
+    Dispatcher.dispatch({
       actionType: "ADD_NOTE",
       keyName: keyName
     });
   },
   keyDepressed: function (keyName) {
-    Dispatch.dispatch({
+    Dispatcher.dispatch({
       actionType: "REMOVE_NOTE",
       keyName: keyName
     });
   },
-  replaceNotes: function (notes) {
-    Dispatch.dispatch({
-      actionType: "REPLACE_NOTES",
-      notes: notes
+  replayNote: function (keyName) {
+    Dispatcher.dispatch({
+      actionType: "REPLAY_NOTE",
+      keyName: keyName
+    });
+  },
+  removeAllNotes: function () {
+    Dispatcher.dispatch({
+      actionType: "REMOVE_ALL_NOTES"
     });
   }
 };
