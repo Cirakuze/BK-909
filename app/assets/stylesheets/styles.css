@@ -734,14 +734,14 @@ i.fa {
 
 div.piano-wrapper {
   width: 100%;
+  height: 100%;
   background-color: #dd5d49;
-  height: 900px;
   display: none;
+  position: absolute;
+  top: 0;
+  z-index: 999999;
 }
 
 div.piano-wrapper.shown {
   display: block;
-  position: absolute;
-  top: 0;
-  z-index: 999999;
 }

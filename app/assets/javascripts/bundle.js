@@ -20530,11 +20530,11 @@
 	  componentDidMount: function () {
 	    document.addEventListener('keydown', function (e) {
 	      if (e.keycode === 39) {
-	        this.setState({ piano: !this.state.piano });
+	        this.setState({ piano: true });
 	      } else if (e.keyCode === 37) {
-	        this.setState({ piano: !this.state.piano });
+	        this.setState({ piano: false });
 	      }
-	    });
+	    }.bind(this));
 	
 	    $(document).keydown(function (e) {
 	      if (this.state.piano === false) {
@@ -20550,55 +20550,42 @@
 	            $('#Right-Bass').toggleClass('bass-right-struck');
 	            drum = new Bass(ctx);
 	          }
-	        }
-	
-	        if ([84, 89].includes(e.keyCode)) {
+	        } else if ([84, 89].includes(e.keyCode)) {
 	          // T, Y
 	          $('#Snare').toggleClass('snare-struck');
 	          drum = new Snare(ctx);
-	        }
-	
-	        if ([85, 73].includes(e.keyCode)) {
+	        } else if ([85, 73].includes(e.keyCode)) {
 	          // U, I
 	          $('#Hi-Hat').toggleClass('hi-hat-struck');
 	          drum = new HiHat(ctx);
-	        }
-	
-	        if ([71, 72].includes(e.keyCode)) {
+	        } else if ([71, 72].includes(e.keyCode)) {
 	          // G, H
 	          $('#Hi-Tom').toggleClass('hi-tom-struck');
 	          drum = new Toms(ctx, "high");
-	        }
-	
-	        if ([74, 75].includes(e.keyCode)) {
+	        } else if ([74, 75].includes(e.keyCode)) {
 	          // J, K
 	          $('#Mid-Tom').toggleClass('mid-tom-struck');
 	          drum = new Toms(ctx, "mid");
-	        }
-	
-	        if ([76, 186].includes(e.keyCode)) {
+	        } else if ([76, 186].includes(e.keyCode)) {
 	          // L, ;
 	          $('#Low-Tom').toggleClass('low-tom-struck');
 	          drum = new Toms(ctx, "low");
-	        }
-	
-	        if ([79].includes(e.keyCode)) {
+	        } else if ([79].includes(e.keyCode)) {
 	          // O
 	          $('#Ride-Cymbal').toggleClass('ride-cymbal-struck');
 	          drum = new RideCymbal(ctx);
-	        }
-	
-	        if (e.keyCode === 80) {
+	        } else if (e.keyCode === 80) {
 	          // P
 	          $('#Crash-Cymbal').toggleClass('crash-cymbal-struck');
 	          drum = new CrashCymbal(ctx);
 	        }
+	
 	        if (drum) {
 	          DrumActions.receiveDrum(drum);
 	          drum.trigger(now);
 	        }
 	      }
-	    });
+	    }.bind(this));
 	
 	    $(document).keyup(function (e) {
 	      if (this.state.piano === false) {
@@ -20609,44 +20596,30 @@
 	          } else if (e.keyCode === 78) {
 	            $('#Right-Bass').toggleClass('bass-right-struck');
 	          }
-	        }
-	
-	        if ([84, 89].includes(e.keyCode)) {
+	        } else if ([84, 89].includes(e.keyCode)) {
 	          // T, Y
 	          $('#Snare').toggleClass('snare-struck');
-	        }
-	
-	        if ([85, 73].includes(e.keyCode)) {
+	        } else if ([85, 73].includes(e.keyCode)) {
 	          // U, I
 	          $('#Hi-Hat').toggleClass('hi-hat-struck');
-	        }
-	
-	        if ([71, 72].includes(e.keyCode)) {
+	        } else if ([71, 72].includes(e.keyCode)) {
 	          // G, H
 	          $('#Hi-Tom').toggleClass('hi-tom-struck');
-	        }
-	
-	        if ([74, 75].includes(e.keyCode)) {
+	        } else if ([74, 75].includes(e.keyCode)) {
 	          // J, K
 	          $('#Mid-Tom').toggleClass('mid-tom-struck');
-	        }
-	
-	        if ([76, 186].includes(e.keyCode)) {
+	        } else if ([76, 186].includes(e.keyCode)) {
 	          // L, ;
 	          $('#Low-Tom').toggleClass('low-tom-struck');
-	        }
-	
-	        if ([79].includes(e.keyCode)) {
+	        } else if ([79].includes(e.keyCode)) {
 	          // O
 	          $('#Ride-Cymbal').toggleClass('ride-cymbal-struck');
-	        }
-	
-	        if (e.keyCode === 80) {
+	        } else if (e.keyCode === 80) {
 	          // P
 	          $('#Crash-Cymbal').toggleClass('crash-cymbal-struck');
 	        }
 	      }
-	    });
+	    }.bind(this));
 	  },
 	  render: function () {
 	    return React.createElement(
@@ -31455,10 +31428,11 @@
 	
 	    document.addEventListener('keydown', function (e) {
 	      if (e.keycode === 39) {
-	        this.setState({ piano: !this.state.piano });
+	        this.setState({ piano: true });
 	      } else if (e.keyCode === 37) {
-	        this.setState({ piano: !this.state.piano });
+	        this.setState({ piano: false });
 	      }
+	
 	      if (this.state.piano === false) {
 	        if (e.keyCode === 32) {
 	          // spacebar
@@ -31466,9 +31440,7 @@
 	        } else if (e.keyCode === 13) {
 	          // enter
 	          this.resetSequence();
-	        }
-	
-	        if (e.keyCode === 38) {
+	        } else if (e.keyCode === 38) {
 	          this.tempoUp();
 	        } else if (e.keyCode == 40) {
 	          this.tempoDown();
@@ -31489,7 +31461,6 @@
 	            this.setState({ switching: true });
 	          } else {
 	            if (!DrumStore.empty() && SequencerConstants.codeToName.hasOwnProperty(e.keyCode)) {
-	
 	              SequencerActions.updateBank(SequencerConstants.codeToBeat[e.keyCode]);
 	            } else if (DrumKeyConstants.codes.includes(e.keyCode)) {
 	              // console.log(e.keyCode);
@@ -38565,7 +38536,10 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
+	var PianoKey = __webpack_require__(208);
 	var $ = __webpack_require__(176);
+	var KeyAction = __webpack_require__(212);
+	var Mapping = __webpack_require__(213);
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -38584,16 +38558,326 @@
 	        $('#piano-wrapper').removeClass('shown');
 	        this.setState({ piano: !this.state.piano });
 	      }
-	    });
+	    }.bind(this));
+	
+	    $(document).keydown(function (e) {
+	      if (this.state.piano) {
+	        console.log("piano key down");
+	        KeyAction.keyPressed(Mapping[e.keyCode]);
+	      }
+	    }.bind(this));
+	
+	    $(document).keyup(function (e) {
+	      if (this.state.piano) {
+	        console.log("piano key up");
+	        KeyAction.keyDepressed(Mapping[e.keyCode]);
+	      }
+	    }.bind(this));
 	  },
 	  render: function () {
 	    return React.createElement(
 	      'div',
 	      { className: 'piano-wrapper', id: 'piano-wrapper' },
-	      'PIANO'
+	      React.createElement(
+	        'div',
+	        { id: 'octave' },
+	        React.createElement(PianoKey, { noteName: "C5" }),
+	        React.createElement(PianoKey, { noteName: "Db5" }),
+	        React.createElement(PianoKey, { noteName: "D5" }),
+	        React.createElement(PianoKey, { noteName: "Eb5" }),
+	        React.createElement(PianoKey, { noteName: "E5" }),
+	        React.createElement(PianoKey, { noteName: "F5" }),
+	        React.createElement(PianoKey, { noteName: "Gb5" }),
+	        React.createElement(PianoKey, { noteName: "G5" }),
+	        React.createElement(PianoKey, { noteName: "Ab5" }),
+	        React.createElement(PianoKey, { noteName: "A5" }),
+	        React.createElement(PianoKey, { noteName: "Bb5" }),
+	        React.createElement(PianoKey, { noteName: "B5" })
+	      ),
+	      React.createElement(
+	        'div',
+	        { id: 'octave' },
+	        React.createElement(PianoKey, { noteName: "C6" }),
+	        React.createElement(PianoKey, { noteName: "Db6" }),
+	        React.createElement(PianoKey, { noteName: "D6" }),
+	        React.createElement(PianoKey, { noteName: "Eb6" }),
+	        React.createElement(PianoKey, { noteName: "E6" }),
+	        React.createElement(PianoKey, { noteName: "F6" }),
+	        React.createElement(PianoKey, { noteName: "Gb6" }),
+	        React.createElement(PianoKey, { noteName: "G6" }),
+	        React.createElement(PianoKey, { noteName: "Ab6" }),
+	        React.createElement(PianoKey, { noteName: "A6" }),
+	        React.createElement(PianoKey, { noteName: "Bb6" }),
+	        React.createElement(PianoKey, { noteName: "B6" })
+	      ),
+	      React.createElement(
+	        'div',
+	        { id: 'octave' },
+	        React.createElement(PianoKey, { noteName: "C7" }),
+	        React.createElement(PianoKey, { noteName: "Db7" }),
+	        React.createElement(PianoKey, { noteName: "D7" }),
+	        React.createElement(PianoKey, { noteName: "Eb7" }),
+	        React.createElement(PianoKey, { noteName: "E7" }),
+	        React.createElement(PianoKey, { noteName: "F7" }),
+	        React.createElement(PianoKey, { noteName: "Gb7" }),
+	        React.createElement(PianoKey, { noteName: "G7" })
+	      )
 	    );
 	  }
 	});
+
+/***/ },
+/* 208 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var KeyStore = __webpack_require__(209);
+	var Tones = __webpack_require__(210);
+	var Note = __webpack_require__(211);
+	
+	module.exports = React.createClass({
+	  displayName: 'exports',
+	
+	  getInitialState: function () {
+	    return {
+	      selected: false
+	    };
+	  },
+	  componentDidMount: function () {
+	    this.note = new Note(Tones[this.props.noteName]);
+	    KeyStore.addListener(this.checkForNotes);
+	  },
+	  componentWillUnmount: function () {
+	    KeyStore.removeListener(this.checkForNotes);
+	  },
+	  checkForNotes: function () {
+	    if (KeyStore.allNotes().includes(this.props.noteName)) {
+	      this.setState({ selected: true });
+	      this.note.start();
+	    } else {
+	      this.setState({ selected: false });
+	      this.note.stop();
+	    }
+	  },
+	  render: function () {
+	    var keyFlat;
+	    if (this.props.noteName.includes("b")) {
+	      keyFlat = true;
+	    } else {
+	      keyFlat = false;
+	    }
+	    return React.createElement('div', { className: keyFlat ? "black" : "white",
+	      id: this.state.selected ? "selected" : "" });
+	  }
+	});
+
+/***/ },
+/* 209 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var Dispatcher = __webpack_require__(172);
+	var Store = __webpack_require__(186).Store;
+	var Tones = __webpack_require__(210);
+	var Note = __webpack_require__(211);
+	var KeyAction = __webpack_require__(212);
+	var KeyStore = new Store(Dispatcher);
+	
+	KeyStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case "ADD_NOTE":
+	      addNote(payload.keyName);
+	      KeyStore.__emitChange();
+	      break;
+	    case "REMOVE_NOTE":
+	      removeNote(payload.keyName);
+	      KeyStore.__emitChange();
+	      break;
+	    case "REPLACE_NOTES":
+	      replaceNotes(payload.notes);
+	      KeyStore.__emitChange();
+	      break;
+	  }
+	};
+	
+	KeyStore.allNotes = function () {
+	  return _notes.slice();
+	};
+	
+	var _notes = [];
+	
+	var addNote = function (keyName) {
+	  if (!_notes.includes(keyName)) {
+	    _notes.push(keyName);
+	  }
+	};
+	
+	var removeNote = function (keyName) {
+	  var idx = _notes.indexOf(keyName);
+	  _notes.splice(idx, 1);
+	};
+	
+	var replaceNotes = function (notes) {
+	  _notes = notes;
+	};
+	
+	module.exports = KeyStore;
+
+/***/ },
+/* 210 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  C5: 523.25,
+	  Db5: 554.37,
+	  D5: 587.33,
+	  Eb5: 622.25,
+	  E5: 659.25,
+	  F5: 698.46,
+	  Gb5: 739.99,
+	  G5: 783.99,
+	  Ab5: 830.61,
+	  A5: 880,
+	  Bb5: 932.33,
+	  B5: 987.77,
+	  C6: 1046.50,
+	  Db6: 1108.73,
+	  D6: 1174.66,
+	  Eb6: 1244.51,
+	  E6: 1318.51,
+	  F6: 1396.91,
+	  Gb6: 1479.98,
+	  G6: 1567.98,
+	  Ab6: 1661.22,
+	  A6: 1762,
+	  Bb6: 1864.66,
+	  B6: 1975.53,
+	  C7: 2093,
+	  Db7: 2217.46,
+	  D7: 2349.32,
+	  Eb7: 2489.02,
+	  E7: 2637.02,
+	  F7: 2793.83,
+	  Gb7: 2959.96,
+	  G7: 3135.96
+	};
+
+/***/ },
+/* 211 */
+/***/ function(module, exports) {
+
+	// util/Note.js
+	var ctx = new (window.AudioContext || window.webkitAudioContext)();
+	
+	var createOscillator = function (freq) {
+	  var osc = ctx.createOscillator();
+	  osc.type = "square";
+	  osc.frequency.value = freq;
+	  osc.detune.value = 0;
+	  osc.start(ctx.currentTime);
+	  return osc;
+	};
+	
+	var createGainNode = function () {
+	  var gainNode = ctx.createGain();
+	  gainNode.gain.value = 0;
+	  gainNode.connect(ctx.destination);
+	  return gainNode;
+	};
+	
+	var Note = function (freq) {
+	  this.oscillatorNode = createOscillator(freq);
+	  this.gainNode = createGainNode();
+	  this.oscillatorNode.connect(this.gainNode);
+	};
+	
+	Note.prototype = {
+	  start: function () {
+	    // can't explain 0.3, it is a reasonable value
+	    this.gainNode.gain.value = 0.3;
+	  },
+	
+	  stop: function () {
+	    this.gainNode.gain.value = 0;
+	  }
+	};
+	
+	module.exports = Note;
+	
+	// Note.oscillatorNode.frequency.value
+
+/***/ },
+/* 212 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Dispatch = __webpack_require__(172);
+	
+	var KeyAction = {
+	  keyPressed: function (keyName) {
+	    Dispatch.dispatch({
+	      actionType: "ADD_NOTE",
+	      keyName: keyName
+	    });
+	  },
+	  keyDepressed: function (keyName) {
+	    Dispatch.dispatch({
+	      actionType: "REMOVE_NOTE",
+	      keyName: keyName
+	    });
+	  },
+	  replaceNotes: function (notes) {
+	    Dispatch.dispatch({
+	      actionType: "REPLACE_NOTES",
+	      notes: notes
+	    });
+	  }
+	};
+	
+	module.exports = KeyAction;
+
+/***/ },
+/* 213 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	  90: 'C5',
+	  83: 'Db5',
+	  88: 'D5',
+	  68: 'Eb5',
+	  67: 'E5',
+	  86: 'F5',
+	  71: 'Gb5',
+	  66: 'G5',
+	  72: 'Ab5',
+	  78: 'A5',
+	  74: 'Bb5',
+	  77: 'B5',
+	  188: 'C6',
+	  76: 'Db6',
+	  190: 'D6',
+	  186: 'Eb6',
+	  191: 'E6',
+	  81: 'C6',
+	  50: 'Db6',
+	  87: 'D6',
+	  51: 'Eb6',
+	  69: 'E6',
+	  82: 'F6',
+	  53: 'Gb6',
+	  84: 'G6',
+	  54: 'Ab6',
+	  89: 'A6',
+	  55: 'Bb6',
+	  85: 'B6',
+	  73: 'C7',
+	  57: 'Db7',
+	  79: 'D7',
+	  48: 'Eb7',
+	  80: 'E7',
+	  219: 'F7',
+	  187: 'Gb7',
+	  221: 'G7'
+	};
 
 /***/ }
 /******/ ]);

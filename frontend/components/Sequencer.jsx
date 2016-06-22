@@ -48,10 +48,11 @@ module.exports = React.createClass({
 
     document.addEventListener('keydown', function (e) {
       if (e.keycode === 39) {
-        this.setState({piano: !this.state.piano});
+        this.setState({piano: true});
       } else if (e.keyCode === 37) {
-        this.setState({piano: !this.state.piano});
+        this.setState({piano: false});
       }
+      
       if (this.state.piano === false) {
         if (e.keyCode === 32) {
           // spacebar
@@ -59,9 +60,7 @@ module.exports = React.createClass({
         } else if (e.keyCode === 13) {
           // enter
           this.resetSequence();
-        }
-
-        if (e.keyCode === 38) {
+        } else if (e.keyCode === 38) {
           this.tempoUp();
         } else if (e.keyCode == 40) {
           this.tempoDown();
@@ -83,7 +82,6 @@ module.exports = React.createClass({
           } else {
             if ( (!DrumStore.empty()) &&
               SequencerConstants.codeToName.hasOwnProperty(e.keyCode) ) {
-
               SequencerActions.updateBank(
                 SequencerConstants.codeToBeat[e.keyCode]
               );
