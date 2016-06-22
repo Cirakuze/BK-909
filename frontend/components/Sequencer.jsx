@@ -11,6 +11,7 @@ var ctx = new (window.AudioContext || window.webkitAudioContext);
 var steps = { 0: 1, 1: 2, 2: 3, 3: 4, 4: "Q", 5: "W", 6: "E", 7: "R", 8: "A", 9: "S", 10: "D", 11: "F", 12: "Z", 13: "X", 14: "C", 15: "V" };
 
 function stepKeys(key) {
+  // This wraps the key numbers so that the same letters can be used on all rows
   if (key > 47) {
     key -= 48;
   } else if (key > 31) {
@@ -27,6 +28,7 @@ module.exports = React.createClass({
       leds: [false,false,false,false,false,false,false,false,
         false,false,false,false,false,false,false,false],
       rows: 1,
+      currentRow: 1,
       currentStep: 1,
       switching: false,
       drum: "",
@@ -37,6 +39,7 @@ module.exports = React.createClass({
     });
   },
   componentDidMount: function () {
+    $('#step0').addClass('row-selected');
     this.setState({drum: DrumStore.drum().name});
     this.dListener = DrumStore.addListener(this.setDrum);
     this.sListener = SequencerStore.addListener(this.manageLEDs);
@@ -52,6 +55,18 @@ module.exports = React.createClass({
         $('.drumset').removeClass('hidden');
       } else {
         if (this.state.piano === false) {
+          if (e.keyCode === 9) {
+            e.preventDefault();
+            // prevent tab from actually tabbing
+            if (this.state.currentRow < this.state.rows) {
+              // wrap row number
+              this.setState({currentRow: this.state.currentRow + 1});
+            } else {
+              this.setState({currentRow: 1});
+            }
+
+            this.displayCurrentRow();
+          }
           if (e.keyCode === 187) {
             // 187 +
             if (this.state.rows < 4) {
@@ -63,6 +78,10 @@ module.exports = React.createClass({
             if (this.state.rows > 1) {
               this.setState({rows: this.state.rows - 1});
               SequencerActions.updateLength(this.state.rows);
+              if (this.state.currentRow > 1) {
+                this.setState({currentRow: this.state.currentRow - 1});
+                this.displayCurrentRow();
+              }
             }
           }
 
@@ -94,9 +113,19 @@ module.exports = React.createClass({
             } else {
               if ( (!DrumStore.empty()) &&
                 SequencerConstants.codeToName.hasOwnProperty(e.keyCode) ) {
-                SequencerActions.updateBank(
-                  SequencerConstants.codeToBeat[e.keyCode]
-                );
+
+                var beat;
+                if (this.state.currentRow == 4) {
+                  beat = SequencerConstants.codeToBeat[e.keyCode] + 48;
+                } else if (this.state.currentRow == 3) {
+                  beat = SequencerConstants.codeToBeat[e.keyCode] + 32;
+                } else if (this.state.currentRow == 2) {
+                  beat = SequencerConstants.codeToBeat[e.keyCode] + 16;
+                } else if (this.state.currentRow == 1) {
+                  beat = SequencerConstants.codeToBeat[e.keyCode];
+                }
+
+                SequencerActions.updateBank(beat);
               } else if (DrumKeyConstants.codes.includes(e.keyCode)) {
                 // console.log(e.keyCode);
               }
@@ -109,6 +138,22 @@ module.exports = React.createClass({
   componentWillUnmount: function () {
     this.dListener.remove();
     this.sListener.remove();
+  },
+  displayCurrentRow: function () {
+    $('#step0').removeClass('row-selected');
+    $('#step16').removeClass('row-selected');
+    $('#step32').removeClass('row-selected');
+    $('#step48').removeClass('row-selected');
+
+    if (this.state.currentRow == 1) {
+      $('#step0').addClass('row-selected');
+    } else if (this.state.currentRow == 2) {
+      $('#step16').addClass('row-selected');
+    } else if (this.state.currentRow == 3) {
+      $('#step32').addClass('row-selected');
+    } else if (this.state.currentRow == 4) {
+      $('#step48').addClass('row-selected');
+    }
   },
   setDrum: function () {
     this.setState({drum:DrumStore.drum().name});
@@ -194,9 +239,10 @@ module.exports = React.createClass({
     var buttons = this.state.leds.map(function (button, key) {
       var klass = this.state.leds[key] ? "button-led LED-ON" : "button-led";
       var klass2 = (this.state.currentStep === key + 1) ? "step-led LED-ON" : "step-led";
+      var stepLabel = stepKeys(key);
       return <div className="button" key={key}>
               <div className={klass}>
-                <p>{stepKeys(key)}</p>
+                <p id={"step" + key}>{stepLabel}</p>
               </div>
               <div className={klass2} key={key}></div>
             </div>;
@@ -218,6 +264,7 @@ module.exports = React.createClass({
             <p>-Enter resets the sequence</p>
             <p>-Up/Down arrow keys speed up/slow down tempo</p>
             <p>-Switch banks by pressing tilde then a step key</p>
+            <p>-Press +/- to lengthen/shorten pattern</p>
             <p>-Banks 13 (z), 14 (x), 15 (c), and 16 (v) are presets</p>
             <p>-Press the right arrow key to access piano (left to come back)</p>
           </div>

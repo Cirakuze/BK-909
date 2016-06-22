@@ -22,7 +22,7 @@ SequencerStore.currentTempo = function () {
 SequencerStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case "UPDATE_BANK":
-      updateBank(payload.bank, payload.drum, payload.beat);
+      updateBank(payload.beat);
       this.__emitChange();
       break;
     case "UPDATE_LENGTH":
@@ -59,7 +59,6 @@ function updateLength(length) {
       console.log("NO CHANGE");
     } else if (newBeats > oldBeats) {
       var last16 = _banks[_currentBank][drum].slice(-16);
-
       _banks[_currentBank][drum] =
         _banks[_currentBank][drum]
           .concat(last16);

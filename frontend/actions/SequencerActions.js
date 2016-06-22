@@ -1,11 +1,9 @@
 var BankDispatcher = require('../dispatcher/Dispatcher');
 
 module.exports = {
-  updateBank: function (bankNum, drumName, beatNum) {
+  updateBank: function (beatNum) {
     BankDispatcher.dispatch({
       actionType: "UPDATE_BANK",
-      bank: bankNum,
-      drum: drumName,
       beat: beatNum
     });
   },

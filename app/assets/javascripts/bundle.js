@@ -31388,6 +31388,7 @@
 	var steps = { 0: 1, 1: 2, 2: 3, 3: 4, 4: "Q", 5: "W", 6: "E", 7: "R", 8: "A", 9: "S", 10: "D", 11: "F", 12: "Z", 13: "X", 14: "C", 15: "V" };
 	
 	function stepKeys(key) {
+	  // This wraps the key numbers so that the same letters can be used on all rows
 	  if (key > 47) {
 	    key -= 48;
 	  } else if (key > 31) {
@@ -31405,6 +31406,7 @@
 	    return {
 	      leds: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	      rows: 1,
+	      currentRow: 1,
 	      currentStep: 1,
 	      switching: false,
 	      drum: "",
@@ -31415,6 +31417,7 @@
 	    };
 	  },
 	  componentDidMount: function () {
+	    $('#step0').addClass('row-selected');
 	    this.setState({ drum: DrumStore.drum().name });
 	    this.dListener = DrumStore.addListener(this.setDrum);
 	    this.sListener = SequencerStore.addListener(this.manageLEDs);
@@ -31430,6 +31433,18 @@
 	        $('.drumset').removeClass('hidden');
 	      } else {
 	        if (this.state.piano === false) {
+	          if (e.keyCode === 9) {
+	            e.preventDefault();
+	            // prevent tab from actually tabbing
+	            if (this.state.currentRow < this.state.rows) {
+	              // wrap row number
+	              this.setState({ currentRow: this.state.currentRow + 1 });
+	            } else {
+	              this.setState({ currentRow: 1 });
+	            }
+	
+	            this.displayCurrentRow();
+	          }
 	          if (e.keyCode === 187) {
 	            // 187 +
 	            if (this.state.rows < 4) {
@@ -31441,6 +31456,10 @@
 	            if (this.state.rows > 1) {
 	              this.setState({ rows: this.state.rows - 1 });
 	              SequencerActions.updateLength(this.state.rows);
+	              if (this.state.currentRow > 1) {
+	                this.setState({ currentRow: this.state.currentRow - 1 });
+	                this.displayCurrentRow();
+	              }
 	            }
 	          }
 	
@@ -31471,7 +31490,19 @@
 	              this.setState({ switching: true });
 	            } else {
 	              if (!DrumStore.empty() && SequencerConstants.codeToName.hasOwnProperty(e.keyCode)) {
-	                SequencerActions.updateBank(SequencerConstants.codeToBeat[e.keyCode]);
+	
+	                var beat;
+	                if (this.state.currentRow == 4) {
+	                  beat = SequencerConstants.codeToBeat[e.keyCode] + 48;
+	                } else if (this.state.currentRow == 3) {
+	                  beat = SequencerConstants.codeToBeat[e.keyCode] + 32;
+	                } else if (this.state.currentRow == 2) {
+	                  beat = SequencerConstants.codeToBeat[e.keyCode] + 16;
+	                } else if (this.state.currentRow == 1) {
+	                  beat = SequencerConstants.codeToBeat[e.keyCode];
+	                }
+	
+	                SequencerActions.updateBank(beat);
 	              } else if (DrumKeyConstants.codes.includes(e.keyCode)) {
 	                // console.log(e.keyCode);
 	              }
@@ -31484,6 +31515,22 @@
 	  componentWillUnmount: function () {
 	    this.dListener.remove();
 	    this.sListener.remove();
+	  },
+	  displayCurrentRow: function () {
+	    $('#step0').removeClass('row-selected');
+	    $('#step16').removeClass('row-selected');
+	    $('#step32').removeClass('row-selected');
+	    $('#step48').removeClass('row-selected');
+	
+	    if (this.state.currentRow == 1) {
+	      $('#step0').addClass('row-selected');
+	    } else if (this.state.currentRow == 2) {
+	      $('#step16').addClass('row-selected');
+	    } else if (this.state.currentRow == 3) {
+	      $('#step32').addClass('row-selected');
+	    } else if (this.state.currentRow == 4) {
+	      $('#step48').addClass('row-selected');
+	    }
 	  },
 	  setDrum: function () {
 	    this.setState({ drum: DrumStore.drum().name });
@@ -31569,6 +31616,7 @@
 	    var buttons = this.state.leds.map(function (button, key) {
 	      var klass = this.state.leds[key] ? "button-led LED-ON" : "button-led";
 	      var klass2 = this.state.currentStep === key + 1 ? "step-led LED-ON" : "step-led";
+	      var stepLabel = stepKeys(key);
 	      return React.createElement(
 	        'div',
 	        { className: 'button', key: key },
@@ -31577,8 +31625,8 @@
 	          { className: klass },
 	          React.createElement(
 	            'p',
-	            null,
-	            stepKeys(key)
+	            { id: "step" + key },
+	            stepLabel
 	          )
 	        ),
 	        React.createElement('div', { className: klass2, key: key })
@@ -31657,6 +31705,11 @@
 	            'p',
 	            null,
 	            '-Switch banks by pressing tilde then a step key'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '-Press +/- to lengthen/shorten pattern'
 	          ),
 	          React.createElement(
 	            'p',
@@ -38275,11 +38328,9 @@
 	var BankDispatcher = __webpack_require__(172);
 	
 	module.exports = {
-	  updateBank: function (bankNum, drumName, beatNum) {
+	  updateBank: function (beatNum) {
 	    BankDispatcher.dispatch({
 	      actionType: "UPDATE_BANK",
-	      bank: bankNum,
-	      drum: drumName,
 	      beat: beatNum
 	    });
 	  },
@@ -38331,7 +38382,7 @@
 	SequencerStore.__onDispatch = function (payload) {
 	  switch (payload.actionType) {
 	    case "UPDATE_BANK":
-	      updateBank(payload.bank, payload.drum, payload.beat);
+	      updateBank(payload.beat);
 	      this.__emitChange();
 	      break;
 	    case "UPDATE_LENGTH":
@@ -38368,7 +38419,6 @@
 	      console.log("NO CHANGE");
 	    } else if (newBeats > oldBeats) {
 	      var last16 = _banks[_currentBank][drum].slice(-16);
-	
 	      _banks[_currentBank][drum] = _banks[_currentBank][drum].concat(last16);
 	      // console.log(_banks[_currentBank][drum]);
 	    } else if (newBeats < oldBeats) {
