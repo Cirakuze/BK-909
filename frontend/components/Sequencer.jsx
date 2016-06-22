@@ -8,24 +8,7 @@ var $ = require('jquery');
 var Drums = require('../constants/Drums');
 var ctx = new (window.AudioContext || window.webkitAudioContext);
 
-var stepKeys = {
-  0: 1,
-  1: 2,
-  2: 3,
-  3: 4,
-  4: "Q",
-  5: "W",
-  6: "E",
-  7: "R",
-  8: "A",
-  9: "S",
-  10: "D",
-  11: "F",
-  12: "Z",
-  13: "X",
-  14: "C",
-  15: "V"
-};
+var stepKeys = { 0: 1, 1: 2, 2: 3, 3: 4, 4: "Q", 5: "W", 6: "E", 7: "R", 8: "A", 9: "S", 10: "D", 11: "F", 12: "Z", 13: "X", 14: "C", 15: "V" };
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -108,10 +91,14 @@ module.exports = React.createClass({
   manageLEDs: function () {
     var bank = SequencerStore.bank(SequencerStore.currentBank());
     var drum = [DrumStore.drum().name];
-    this.setState({leds:bank[drum]});
+    var newTempo = SequencerStore.currentTempo();
+    this.setState({
+      leds:bank[drum],
+      tempo: newTempo
+    });
   },
   updateTempo: function (e) {
-    this.setState({tempo:e.currentTarget.value});
+    SequencerActions.updateTempo(e.currentTarget.value);
   },
   togglePlayBack: function () {
     if (!this.state.playing) {
@@ -150,21 +137,31 @@ module.exports = React.createClass({
     this.setState({currentStep:1});
   },
   tempoUp: function () {
-    this.setState({tempo: this.state.tempo + 4});
-    clearInterval(this.intervalID);
-    if (this.state.playing) {
-      this.intervalID = setInterval(function () {
-        this.stepTheSequence();
-      }.bind(this), 15000 / this.state.tempo);
+    if (this.state.tempo < 240) {
+      $('#tempo').removeClass('tempo-limit');
+      this.setState({tempo: this.state.tempo + 4});
+      clearInterval(this.intervalID);
+      if (this.state.playing) {
+        this.intervalID = setInterval(function () {
+          this.stepTheSequence();
+        }.bind(this), 15000 / this.state.tempo);
+      }
+    } else if (this.state.tempo === 240) {
+      $('#tempo').addClass('tempo-limit');
     }
   },
   tempoDown: function () {
-    this.setState({tempo: this.state.tempo - 4});
-    clearInterval(this.intervalID);
-    if (this.state.playing) {
-      this.intervalID = setInterval(function () {
-        this.stepTheSequence();
-      }.bind(this), 15000 / this.state.tempo);
+    if (this.state.tempo > 40) {
+      $('#tempo').removeClass('tempo-limit');
+      this.setState({tempo: this.state.tempo - 4});
+      clearInterval(this.intervalID);
+      if (this.state.playing) {
+        this.intervalID = setInterval(function () {
+          this.stepTheSequence();
+        }.bind(this), 15000 / this.state.tempo);
+      }
+    } else if (this.state.tempo === 40) {
+      $('#tempo').addClass('tempo-limit');
     }
   },
   render: function () {
@@ -192,6 +189,7 @@ module.exports = React.createClass({
             </div>
             <p>Tempo</p>
             <input
+              id="tempo"
               type="text"
               disabled="disabled"
               value={this.state.tempo}

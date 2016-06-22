@@ -673,6 +673,10 @@ div.step-led {
   left: -15px;
 }
 
+.tempo-limit {
+  background-color: red;
+}
+
 i#vol-up {
   top: 10px;
 }

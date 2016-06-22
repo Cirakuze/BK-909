@@ -12,7 +12,11 @@ SequencerStore.bank = function (bankNum) {
 };
 
 SequencerStore.currentBank = function () {
-  return currentBank;
+  return _currentBank;
+};
+
+SequencerStore.currentTempo = function () {
+  return _tempos[_currentBank];
 };
 
 SequencerStore.__onDispatch = function (payload) {
@@ -25,11 +29,15 @@ SequencerStore.__onDispatch = function (payload) {
       switchBank(payload.bank);
       this.__emitChange();
       break;
+    case "UPDATE_TEMPO":
+      updateTempo(payload.tempo);
+      this.__emitChange();
+      break;
   }
 };
 
 function switchBank(bankNum) {
-  currentBank = bankNum;
+  _currentBank = bankNum;
 }
 
 function updateBank(beat) {
@@ -39,7 +47,13 @@ function updateBank(beat) {
   _banks[bank][drum][beat - 1] = !_banks[bank][drum][beat - 1];
 }
 
-var currentBank = 1;
+function updateTempo(tempo) {
+  _tempos[_currentBank] = tempo;
+}
+
+var _currentBank = 1;
+
+var _tempos = { 1: 120, 2: 120, 3: 120, 4: 120, 5: 120, 6: 120, 8: 120, 9: 120, 10: 120, 11: 120, 12: 120, 13: 100, 14: 130, 15: 120, 16: 120 };
 
 var _banks = {
   1: {

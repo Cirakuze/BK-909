@@ -31385,24 +31385,7 @@
 	var Drums = __webpack_require__(206);
 	var ctx = new (window.AudioContext || window.webkitAudioContext)();
 	
-	var stepKeys = {
-	  0: 1,
-	  1: 2,
-	  2: 3,
-	  3: 4,
-	  4: "Q",
-	  5: "W",
-	  6: "E",
-	  7: "R",
-	  8: "A",
-	  9: "S",
-	  10: "D",
-	  11: "F",
-	  12: "Z",
-	  13: "X",
-	  14: "C",
-	  15: "V"
-	};
+	var stepKeys = { 0: 1, 1: 2, 2: 3, 3: 4, 4: "Q", 5: "W", 6: "E", 7: "R", 8: "A", 9: "S", 10: "D", 11: "F", 12: "Z", 13: "X", 14: "C", 15: "V" };
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -31483,10 +31466,14 @@
 	  manageLEDs: function () {
 	    var bank = SequencerStore.bank(SequencerStore.currentBank());
 	    var drum = [DrumStore.drum().name];
-	    this.setState({ leds: bank[drum] });
+	    var newTempo = SequencerStore.currentTempo();
+	    this.setState({
+	      leds: bank[drum],
+	      tempo: newTempo
+	    });
 	  },
 	  updateTempo: function (e) {
-	    this.setState({ tempo: e.currentTarget.value });
+	    SequencerActions.updateTempo(e.currentTarget.value);
 	  },
 	  togglePlayBack: function () {
 	    if (!this.state.playing) {
@@ -31525,21 +31512,31 @@
 	    this.setState({ currentStep: 1 });
 	  },
 	  tempoUp: function () {
-	    this.setState({ tempo: this.state.tempo + 4 });
-	    clearInterval(this.intervalID);
-	    if (this.state.playing) {
-	      this.intervalID = setInterval(function () {
-	        this.stepTheSequence();
-	      }.bind(this), 15000 / this.state.tempo);
+	    if (this.state.tempo < 240) {
+	      $('#tempo').removeClass('tempo-limit');
+	      this.setState({ tempo: this.state.tempo + 4 });
+	      clearInterval(this.intervalID);
+	      if (this.state.playing) {
+	        this.intervalID = setInterval(function () {
+	          this.stepTheSequence();
+	        }.bind(this), 15000 / this.state.tempo);
+	      }
+	    } else if (this.state.tempo === 240) {
+	      $('#tempo').addClass('tempo-limit');
 	    }
 	  },
 	  tempoDown: function () {
-	    this.setState({ tempo: this.state.tempo - 4 });
-	    clearInterval(this.intervalID);
-	    if (this.state.playing) {
-	      this.intervalID = setInterval(function () {
-	        this.stepTheSequence();
-	      }.bind(this), 15000 / this.state.tempo);
+	    if (this.state.tempo > 40) {
+	      $('#tempo').removeClass('tempo-limit');
+	      this.setState({ tempo: this.state.tempo - 4 });
+	      clearInterval(this.intervalID);
+	      if (this.state.playing) {
+	        this.intervalID = setInterval(function () {
+	          this.stepTheSequence();
+	        }.bind(this), 15000 / this.state.tempo);
+	      }
+	    } else if (this.state.tempo === 40) {
+	      $('#tempo').addClass('tempo-limit');
 	    }
 	  },
 	  render: function () {
@@ -31586,6 +31583,7 @@
 	            'Tempo'
 	          ),
 	          React.createElement('input', {
+	            id: 'tempo',
 	            type: 'text',
 	            disabled: 'disabled',
 	            value: this.state.tempo,
@@ -38260,6 +38258,12 @@
 	      actionType: "SWITCH_BANK",
 	      bank: bankNum
 	    });
+	  },
+	  updateTempo: function (newTempo) {
+	    BankDispatcher.dispatch({
+	      actionType: "UPDATE_TEMPO",
+	      tempo: newTempo
+	    });
 	  }
 	};
 
@@ -38281,7 +38285,11 @@
 	};
 	
 	SequencerStore.currentBank = function () {
-	  return currentBank;
+	  return _currentBank;
+	};
+	
+	SequencerStore.currentTempo = function () {
+	  return _tempos[_currentBank];
 	};
 	
 	SequencerStore.__onDispatch = function (payload) {
@@ -38294,11 +38302,15 @@
 	      switchBank(payload.bank);
 	      this.__emitChange();
 	      break;
+	    case "UPDATE_TEMPO":
+	      updateTempo(payload.tempo);
+	      this.__emitChange();
+	      break;
 	  }
 	};
 	
 	function switchBank(bankNum) {
-	  currentBank = bankNum;
+	  _currentBank = bankNum;
 	}
 	
 	function updateBank(beat) {
@@ -38308,7 +38320,13 @@
 	  _banks[bank][drum][beat - 1] = !_banks[bank][drum][beat - 1];
 	}
 	
-	var currentBank = 1;
+	function updateTempo(tempo) {
+	  _tempos[_currentBank] = tempo;
+	}
+	
+	var _currentBank = 1;
+	
+	var _tempos = { 1: 120, 2: 120, 3: 120, 4: 120, 5: 120, 6: 120, 8: 120, 9: 120, 10: 120, 11: 120, 12: 120, 13: 100, 14: 130, 15: 120, 16: 120 };
 	
 	var _banks = {
 	  1: {

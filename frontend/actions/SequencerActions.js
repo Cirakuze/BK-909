@@ -14,5 +14,11 @@ module.exports = {
       actionType: "SWITCH_BANK",
       bank: bankNum
     });
+  },
+  updateTempo: function (newTempo) {
+    BankDispatcher.dispatch({
+      actionType: "UPDATE_TEMPO",
+      tempo: newTempo
+    });
   }
 };
