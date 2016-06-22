@@ -18,53 +18,51 @@ module.exports = React.createClass({
     });
   },
   componentDidMount: function () {
-    document.addEventListener('keydown', function (e) {
-      if (e.keycode === 39) {
+    $(document).keydown(function (e) {
+      if (e.keyCode === 39) {
         this.setState({piano: true});
       } else if (e.keyCode === 37) {
         this.setState({piano: false});
-      }
-    }.bind(this));
+      } else {
+        if (this.state.piano === false) {
+          var now = ctx.currentTime;
+          var drum;
 
-    $(document).keydown(function (e) {
-      if (this.state.piano === false) {
-        var now = ctx.currentTime;
-        var drum;
-
-        if ([66, 78].includes(e.keyCode)) { // B, N
-          if (e.keyCode === 66) {
-            $('#Left-Bass').toggleClass('bfass-left-struck');
-            drum = new Bass(ctx);
-          } else if (e.keyCode === 78) {
-            $('#Right-Bass').toggleClass('bass-right-struck');
-            drum = new Bass(ctx);
+          if ([66, 78].includes(e.keyCode)) { // B, N
+            if (e.keyCode === 66) {
+              $('#Left-Bass').toggleClass('bfass-left-struck');
+              drum = new Bass(ctx);
+            } else if (e.keyCode === 78) {
+              $('#Right-Bass').toggleClass('bass-right-struck');
+              drum = new Bass(ctx);
+            }
+          } else if ([84, 89].includes(e.keyCode)) { // T, Y
+            $('#Snare').toggleClass('snare-struck');
+            drum = new Snare(ctx);
+          } else if ([85, 73].includes(e.keyCode)) { // U, I
+            $('#Hi-Hat').toggleClass('hi-hat-struck');
+            drum = new HiHat(ctx);
+          } else if ([71, 72].includes(e.keyCode)) { // G, H
+            $('#Hi-Tom').toggleClass('hi-tom-struck');
+            drum = new Toms(ctx, "high");
+          } else if ([74, 75].includes(e.keyCode)) { // J, K
+            $('#Mid-Tom').toggleClass('mid-tom-struck');
+            drum = new Toms(ctx, "mid");
+          } else if ([76, 186].includes(e.keyCode)) { // L, ;
+            $('#Low-Tom').toggleClass('low-tom-struck');
+            drum = new Toms(ctx, "low");
+          } else if ([79].includes(e.keyCode)) { // O
+            $('#Ride-Cymbal').toggleClass('ride-cymbal-struck');
+            drum = new RideCymbal(ctx);
+          } else if (e.keyCode === 80) { // P
+            $('#Crash-Cymbal').toggleClass('crash-cymbal-struck');
+            drum = new CrashCymbal(ctx);
           }
-        } else if ([84, 89].includes(e.keyCode)) { // T, Y
-          $('#Snare').toggleClass('snare-struck');
-          drum = new Snare(ctx);
-        } else if ([85, 73].includes(e.keyCode)) { // U, I
-          $('#Hi-Hat').toggleClass('hi-hat-struck');
-          drum = new HiHat(ctx);
-        } else if ([71, 72].includes(e.keyCode)) { // G, H
-          $('#Hi-Tom').toggleClass('hi-tom-struck');
-          drum = new Toms(ctx, "high");
-        } else if ([74, 75].includes(e.keyCode)) { // J, K
-          $('#Mid-Tom').toggleClass('mid-tom-struck');
-          drum = new Toms(ctx, "mid");
-        } else if ([76, 186].includes(e.keyCode)) { // L, ;
-          $('#Low-Tom').toggleClass('low-tom-struck');
-          drum = new Toms(ctx, "low");
-        } else if ([79].includes(e.keyCode)) { // O
-          $('#Ride-Cymbal').toggleClass('ride-cymbal-struck');
-          drum = new RideCymbal(ctx);
-        } else if (e.keyCode === 80) { // P
-          $('#Crash-Cymbal').toggleClass('crash-cymbal-struck');
-          drum = new CrashCymbal(ctx);
-        }
 
-        if (drum) {
-          DrumActions.receiveDrum(drum);
-          drum.trigger(now);
+          if (drum) {
+            DrumActions.receiveDrum(drum);
+            drum.trigger(now);
+          }
         }
       }
     }.bind(this));

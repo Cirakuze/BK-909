@@ -47,46 +47,46 @@ module.exports = React.createClass({
     this.sListener = SequencerStore.addListener(this.manageLEDs);
 
     document.addEventListener('keydown', function (e) {
-      if (e.keycode === 39) {
+      if (e.keyCode === 39) {
         this.setState({piano: true});
       } else if (e.keyCode === 37) {
         this.setState({piano: false});
-      }
-      
-      if (this.state.piano === false) {
-        if (e.keyCode === 32) {
-          // spacebar
-          this.togglePlayBack();
-        } else if (e.keyCode === 13) {
-          // enter
-          this.resetSequence();
-        } else if (e.keyCode === 38) {
-          this.tempoUp();
-        } else if (e.keyCode == 40) {
-          this.tempoDown();
-        }
-
-        this.setState({error:""});
-        if (this.state.switching) {
-          var newBank = SequencerConstants.codeToBeat[e.keyCode];
-          if (!newBank) {
-            // this.setState({error:"That bank does not exist!"});
-          } else {
-            SequencerActions.switchBank(newBank);
-            this.manageLEDs();
-            this.setState({switching:false});
+      } else {
+        if (this.state.piano === false) {
+          if (e.keyCode === 32) {
+            // spacebar
+            this.togglePlayBack();
+          } else if (e.keyCode === 13) {
+            // enter
+            this.resetSequence();
+          } else if (e.keyCode === 38) {
+            this.tempoUp();
+          } else if (e.keyCode == 40) {
+            this.tempoDown();
           }
-        } else {
-          if (e.keyCode === 192) {
-            this.setState({switching:true});
+
+          this.setState({error:""});
+          if (this.state.switching) {
+            var newBank = SequencerConstants.codeToBeat[e.keyCode];
+            if (!newBank) {
+              // this.setState({error:"That bank does not exist!"});
+            } else {
+              SequencerActions.switchBank(newBank);
+              this.manageLEDs();
+              this.setState({switching:false});
+            }
           } else {
-            if ( (!DrumStore.empty()) &&
-              SequencerConstants.codeToName.hasOwnProperty(e.keyCode) ) {
-              SequencerActions.updateBank(
-                SequencerConstants.codeToBeat[e.keyCode]
-              );
-            } else if (DrumKeyConstants.codes.includes(e.keyCode)) {
-              // console.log(e.keyCode);
+            if (e.keyCode === 192) {
+              this.setState({switching:true});
+            } else {
+              if ( (!DrumStore.empty()) &&
+                SequencerConstants.codeToName.hasOwnProperty(e.keyCode) ) {
+                SequencerActions.updateBank(
+                  SequencerConstants.codeToBeat[e.keyCode]
+                );
+              } else if (DrumKeyConstants.codes.includes(e.keyCode)) {
+                // console.log(e.keyCode);
+              }
             }
           }
         }
@@ -228,7 +228,7 @@ module.exports = React.createClass({
             <p>-Enter resets the sequence</p>
             <p>-Up/Down arrow keys speed up/slow down tempo</p>
             <p>-Switch banks by pressing tilde then a step key</p>
-            <p>-Banks 13 (z), 14 (x), 15 (c), and 16 (v) have preset rhythms</p>
+            <p>-Banks 13 (z), 14 (x), 15 (c), and 16 (v) are presets</p>
           </div>
         </div>
       </div>

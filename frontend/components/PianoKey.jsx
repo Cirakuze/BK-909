@@ -33,7 +33,7 @@ module.exports = React.createClass({
       keyFlat = false;
     }
     return (
-      <div className={ keyFlat ? "black" : "white" }
+      <div className={ keyFlat ? "key black" : "key white" }
           id={ this.state.selected ? "selected" : ""}>
       </div>
     );

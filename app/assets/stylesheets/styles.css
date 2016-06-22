@@ -735,13 +735,59 @@ i.fa {
 div.piano-wrapper {
   width: 100%;
   height: 100%;
-  background-color: #dd5d49;
+  background-color: #dcddc8;
   display: none;
   position: absolute;
   top: 0;
   z-index: 999999;
+  perspective: 1000px;
 }
 
 div.piano-wrapper.shown {
   display: block;
+}
+
+.piano {
+  width: 1664px;
+  margin: auto;
+  background-color: #78091c;
+}
+
+.piano > * {
+  float: left;
+}
+
+.octave {
+  position: relative;
+  z-index: 1000000;
+  background-color: #7dcf0b;
+}
+
+.octave > * {
+  float: left;
+  transform: rotateX(25deg);
+}
+
+.key {
+  border: solid 1px black;
+}
+
+.white {
+  background-color: white;
+  height: 200px;
+  position: relative;
+  z-index: 1000001;
+  width: 50px;
+}
+
+.black {
+  background-color: black;
+  height: 125px;
+  position: relative;
+  z-index: 1000002;
+  width: 50px;
+}
+
+#selected {
+  box-shadow: 0 0 50px white;
 }
