@@ -31639,7 +31639,7 @@
 	          { className: 'instructions' },
 	          React.createElement(
 	            'h3',
-	            null,
+	            { id: 'short' },
 	            'Short version:'
 	          ),
 	          React.createElement(
@@ -31664,7 +31664,7 @@
 	          ),
 	          React.createElement(
 	            'p',
-	            null,
+	            { className: 'instructions-bullets' },
 	            '1) Pick a drum'
 	          ),
 	          React.createElement(
@@ -31674,7 +31674,7 @@
 	          ),
 	          React.createElement(
 	            'p',
-	            null,
+	            { className: 'instructions-bullets' },
 	            '2) Set a pattern'
 	          ),
 	          React.createElement(
@@ -31689,7 +31689,7 @@
 	          ),
 	          React.createElement(
 	            'p',
-	            null,
+	            { className: 'instructions-bullets' },
 	            '3) Start the sequence'
 	          ),
 	          React.createElement(
@@ -31709,7 +31709,7 @@
 	          ),
 	          React.createElement(
 	            'p',
-	            null,
+	            { className: 'instructions-bullets' },
 	            '4) Switch patterns'
 	          ),
 	          React.createElement(
@@ -31729,7 +31729,7 @@
 	          ),
 	          React.createElement(
 	            'p',
-	            null,
+	            { className: 'instructions-bullets' },
 	            '5) Patterns auto-save'
 	          ),
 	          React.createElement(
@@ -31739,7 +31739,7 @@
 	          ),
 	          React.createElement(
 	            'p',
-	            null,
+	            { className: 'instructions-bullets' },
 	            '6) Add piano'
 	          ),
 	          React.createElement(

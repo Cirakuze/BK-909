@@ -455,6 +455,7 @@ div.app-title {
   z-index: 9;
   top: 250px;
   left: 165px;
+  width: 300px;
 }
 
 .snare-stand {
@@ -737,10 +738,10 @@ h1#instructions-header:hover {
 
 div.instructions {
   position: absolute;
-  right: -550px;
+  right: -500px;
   top: -600px;
   height: 0px;
-  border: solid 1px black;
+  border: solid 0px black;
   border-radius: 10px;
   padding-right: 15px;
   padding-left: 15px;
@@ -754,13 +755,31 @@ div.instructions * {
   overflow: hidden;
 }
 
+div.instructions  *:hover {
+  color: #456c71;
+  cursor: pointer;
+}
+
+div.instructions p {
+  font-size: 14px;
+}
+
+div.instructions p.instructions-bullets {
+  font-size: 18px;
+}
+
 i.fa {
   font-size: 50px;
   margin-left: 25px;
 }
 
+h3#short {
+  margin-top: 15px;
+}
+
 div.instructions.show-instructions {
   height: 445px;
+  border: solid 1px black;
 }
 
 

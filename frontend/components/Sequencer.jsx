@@ -259,27 +259,27 @@ module.exports = React.createClass({
             Instructions:
           </h1>
           <div className="instructions">
-            <h3>Short version:</h3>
+            <h3 id="short">Short version:</h3>
             <p>1) Press ~ (the key above the tab key)</p>
             <p>2) Press v</p>
             <p>3) Press space bar</p>
             <h3>Long version:</h3>
-            <p>1) Pick a drum</p>
+            <p className="instructions-bullets">1) Pick a drum</p>
             <p>&nbsp;&nbsp;&nbsp;-Select a drum by pressing the key on the drum</p>
-            <p>2) Set a pattern</p>
+            <p className="instructions-bullets">2) Set a pattern</p>
             <p>&nbsp;&nbsp;&nbsp;-Toggle a step by pressing the key on the step</p>
             <p>&nbsp;&nbsp;&nbsp;&nbsp;(red dot is on / brown dot is off)</p>
-            <p>3) Start the sequence</p>
+            <p className="instructions-bullets">3) Start the sequence</p>
             <p>&nbsp;&nbsp;&nbsp;-Space bar starts/stops the sequence</p>
             <p>&nbsp;&nbsp;&nbsp;-Enter resets the sequence</p>
             <p>&nbsp;&nbsp;&nbsp;-Up/Down arrow keys speed up/slow down tempo</p>
-            <p>4) Switch patterns</p>
+            <p className="instructions-bullets">4) Switch patterns</p>
             <p>&nbsp;&nbsp;&nbsp;-Switch banks by pressing tilde then a step key</p>
             <p>&nbsp;&nbsp;&nbsp;-Press +/- to lengthen/shorten pattern</p>
             <p>&nbsp;&nbsp;&nbsp;-Press tab to cycle through rows of pattern</p>
-            <p>5) Patterns auto-save</p>
+            <p className="instructions-bullets">5) Patterns auto-save</p>
             <p>&nbsp;&nbsp;&nbsp;-Banks 13 (z), 14 (x), 15 (c), and 16 (v) are presets</p>
-            <p>6) Add piano</p>
+            <p className="instructions-bullets">6) Add piano</p>
             <p>&nbsp;&nbsp;&nbsp;-Press the right arrow key to access piano (left to come back)</p>
           </div>
         </div>
