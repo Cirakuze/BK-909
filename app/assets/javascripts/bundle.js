@@ -38987,6 +38987,7 @@
 	var ctx = new (window.AudioContext || window.webkitAudioContext)();
 	
 	var Note = function (freq) {
+	  // INSTRUMENT ONE
 	  this.osc1 = ctx.createOscillator();
 	  this.osc1.type = "sine";
 	  this.osc1.frequency.value = freq;
@@ -38997,6 +38998,7 @@
 	  this.osc1.connect(this.gain1);
 	  this.gain1.connect(ctx.destination);
 	
+	  // INSTRUMENT TWO
 	  this.osc2 = ctx.createOscillator();
 	  this.osc2.type = "triangle";
 	  this.osc2.frequency.value = freq;
@@ -39007,6 +39009,7 @@
 	  this.osc2.connect(this.gain2);
 	  this.gain2.connect(ctx.destination);
 	
+	  // INSTRUMENT 3
 	  this.osc3 = ctx.createOscillator();
 	  this.osc3.type = "sawtooth";
 	  this.osc3.frequency.value = freq;
@@ -39017,6 +39020,7 @@
 	  this.osc3.connect(this.gain3);
 	  this.gain3.connect(ctx.destination);
 	
+	  // INSTRUMENT 4
 	  this.osc4 = ctx.createOscillator();
 	  this.osc4.type = "square";
 	  this.osc4.frequency.value = freq;
@@ -39211,7 +39215,6 @@
 	          this.setState({ currentBar: 1 });
 	        }
 	      }
-	
 	      this.displayCurrentBar();
 	    }.bind(this));
 	  },
@@ -39309,9 +39312,9 @@
 	
 	var _volumes = {
 	  Organ: "0.1",
-	  Wood: "0.0",
-	  Brass: "0.0",
-	  String: "0.0"
+	  Wood: "0.0125",
+	  Brass: "0.0125",
+	  String: "0.0125"
 	
 	};
 	

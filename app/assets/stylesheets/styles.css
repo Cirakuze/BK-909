@@ -882,7 +882,7 @@ div.piano-label {
 
 #drawbars-container {
   width: 900px;
-  height: 400px;
+  height: 115px;
   /*background-color: #8dab19;*/
   margin: auto;
   padding: 15px;
@@ -894,11 +894,13 @@ div.piano-label {
   float: left;
   margin: 5px;
   position: relative;
+  border-radius: 10%;
+  padding-top: 15px;
 }
 
 .drawbar-label {
   text-align: center;
-  background-color: #c3c674;
+  /*background-color: #c3c674;*/
 }
 
 .drawbar-slider {
@@ -913,16 +915,15 @@ div.piano-label {
 }
 
 .drawbar.drawbar-selected {
-  box-shadow: 0px 0px 1px 1px #e62d2d;
+  /*box-shadow: 0px 0px 1px 1px #e62d2d;*/
+  background-color: #d6d37d;
 }
 
 input[type=range] {
     /*removes default webkit styles*/
     -webkit-appearance: none;
-
     /*fix for FF unable to apply focus style bug */
     border: 1px solid white;
-
     /*required for proper track sizing in FF*/
     width: 50px;
 }

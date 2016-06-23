@@ -25,7 +25,6 @@ module.exports = React.createClass({
           this.setState({currentBar: 1});
         }
       }
-
       this.displayCurrentBar();
     }.bind(this));
   },
