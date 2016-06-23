@@ -39214,6 +39214,12 @@
 	        } else {
 	          this.setState({ currentBar: 1 });
 	        }
+	      } else if ([38, 40].includes(e.keyCode)) {
+	        if (e.keyCode === 40) {
+	          this.downVolume();
+	        } else if (e.keyCode === 38) {
+	          this.upVolume();
+	        }
 	      }
 	      this.displayCurrentBar();
 	    }.bind(this));
@@ -39238,6 +39244,20 @@
 	    });
 	    var currId = "#drawbar-" + this.state.instruments[this.state.currentBar - 1];
 	    $(currId).addClass('drawbar-selected');
+	  },
+	  upVolume: function () {
+	    if (this.state.volume[this.state.currentBar - 1] < 0.1) {
+	      var volumes = this.state.volume;
+	      volumes[this.state.currentBar - 1] = parseFloat(volumes[this.state.currentBar - 1]) + 0.0125;
+	      VolumeActions.updateVolumes(volumes);
+	    }
+	  },
+	  downVolume: function () {
+	    if (this.state.volume[this.state.currentBar - 1] > 0.001) {
+	      var volumes = this.state.volume;
+	      volumes[this.state.currentBar - 1] = parseFloat(volumes[this.state.currentBar - 1]) - 0.0125;
+	      VolumeActions.updateVolumes(volumes);
+	    }
 	  },
 	  updateVolume: function (e) {
 	    var volumes = this.state.volume;
@@ -39280,6 +39300,25 @@
 	        'div',
 	        { id: 'drawbars-container', className: 'clearfix' },
 	        drawbars
+	      ),
+	      React.createElement(
+	        'div',
+	        { id: 'drawbars-instructions' },
+	        React.createElement(
+	          'h1',
+	          null,
+	          'Instructions'
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          'Press tab to select an instrument'
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          'Use up/down arrow keys to change volume'
+	        )
 	      )
 	    );
 	  }

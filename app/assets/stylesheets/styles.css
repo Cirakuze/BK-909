@@ -919,6 +919,12 @@ div.piano-label {
   background-color: #d6d37d;
 }
 
+div#drawbars-instructions {
+  width: 500px;
+  text-align: center;
+  margin: auto;
+}
+
 input[type=range] {
     /*removes default webkit styles*/
     -webkit-appearance: none;
