@@ -900,7 +900,7 @@ div.piano-label {
 }
 
 #drawbars-container {
-  width: 900px;
+  width: 450px;
   height: 115px;
   /*background-color: #8dab19;*/
   margin: auto;
@@ -939,7 +939,7 @@ div.piano-label {
 }
 
 div#drawbars-instructions {
-  width: 500px;
+  width: 600px;
   text-align: center;
   margin: auto;
 }

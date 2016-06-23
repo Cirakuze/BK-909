@@ -16,7 +16,7 @@ module.exports = React.createClass({
     this.receiveVolumes();
 
     $(document).keydown(function (e) {
-      if (e.keyCode === 13 || e.keyCode === 13) {
+      if (e.keyCode === 13 || e.keyCode === 9) {
         // Enter key or Tab key
         e.preventDefault();
         if (this.state.currentBar < this.state.instruments.length) {
@@ -106,7 +106,8 @@ module.exports = React.createClass({
         </div>
         <div id="drawbars-instructions">
           <h1>Instructions</h1>
-          <p>Press enter to cycle through instruments</p>
+          <p>Press space bar to sustain notes</p>
+          <p>Press enter/tab to cycle through instruments</p>
           <p>Use up/down arrow keys to change volume</p>
         </div>
       </div>

@@ -39206,7 +39206,7 @@
 	    this.receiveVolumes();
 	
 	    $(document).keydown(function (e) {
-	      if (e.keyCode === 13 || e.keyCode === 13) {
+	      if (e.keyCode === 13 || e.keyCode === 9) {
 	        // Enter key or Tab key
 	        e.preventDefault();
 	        if (this.state.currentBar < this.state.instruments.length) {
@@ -39312,7 +39312,12 @@
 	        React.createElement(
 	          'p',
 	          null,
-	          'Press enter to cycle through instruments'
+	          'Press space bar to sustain notes'
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          'Press enter/tab to cycle through instruments'
 	        ),
 	        React.createElement(
 	          'p',
