@@ -38695,6 +38695,7 @@
 	var KeyAction = __webpack_require__(212);
 	var Mapping = __webpack_require__(214);
 	var KeyStore = __webpack_require__(209);
+	var Drawbars = __webpack_require__(215);
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -38747,6 +38748,11 @@
 	    return React.createElement(
 	      'div',
 	      { className: 'piano-wrapper', id: 'piano-wrapper' },
+	      React.createElement(
+	        'div',
+	        { className: 'piano-label' },
+	        'ORGAN'
+	      ),
 	      React.createElement(
 	        'div',
 	        { className: 'piano clearfix' },
@@ -38808,15 +38814,7 @@
 	          React.createElement(PianoKey, { noteName: "A6" })
 	        )
 	      ),
-	      React.createElement(
-	        'div',
-	        { id: 'drawbars-wrapper' },
-	        React.createElement(
-	          'div',
-	          { id: 'drawbars-container' },
-	          'DRAWBARS'
-	        )
-	      )
+	      React.createElement(Drawbars, null)
 	    );
 	  }
 	});
@@ -38830,6 +38828,7 @@
 	var Tones = __webpack_require__(210);
 	var Note = __webpack_require__(211);
 	var NoteToKey = __webpack_require__(213);
+	var VolumeStore = __webpack_require__(219);
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -38849,7 +38848,10 @@
 	  checkForNotes: function () {
 	    if (KeyStore.allNotes().includes(this.props.noteName)) {
 	      this.setState({ selected: true });
-	      this.note.start();
+	      var vols = VolumeStore.volumes("v");
+	      this.note.start(vols.map(function (v) {
+	        return parseFloat(v);
+	      }));
 	    } else {
 	      this.setState({ selected: false });
 	      this.note.stop();
@@ -38982,45 +38984,67 @@
 /* 211 */
 /***/ function(module, exports) {
 
-	// util/Note.js
 	var ctx = new (window.AudioContext || window.webkitAudioContext)();
 	
-	var createOscillator = function (freq) {
-	  var osc = ctx.createOscillator();
-	  osc.type = "sawtooth";
-	  osc.frequency.value = freq;
-	  osc.detune.value = 0;
-	  osc.start(ctx.currentTime);
-	  return osc;
-	};
-	
-	var createGainNode = function () {
-	  var gainNode = ctx.createGain();
-	  gainNode.gain.value = 0;
-	  gainNode.connect(ctx.destination);
-	  return gainNode;
-	};
-	
 	var Note = function (freq) {
-	  this.oscillatorNode = createOscillator(freq);
-	  this.gainNode = createGainNode();
-	  this.oscillatorNode.connect(this.gainNode);
+	  this.osc1 = ctx.createOscillator();
+	  this.osc1.type = "sine";
+	  this.osc1.frequency.value = freq;
+	  this.osc1.start(ctx.currentTime);
+	
+	  this.gain1 = ctx.createGain();
+	  this.gain1.gain.value = 0;
+	  this.osc1.connect(this.gain1);
+	  this.gain1.connect(ctx.destination);
+	
+	  this.osc2 = ctx.createOscillator();
+	  this.osc2.type = "triangle";
+	  this.osc2.frequency.value = freq;
+	  this.osc2.start(ctx.currentTime);
+	
+	  this.gain2 = ctx.createGain();
+	  this.gain2.gain.value = 0;
+	  this.osc2.connect(this.gain2);
+	  this.gain2.connect(ctx.destination);
+	
+	  this.osc3 = ctx.createOscillator();
+	  this.osc3.type = "sawtooth";
+	  this.osc3.frequency.value = freq;
+	  this.osc3.start(ctx.currentTime);
+	
+	  this.gain3 = ctx.createGain();
+	  this.gain3.gain.value = 0;
+	  this.osc3.connect(this.gain3);
+	  this.gain3.connect(ctx.destination);
+	
+	  this.osc4 = ctx.createOscillator();
+	  this.osc4.type = "square";
+	  this.osc4.frequency.value = freq;
+	  this.osc4.start(ctx.currentTime);
+	
+	  this.gain4 = ctx.createGain();
+	  this.gain4.gain.value = 0;
+	  this.osc4.connect(this.gain4);
+	  this.gain4.connect(ctx.destination);
 	};
 	
 	Note.prototype = {
-	  start: function () {
-	    // can't explain 0.3, it is a reasonable value
-	    this.gainNode.gain.value = 0.09;
+	  start: function (vols) {
+	    this.gain1.gain.value = vols[0];
+	    this.gain2.gain.value = vols[1];
+	    this.gain3.gain.value = vols[2];
+	    this.gain4.gain.value = vols[3];
 	  },
 	
 	  stop: function () {
-	    this.gainNode.gain.value = 0;
+	    this.gain1.gain.value = 0;
+	    this.gain2.gain.value = 0;
+	    this.gain3.gain.value = 0;
+	    this.gain4.gain.value = 0;
 	  }
 	};
 	
 	module.exports = Note;
-	
-	// Note.oscillatorNode.frequency.value
 
 /***/ },
 /* 212 */
@@ -39128,6 +39152,7 @@
 	  191: 'B4',
 	  222: 'C5',
 	
+	  49: 'B4', // 1
 	  81: 'C5', // Q
 	  50: 'Db5', // 2
 	  87: 'D5', // W
@@ -39152,6 +39177,174 @@
 	  8: 'Ab6', // -d
 	  220: 'A6' // \
 	};
+
+/***/ },
+/* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var $ = __webpack_require__(176);
+	var VolumeActions = __webpack_require__(218);
+	var VolumeStore = __webpack_require__(219);
+	
+	module.exports = React.createClass({
+	  displayName: 'exports',
+	
+	  getInitialState: function () {
+	    return {
+	      instruments: [],
+	      volume: [],
+	      currentBar: 1
+	    };
+	  },
+	  componentDidMount: function () {
+	    this.listener = VolumeStore.addListener(this.receiveVolumes);
+	    this.receiveVolumes();
+	
+	    $(document).keydown(function (e) {
+	      if (e.keyCode === 9) {
+	        // prevent real actual tabbing
+	        e.preventDefault();
+	        if (this.state.currentBar < this.state.instruments.length) {
+	          this.setState({ currentBar: this.state.currentBar + 1 });
+	        } else {
+	          this.setState({ currentBar: 1 });
+	        }
+	      }
+	
+	      this.displayCurrentBar();
+	    }.bind(this));
+	  },
+	  componentWillUnmount: function () {
+	    this.listener.remove();
+	  },
+	  receiveVolumes: function () {
+	    var iv = VolumeStore.volumes();
+	    // iv is an array of two subarrays, instruments, and volumes.
+	    this.setState({
+	      instruments: iv[0],
+	      volume: iv[1]
+	    });
+	  },
+	  displayCurrentBar: function () {
+	    var ids = this.state.instruments.map(function (i) {
+	      return "#drawbar-" + i;
+	    });
+	    ids.forEach(function (id) {
+	      $(id).removeClass('drawbar-selected');
+	    });
+	    var currId = "#drawbar-" + this.state.instruments[this.state.currentBar - 1];
+	    $(currId).addClass('drawbar-selected');
+	  },
+	  updateVolume: function (e) {
+	    var volumes = this.state.volume;
+	    volumes[this.state.currentBar - 1] = e.currentTarget.value;
+	    VolumeActions.updateVolumes(volumes);
+	  },
+	  render: function () {
+	    var drawbars = this.state.instruments.map(function (i, key) {
+	      var idx = this.state.instruments.indexOf(i);
+	      return React.createElement(
+	        'div',
+	        { id: "drawbar-" + i,
+	          className: 'drawbar',
+	          key: key },
+	        React.createElement(
+	          'div',
+	          { id: "drawbar-label-" + i,
+	            className: 'drawbar-label' },
+	          i
+	        ),
+	        React.createElement('input', {
+	          disabled: this.state.currentBar == idx + 1 ? "" : "disabled",
+	          id: "drawbar-slider-" + i,
+	          className: 'drawbar-slider',
+	          type: 'range', name: 'volume',
+	          min: '0', max: '0.1', step: '0.0125',
+	          value: this.state.volume[key],
+	          onChange: this.updateVolume })
+	      );
+	    }.bind(this));
+	    return React.createElement(
+	      'div',
+	      { id: 'drawbars-wrapper' },
+	      React.createElement(
+	        'div',
+	        { id: 'drawbars-label' },
+	        'DRAWBARS'
+	      ),
+	      React.createElement(
+	        'div',
+	        { id: 'drawbars-container', className: 'clearfix' },
+	        drawbars
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 216 */,
+/* 217 */,
+/* 218 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var DrumDispatcher = __webpack_require__(172);
+	
+	module.exports = {
+	  updateVolumes: function (newVolumes) {
+	    DrumDispatcher.dispatch({
+	      actionType: "UPDATE_VOLUMES",
+	      volumes: newVolumes
+	    });
+	  }
+	};
+
+/***/ },
+/* 219 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Store = __webpack_require__(186).Store;
+	var VolumeDispatcher = __webpack_require__(172);
+	var VolumeStore = new Store(VolumeDispatcher);
+	
+	var _volumes = {
+	  Organ: "0.1",
+	  Wood: "0.0",
+	  Brass: "0.0",
+	  String: "0.0"
+	
+	};
+	
+	VolumeStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case "UPDATE_VOLUMES":
+	      updateVolumes(payload.volumes);
+	      this.__emitChange();
+	      break;
+	  }
+	};
+	
+	VolumeStore.volumes = function (v) {
+	  var instruments = [];
+	  var volumes = [];
+	  Object.keys(_volumes).forEach(function (i) {
+	    instruments.push(i);
+	    volumes.push(_volumes[i]);
+	  });
+	  if (v) {
+	    return volumes;
+	  } else {
+	    return [instruments, volumes];
+	  }
+	};
+	
+	function updateVolumes(volumes) {
+	  Object.keys(_volumes).forEach(function (i, idx) {
+	    _volumes[i] = volumes[idx];
+	  });
+	}
+	
+	module.exports = VolumeStore;
 
 /***/ }
 /******/ ]);

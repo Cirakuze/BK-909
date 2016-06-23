@@ -4,6 +4,7 @@ var $ = require('jquery');
 var KeyAction = require('../actions/KeyActions');
 var Mapping = require('../constants/PianoMapping');
 var KeyStore = require('../stores/KeyStore');
+var Drawbars = require('./Drawbars');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -55,6 +56,7 @@ module.exports = React.createClass({
   render: function () {
     return (
       <div className="piano-wrapper" id="piano-wrapper">
+        <div className="piano-label">ORGAN</div>
         <div className="piano clearfix">
           <div className="octave clearfix">
             <PianoKey noteName={"F3"} />
@@ -110,11 +112,7 @@ module.exports = React.createClass({
           </div>
 
         </div>
-        <div id="drawbars-wrapper">
-          <div id="drawbars-container">
-            DRAWBARS
-          </div>
-        </div>
+        <Drawbars />
       </div>
     );
   }

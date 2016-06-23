@@ -780,6 +780,12 @@ div.piano-wrapper.shown {
   top: 135px;
 }
 
+div.piano-label {
+  text-align: center;
+  font-size: 36px;
+  margin-top: 15px;
+}
+
 .piano {
   width: 1248px;
   margin: auto;
@@ -868,9 +874,78 @@ div.piano-wrapper.shown {
   /*border: solid 1px black;*/
 }
 
+#drawbars-label {
+  width: 500px;
+  text-align: center;
+  margin: 15px auto;
+}
+
 #drawbars-container {
   width: 900px;
   height: 400px;
-  border: solid 1px red;
+  /*background-color: #8dab19;*/
   margin: auto;
+  padding: 15px;
+}
+
+.drawbar {
+  height: 100px;
+  width: 100px;
+  float: left;
+  margin: 5px;
+  position: relative;
+}
+
+.drawbar-label {
+  text-align: center;
+  background-color: #c3c674;
+}
+
+.drawbar-slider {
+  transform: rotateZ(-90deg);
+  position: absolute;
+  top: 55px;
+  left: 15px;
+}
+
+.drawbar-slider:hover {
+  cursor: pointer;
+}
+
+.drawbar.drawbar-selected {
+  box-shadow: 0px 0px 1px 1px #e62d2d;
+}
+
+input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+
+    /*fix for FF unable to apply focus style bug */
+    border: 1px solid white;
+
+    /*required for proper track sizing in FF*/
+    width: 50px;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 50px;
+    height: 14px;
+    background: #828b7a;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 5%;
+    background: #24413c;
+    border: solid 1px #a6b2e8;
+    margin-top: -1px;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
 }
