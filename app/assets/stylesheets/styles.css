@@ -769,20 +769,19 @@ div.instructions.show-instructions {
 
 div.piano-wrapper {
   width: 100%;
-  background-color: #dcddc8;
   position: absolute;
-  top: -500px;
+  top: -1000px;
   z-index: 999999;
   perspective: 1000px;
   transition: top 1s ease;
 }
 
 div.piano-wrapper.shown {
-  top: 90px;
+  top: 135px;
 }
 
 .piano {
-  width: 1352px;
+  width: 1248px;
   margin: auto;
   background-color: #78091c;
   transform: rotateX(25deg);
@@ -795,7 +794,7 @@ div.piano-wrapper.shown {
 .octave {
   position: relative;
   z-index: 1000000;
-  background-color: #7dcf0b;
+  /*background-color: #7dcf0b;*/
 }
 
 .octave:nth-child(1) {
@@ -808,7 +807,7 @@ div.piano-wrapper.shown {
 }
 
 .octave:nth-child(4) {
-  width: 416px;
+  width: 312px;
 }
 
 .octave > * {
@@ -858,4 +857,20 @@ div.piano-wrapper.shown {
 
 #selected {
   background-color: #a2b8ae;
+}
+
+
+/*DRAWBARS*/
+
+#drawbars-wrapper {
+  width: 100%;
+  /*background-color: #66980e;*/
+  /*border: solid 1px black;*/
+}
+
+#drawbars-container {
+  width: 900px;
+  height: 400px;
+  border: solid 1px red;
+  margin: auto;
 }

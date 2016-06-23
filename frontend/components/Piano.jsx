@@ -107,11 +107,13 @@ module.exports = React.createClass({
             <PianoKey noteName={"G6"} />
             <PianoKey noteName={"Ab6"} />
             <PianoKey noteName={"A6"} />
-            <PianoKey noteName={"Bb6"} />
-            <PianoKey noteName={"B6"} />
-            <PianoKey noteName={"C7"} />
           </div>
 
+        </div>
+        <div id="drawbars-wrapper">
+          <div id="drawbars-container">
+            DRAWBARS
+          </div>
         </div>
       </div>
     );

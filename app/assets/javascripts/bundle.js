@@ -38805,10 +38805,16 @@
 	          React.createElement(PianoKey, { noteName: "Gb6" }),
 	          React.createElement(PianoKey, { noteName: "G6" }),
 	          React.createElement(PianoKey, { noteName: "Ab6" }),
-	          React.createElement(PianoKey, { noteName: "A6" }),
-	          React.createElement(PianoKey, { noteName: "Bb6" }),
-	          React.createElement(PianoKey, { noteName: "B6" }),
-	          React.createElement(PianoKey, { noteName: "C7" })
+	          React.createElement(PianoKey, { noteName: "A6" })
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { id: 'drawbars-wrapper' },
+	        React.createElement(
+	          'div',
+	          { id: 'drawbars-container' },
+	          'DRAWBARS'
 	        )
 	      )
 	    );
@@ -38968,11 +38974,8 @@
 	  Gb6: 1479.98,
 	  G6: 1567.98,
 	  Ab6: 1661.22,
-	  A6: 1760.00,
-	  Bb6: 1864.66,
-	  B6: 1975.53,
+	  A6: 1760.00
 	
-	  C7: 2093.00 // delete
 	};
 
 /***/ },
@@ -39074,32 +39077,28 @@
 	  B4: "/",
 	
 	  C5: "Q",
-	  Db5: "W",
-	  D5: "E",
-	  Eb5: "R",
-	  E5: "T",
-	  F5: "Y",
-	  Gb5: "U",
-	  G5: "I",
-	  Ab5: "O",
-	  A5: "P",
-	  Bb5: "[",
-	  B5: "]",
+	  Db5: 2,
+	  D5: "W",
+	  Eb5: 3,
+	  E5: "E",
+	  F5: "R",
+	  Gb5: 5,
+	  G5: "T",
+	  Ab5: 6,
+	  A5: "Y",
+	  Bb5: 7,
+	  B5: "U",
 	
-	  C6: 1,
-	  Db6: 2,
-	  D6: 3,
-	  Eb6: 4,
-	  E6: 5,
-	  F6: 6,
-	  Gb6: 7,
-	  G6: 8,
-	  Ab6: 9,
-	  A6: 0,
-	  Bb6: "-",
-	  B6: "+",
-	
-	  C7: "-d"
+	  C6: "I",
+	  Db6: 9,
+	  D6: "O",
+	  Eb6: 0,
+	  E6: "P",
+	  F6: "[",
+	  Gb6: "+",
+	  G6: "]",
+	  Ab6: "-d",
+	  A6: "\\"
 	};
 
 /***/ },
@@ -39130,32 +39129,28 @@
 	  222: 'C5',
 	
 	  81: 'C5', // Q
-	  87: 'Db5',
-	  69: 'D5',
-	  82: 'Eb5',
-	  84: 'E5',
-	  89: 'F5',
-	  85: 'Gb5',
-	  73: 'G5', // I
-	  79: 'Ab5',
-	  80: 'A5',
-	  219: 'Bb5',
-	  221: 'B5',
-	  220: 'C6',
+	  50: 'Db5', // 2
+	  87: 'D5', // W
+	  51: 'Eb5', // 3
+	  69: 'E5', // E
+	  82: 'F5', // R
+	  53: 'Gb5', // 5
+	  84: 'G5', // T
+	  54: 'Ab5', // 6
+	  89: 'A5', // Y
+	  55: 'Bb5', // 7
+	  85: 'B5', // U
 	
-	  49: 'C6', // 1
-	  50: 'Db6',
-	  51: 'D6',
-	  52: 'Eb6',
-	  53: 'E6',
-	  54: 'F6',
-	  55: 'Gb6',
-	  56: 'G6', // 8
-	  57: 'Ab6',
-	  48: 'A6',
-	  189: 'Bb6',
-	  187: 'B6',
-	  8: 'C7'
+	  73: 'C6', // I
+	  57: 'Db6', // 9
+	  79: 'D6', // O
+	  48: 'Eb6', // 0
+	  80: 'E6', // P
+	  219: 'F6', // [
+	  187: 'Gb6', // +
+	  221: 'G6', // ]
+	  8: 'Ab6', // -d
+	  220: 'A6' // \
 	};
 
 /***/ }
