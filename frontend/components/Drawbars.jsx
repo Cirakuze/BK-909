@@ -16,8 +16,8 @@ module.exports = React.createClass({
     this.receiveVolumes();
 
     $(document).keydown(function (e) {
-      if (e.keyCode === 9) {
-        // prevent real actual tabbing
+      if (e.keyCode === 13 || e.keyCode === 13) {
+        // Enter key or Tab key
         e.preventDefault();
         if (this.state.currentBar < this.state.instruments.length) {
           this.setState({currentBar: this.state.currentBar + 1});
@@ -106,7 +106,7 @@ module.exports = React.createClass({
         </div>
         <div id="drawbars-instructions">
           <h1>Instructions</h1>
-          <p>Press tab to select an instrument</p>
+          <p>Press enter to cycle through instruments</p>
           <p>Use up/down arrow keys to change volume</p>
         </div>
       </div>

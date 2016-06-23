@@ -39206,8 +39206,8 @@
 	    this.receiveVolumes();
 	
 	    $(document).keydown(function (e) {
-	      if (e.keyCode === 9) {
-	        // prevent real actual tabbing
+	      if (e.keyCode === 13 || e.keyCode === 13) {
+	        // Enter key or Tab key
 	        e.preventDefault();
 	        if (this.state.currentBar < this.state.instruments.length) {
 	          this.setState({ currentBar: this.state.currentBar + 1 });
@@ -39312,7 +39312,7 @@
 	        React.createElement(
 	          'p',
 	          null,
-	          'Press tab to select an instrument'
+	          'Press enter to cycle through instruments'
 	        ),
 	        React.createElement(
 	          'p',
