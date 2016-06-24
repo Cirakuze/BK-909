@@ -66,7 +66,7 @@ body {
   width: 500px;
   margin: auto;
   position: relative;
-  top: -150px;
+  top: -70px;
   z-index: 5;
   transition: top 1s ease;
   /*background-color: #7002dd;*/
@@ -548,7 +548,7 @@ div.app-title {
 .sequencer-wrapper {
   width: 100%;
   position: relative;
-  top: 105px;
+  top: 215px;
   transition: top 1s ease;
 }
 
@@ -726,10 +726,16 @@ div.instructions-wrapper {
   position: relative;
 }
 
+div#instructions-header *:hover,
+div.instructions *:hover {
+  color: #456c71;
+  cursor: pointer;
+}
+
 div#instructions-header {
   position: absolute;
   right: -385px;
-  top: -610px;
+  top: -630px;
   /*background-color: #7893f2;*/
 }
 
@@ -763,11 +769,6 @@ div.instructions * {
   font-family: Arial, sans-serif;
   line-height: 1.25;
   overflow: hidden;
-}
-
-div.instructions  *:hover {
-  color: #456c71;
-  cursor: pointer;
 }
 
 div.instructions p {
@@ -951,6 +952,11 @@ div#drawbars-instructions {
   width: 600px;
   text-align: center;
   margin: auto;
+}
+
+div#drawbars-instructions > * {
+  font-family: Arial, sans-serif;
+  line-height: 1;
 }
 
 input[type=range] {

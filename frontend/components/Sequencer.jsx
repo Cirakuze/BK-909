@@ -258,6 +258,7 @@ module.exports = React.createClass({
             <h3 id="short">Short version</h3>
             <p>1) Press the space bar and enjoy :D</p>
             <p>2) Press the right arrow key to see the organ</p>
+            <p>&nbsp;&nbsp;&nbsp; Left arrow to come back</p>
             <h3 onClick={this.showInstructions}>Long version (click to expand)</h3>
           </div>
           <div className="instructions">

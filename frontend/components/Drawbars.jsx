@@ -109,6 +109,7 @@ module.exports = React.createClass({
           <p>Press space bar to sustain notes</p>
           <p>Press enter/tab to cycle through instruments</p>
           <p>Use up/down arrow keys to change volume</p>
+          <p>Press left arrow to go back to the drums</p>
         </div>
       </div>
     );

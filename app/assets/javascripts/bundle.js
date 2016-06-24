@@ -31661,6 +31661,11 @@
 	            '2) Press the right arrow key to see the organ'
 	          ),
 	          React.createElement(
+	            'p',
+	            null,
+	            '    Left arrow to come back'
+	          ),
+	          React.createElement(
 	            'h3',
 	            { onClick: this.showInstructions },
 	            'Long version (click to expand)'
@@ -39330,6 +39335,11 @@
 	          'p',
 	          null,
 	          'Use up/down arrow keys to change volume'
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          'Press left arrow to go back to the drums'
 	        )
 	      )
 	    );
