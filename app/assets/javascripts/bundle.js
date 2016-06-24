@@ -82,6 +82,25 @@
 	              { target: '_blank', href: 'http://www.bada.kim' },
 	              ' Bada Kim'
 	            )
+	          ),
+	          React.createElement(
+	            'p',
+	            { className: 'BK-909 clearfix' },
+	            React.createElement(
+	              'a',
+	              { target: '_blank', href: 'https://github.com/Cirakuze/BK-909' },
+	              'BK-909 GitHub Repo -'
+	            ),
+	            React.createElement(
+	              'a',
+	              { target: '_blank', href: 'http://www.bada.kim' },
+	              '- Portfolio -'
+	            ),
+	            React.createElement(
+	              'a',
+	              { target: '_blank', href: 'https://www.linkedin.com/in/badatjkim' },
+	              '- LinkedIn'
+	            )
 	          )
 	        ),
 	        React.createElement(Drumset, null),
@@ -20579,25 +20598,6 @@
 	      React.createElement('div', { className: 'rug' }),
 	      React.createElement(
 	        'div',
-	        { className: 'BK-909 clearfix' },
-	        React.createElement(
-	          'a',
-	          { target: '_blank', href: 'https://github.com/Cirakuze/BK-909' },
-	          'BK-909 GitHub Repo -'
-	        ),
-	        React.createElement(
-	          'a',
-	          { target: '_blank', href: 'http://www.bada.kim' },
-	          '- Portfolio -'
-	        ),
-	        React.createElement(
-	          'a',
-	          { target: '_blank', href: 'https://www.linkedin.com/in/badatjkim' },
-	          '- LinkedIn'
-	        )
-	      ),
-	      React.createElement(
-	        'div',
 	        { className: 'app-title' },
 	        'Drums synthesized using WebAudioAPI'
 	      )
@@ -31727,7 +31727,7 @@
 	          React.createElement(
 	            'p',
 	            null,
-	            '   -Switch banks by pressing tilde then a step key'
+	            '   -Switch between patterns by pressing tilde then a step key'
 	          ),
 	          React.createElement(
 	            'p',
@@ -31747,7 +31747,7 @@
 	          React.createElement(
 	            'p',
 	            null,
-	            '   -Banks 1, 2, 3, and 4 are presets'
+	            '   -Patterns 1, 2, 3, and 4 are presets'
 	          ),
 	          React.createElement(
 	            'p',
@@ -31811,7 +31811,7 @@
 	            React.createElement(
 	              'div',
 	              null,
-	              'Current Bank ',
+	              'Current Pattern ',
 	              SequencerStore.currentBank(),
 	              '/16'
 	            ),

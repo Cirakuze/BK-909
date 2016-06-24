@@ -272,11 +272,11 @@ module.exports = React.createClass({
             <p>&nbsp;&nbsp;&nbsp;-Enter resets the sequence</p>
             <p>&nbsp;&nbsp;&nbsp;-Up/Down arrow keys speed up/slow down tempo</p>
             <p className="instructions-bullets">4) Switch patterns</p>
-            <p>&nbsp;&nbsp;&nbsp;-Switch banks by pressing tilde then a step key</p>
+            <p>&nbsp;&nbsp;&nbsp;-Switch between patterns by pressing tilde then a step key</p>
             <p>&nbsp;&nbsp;&nbsp;-Press +/- to lengthen/shorten pattern</p>
             <p>&nbsp;&nbsp;&nbsp;-Press tab to cycle through rows of pattern</p>
             <p className="instructions-bullets">5) Patterns auto-save</p>
-            <p>&nbsp;&nbsp;&nbsp;-Banks 1, 2, 3, and 4 are presets</p>
+            <p>&nbsp;&nbsp;&nbsp;-Patterns 1, 2, 3, and 4 are presets</p>
             <p className="instructions-bullets">6) Add organ</p>
             <p>&nbsp;&nbsp;&nbsp;-Press the right arrow key to access organ (left to come back)</p>
           </div>
@@ -310,7 +310,7 @@ module.exports = React.createClass({
             </div>
             <div>{this.state.error}</div>
             <div className="sequencer-display clearfix">
-              <div>Current Bank {SequencerStore.currentBank()}/16</div>
+              <div>Current Pattern {SequencerStore.currentBank()}/16</div>
               <div>Current Drum {this.state.drum}</div>
             </div>
           </div>
