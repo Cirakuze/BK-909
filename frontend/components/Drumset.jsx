@@ -168,8 +168,10 @@ module.exports = React.createClass({
 
 
         <div className="rug"></div>
-        <div className="BK-909">
-          <a target="_blank" href="https://github.com/Cirakuze/BK-909">BK-909 GitHub Repo</a>
+        <div className="BK-909 clearfix">
+          <a target="_blank" href="https://github.com/Cirakuze/BK-909">BK-909 GitHub Repo -</a>
+          <a target="_blank" href="http://www.bada.kim">- Portfolio -</a>
+          <a target="_blank" href="https://www.linkedin.com/in/badatjkim">- LinkedIn</a>
         </div>
         <div className="app-title">
           Drums synthesized using WebAudioAPI

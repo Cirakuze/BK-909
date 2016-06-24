@@ -82,15 +82,6 @@
 	              { target: '_blank', href: 'http://www.bada.kim' },
 	              ' Bada Kim'
 	            )
-	          ),
-	          React.createElement(
-	            'p',
-	            { className: 'portfolio' },
-	            React.createElement(
-	              'a',
-	              { target: '_blank', href: 'http://www.bada.kim' },
-	              'Portfolio'
-	            )
 	          )
 	        ),
 	        React.createElement(Drumset, null),
@@ -20588,11 +20579,21 @@
 	      React.createElement('div', { className: 'rug' }),
 	      React.createElement(
 	        'div',
-	        { className: 'BK-909' },
+	        { className: 'BK-909 clearfix' },
 	        React.createElement(
 	          'a',
 	          { target: '_blank', href: 'https://github.com/Cirakuze/BK-909' },
-	          'BK-909 GitHub Repo'
+	          'BK-909 GitHub Repo -'
+	        ),
+	        React.createElement(
+	          'a',
+	          { target: '_blank', href: 'http://www.bada.kim' },
+	          '- Portfolio -'
+	        ),
+	        React.createElement(
+	          'a',
+	          { target: '_blank', href: 'https://www.linkedin.com/in/badatjkim' },
+	          '- LinkedIn'
 	        )
 	      ),
 	      React.createElement(

@@ -16,7 +16,6 @@ var App = React.createClass({
             <p className="inspiration">Inspired by TR-909</p>
             <p className="creation">created by
             <a target="_blank" href="http://www.bada.kim"> Bada Kim</a></p>
-            <p className="portfolio"><a target="_blank" href="http://www.bada.kim">Portfolio</a></p>
           </div>
           <Drumset />
           <Sequencer />
