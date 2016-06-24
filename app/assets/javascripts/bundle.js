@@ -82,6 +82,15 @@
 	              { target: '_blank', href: 'http://www.bada.kim' },
 	              ' Bada Kim'
 	            )
+	          ),
+	          React.createElement(
+	            'p',
+	            { className: 'portfolio' },
+	            React.createElement(
+	              'a',
+	              { target: '_blank', href: 'http://www.bada.kim' },
+	              'Portfolio'
+	            )
 	          )
 	        ),
 	        React.createElement(Drumset, null),
@@ -20583,7 +20592,7 @@
 	        React.createElement(
 	          'a',
 	          { target: '_blank', href: 'https://github.com/Cirakuze/BK-909' },
-	          'BK-909 '
+	          'BK-909 GitHub Repo'
 	        )
 	      ),
 	      React.createElement(
@@ -31628,40 +31637,37 @@
 	        'div',
 	        { className: 'instructions-wrapper' },
 	        React.createElement(
-	          'h1',
-	          {
-	            id: 'instructions-header',
-	            onClick: this.showInstructions },
-	          'Instructions:'
+	          'div',
+	          { id: 'instructions-header' },
+	          React.createElement(
+	            'h1',
+	            null,
+	            'Instructions:'
+	          ),
+	          React.createElement(
+	            'h3',
+	            { id: 'short' },
+	            'Short version'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '1) Press the space bar and enjoy :D'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            '2) Press the right arrow key to see the organ'
+	          ),
+	          React.createElement(
+	            'h3',
+	            { onClick: this.showInstructions },
+	            'Long version (click to expand)'
+	          )
 	        ),
 	        React.createElement(
 	          'div',
 	          { className: 'instructions' },
-	          React.createElement(
-	            'h3',
-	            { id: 'short' },
-	            'Short version:'
-	          ),
-	          React.createElement(
-	            'p',
-	            null,
-	            '1) Press ~ (the key above the tab key)'
-	          ),
-	          React.createElement(
-	            'p',
-	            null,
-	            '2) Press v'
-	          ),
-	          React.createElement(
-	            'p',
-	            null,
-	            '3) Press space bar'
-	          ),
-	          React.createElement(
-	            'h3',
-	            null,
-	            'Long version:'
-	          ),
 	          React.createElement(
 	            'p',
 	            { className: 'instructions-bullets' },
@@ -31670,7 +31676,7 @@
 	          React.createElement(
 	            'p',
 	            null,
-	            '   -Select a drum by pressing the key on the drum'
+	            '   -Select a drum by pressing the key labeled on the drum'
 	          ),
 	          React.createElement(
 	            'p',
@@ -31680,7 +31686,7 @@
 	          React.createElement(
 	            'p',
 	            null,
-	            '   -Toggle a step by pressing the key on the step'
+	            '   -Toggle a step by pressing the key labeled on the step'
 	          ),
 	          React.createElement(
 	            'p',
@@ -31735,17 +31741,17 @@
 	          React.createElement(
 	            'p',
 	            null,
-	            '   -Banks 13 (z), 14 (x), 15 (c), and 16 (v) are presets'
+	            '   -Banks 1, 2, 3, and 4 are presets'
 	          ),
 	          React.createElement(
 	            'p',
 	            { className: 'instructions-bullets' },
-	            '6) Add piano'
+	            '6) Add organ'
 	          ),
 	          React.createElement(
 	            'p',
 	            null,
-	            '   -Press the right arrow key to access piano (left to come back)'
+	            '   -Press the right arrow key to access organ (left to come back)'
 	          )
 	        )
 	      ),
@@ -38463,44 +38469,44 @@
 	var _tempos = { 1: 120, 2: 120, 3: 120, 4: 120, 5: 120, 6: 120, 8: 120, 9: 120, 10: 120, 11: 120, 12: 120, 13: 100, 14: 130, 15: 120, 16: 120 };
 	
 	var _banks = {
-	  1: {
-	    bass: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-	    snare: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	  1: { // PRESET
+	    bass: [true, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false],
+	    snare: [false, false, false, false, true, false, false, false, false, false, false, false, true, false, false, false],
 	    hihat: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	    hitom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	    midtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	    lowtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	    ride: [false, false, true, true, false, true, true, false, true, true, false, true, false, false, false, false],
+	    crash: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false]
+	  },
+	  2: { // PRESET
+	    bass: [true, false, false, false, true, false, false, false, true, false, false, false, true, false, false, false],
+	    snare: [false, false, false, true, false, true, false, false, true, false, false, true, false, false, true, false],
+	    hihat: [true, true, true, false, true, false, true, true, false, true, true, false, true, true, false, true],
 	    hitom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    midtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    lowtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    ride: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    crash: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
 	  },
-	  2: {
-	    bass: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	  3: { // PRESET
+	    bass: [true, true, false, true, false, true, true, false, true, true, false, true, false, true, true, false],
 	    snare: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    hihat: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    hitom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    midtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    lowtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-	    ride: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	    ride: [false, true, true, false, false, false, true, true, false, false, true, true, false, true, false, false],
 	    crash: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
 	  },
-	  3: {
-	    bass: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-	    snare: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	  4: { // PRESET
+	    bass: [true, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false],
+	    snare: [false, false, false, false, true, false, false, false, false, false, false, false, true, false, false, false],
 	    hihat: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    hitom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    midtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    lowtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-	    ride: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-	    crash: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-	  },
-	  4: {
-	    bass: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-	    snare: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-	    hihat: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-	    hitom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-	    midtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-	    lowtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-	    ride: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	    ride: [false, false, true, false, false, false, true, false, false, false, true, false, false, false, true, false],
 	    crash: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
 	  },
 	  5: {
@@ -38583,44 +38589,44 @@
 	    ride: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    crash: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
 	  },
-	  13: { // PRESET
-	    bass: [true, true, false, true, false, true, true, false, true, true, false, true, false, true, true, false],
+	  13: {
+	    bass: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    snare: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    hihat: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-	    hitom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-	    midtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-	    lowtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-	    ride: [false, true, true, false, false, false, true, true, false, false, true, true, false, true, false, false],
-	    crash: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
-	  },
-	  14: { // PRESET
-	    bass: [true, false, false, false, true, false, false, false, true, false, false, false, true, false, false, false],
-	    snare: [false, false, false, true, false, true, false, false, true, false, false, true, false, false, true, false],
-	    hihat: [true, true, true, false, true, false, true, true, false, true, true, false, true, true, false, true],
 	    hitom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    midtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    lowtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    ride: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    crash: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
 	  },
-	  15: { // PRESET
-	    bass: [true, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false],
-	    snare: [false, false, false, false, true, false, false, false, false, false, false, false, true, false, false, false],
+	  14: {
+	    bass: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	    snare: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    hihat: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    hitom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    midtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    lowtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-	    ride: [false, false, true, true, false, true, true, false, true, true, false, true, false, false, false, false],
-	    crash: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, false]
+	    ride: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	    crash: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
 	  },
-	  16: { // PRESET
-	    bass: [true, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false],
-	    snare: [false, false, false, false, true, false, false, false, false, false, false, false, true, false, false, false],
+	  15: {
+	    bass: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	    snare: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    hihat: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    hitom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    midtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    lowtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
-	    ride: [false, false, true, false, false, false, true, false, false, false, true, false, false, false, true, false],
+	    ride: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	    crash: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+	  },
+	  16: {
+	    bass: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	    snare: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	    hihat: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	    hitom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	    midtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	    lowtom: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
+	    ride: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],
 	    crash: [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
 	  }
 	};
@@ -39356,9 +39362,9 @@
 	
 	var _volumes = {
 	  Organ: "0.1",
-	  Wood: "0.0125",
-	  Brass: "0.0125",
-	  String: "0.0125"
+	  Wood: "0.05",
+	  Brass: "0.0375",
+	  String: "0.0250"
 	
 	};
 	

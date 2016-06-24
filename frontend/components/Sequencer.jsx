@@ -253,21 +253,18 @@ module.exports = React.createClass({
     return (
       <div className="sequencer-wrapper">
         <div className="instructions-wrapper">
-          <h1
-            id="instructions-header"
-            onClick={this.showInstructions}>
-            Instructions:
-          </h1>
+          <div id="instructions-header">
+            <h1>Instructions:</h1>
+            <h3 id="short">Short version</h3>
+            <p>1) Press the space bar and enjoy :D</p>
+            <p>2) Press the right arrow key to see the organ</p>
+            <h3 onClick={this.showInstructions}>Long version (click to expand)</h3>
+          </div>
           <div className="instructions">
-            <h3 id="short">Short version:</h3>
-            <p>1) Press ~ (the key above the tab key)</p>
-            <p>2) Press v</p>
-            <p>3) Press space bar</p>
-            <h3>Long version:</h3>
             <p className="instructions-bullets">1) Pick a drum</p>
-            <p>&nbsp;&nbsp;&nbsp;-Select a drum by pressing the key on the drum</p>
+            <p>&nbsp;&nbsp;&nbsp;-Select a drum by pressing the key labeled on the drum</p>
             <p className="instructions-bullets">2) Set a pattern</p>
-            <p>&nbsp;&nbsp;&nbsp;-Toggle a step by pressing the key on the step</p>
+            <p>&nbsp;&nbsp;&nbsp;-Toggle a step by pressing the key labeled on the step</p>
             <p>&nbsp;&nbsp;&nbsp;&nbsp;(red dot is on / brown dot is off)</p>
             <p className="instructions-bullets">3) Start the sequence</p>
             <p>&nbsp;&nbsp;&nbsp;-Space bar starts/stops the sequence</p>
@@ -278,9 +275,9 @@ module.exports = React.createClass({
             <p>&nbsp;&nbsp;&nbsp;-Press +/- to lengthen/shorten pattern</p>
             <p>&nbsp;&nbsp;&nbsp;-Press tab to cycle through rows of pattern</p>
             <p className="instructions-bullets">5) Patterns auto-save</p>
-            <p>&nbsp;&nbsp;&nbsp;-Banks 13 (z), 14 (x), 15 (c), and 16 (v) are presets</p>
-            <p className="instructions-bullets">6) Add piano</p>
-            <p>&nbsp;&nbsp;&nbsp;-Press the right arrow key to access piano (left to come back)</p>
+            <p>&nbsp;&nbsp;&nbsp;-Banks 1, 2, 3, and 4 are presets</p>
+            <p className="instructions-bullets">6) Add organ</p>
+            <p>&nbsp;&nbsp;&nbsp;-Press the right arrow key to access organ (left to come back)</p>
           </div>
         </div>
         <div className="sequencer-controlls-wrapper">

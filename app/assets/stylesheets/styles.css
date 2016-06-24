@@ -45,8 +45,9 @@ body {
   top: 15px;
 }
 
-.header .creation {
-  font-size: 14px;
+.header .creation,
+.header .portfolio {
+  font-size: 16px;
   text-align: center;
   position: relative;
   top: 25px;
@@ -54,9 +55,9 @@ body {
   z-index: 9999;
 }
 
-.header .creation a {
+.header a {
   text-decoration: none;
-  color: #39bfdd;
+  color: #2e9bb4;
 }
 
 /*DRUMSET*/
@@ -726,22 +727,32 @@ div.instructions-wrapper {
   position: relative;
 }
 
-h1#instructions-header {
+div#instructions-header {
   position: absolute;
-  right: -370px;
-  top: -630px;
+  right: -385px;
+  top: -610px;
+  /*background-color: #7893f2;*/
 }
 
-h1#instructions-header:hover {
+div#instructions-header h1 {
+  margin: 0;
+}
+
+div#instructions-header > * {
+  font-family: Arial, sans-serif;
+  line-height: 1.25;
+}
+
+h3:hover {
   cursor: pointer;
 }
 
 div.instructions {
+  /*background-color: #48de48;*/
   position: absolute;
   right: -500px;
-  top: -600px;
+  top: -480px;
   height: 0px;
-  border: solid 0px black;
   border-radius: 10px;
   padding-right: 15px;
   padding-left: 15px;
@@ -774,12 +785,11 @@ i.fa {
 }
 
 h3#short {
-  margin-top: 15px;
+
 }
 
 div.instructions.show-instructions {
-  height: 445px;
-  border: solid 1px black;
+  height: 325px;
 }
 
 

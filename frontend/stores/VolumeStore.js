@@ -4,9 +4,9 @@ var VolumeStore = new Store(VolumeDispatcher);
 
 var _volumes = {
   Organ: "0.1",
-  Wood: "0.0125",
-  Brass: "0.0125",
-  String: "0.0125",
+  Wood: "0.05",
+  Brass: "0.0375",
+  String: "0.0250",
 
 };
 
