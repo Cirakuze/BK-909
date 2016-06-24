@@ -47,6 +47,10 @@ Press the right arrow key to access the piano.
 Space bar sustains notes.
 ![Piano Roll](./app/assets/images/pianoRoll.png?raw=true "Piano Roll")
 
+## EXTRA BONUS: drawbars
+Piano has four drawbars like on an electric organ that adds or reduces multiple layers of sound.
+![Draw Bars](./app/assets/images/drawBars.png?raw=true "Draw Bars")
+
 ## Todos
 Option to increase pattern length from 16 steps to 32 steps.
 Different sets of drum sounds.
