@@ -957,6 +957,9 @@ div.piano-label {
 }
 
 div#drawbars-instructions {
+  position: relative;
+  top: -120px;
+  left: 400px;
   width: 600px;
   text-align: center;
   margin: auto;
@@ -997,4 +1000,27 @@ input[type=range]:focus {
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
     background: #ccc;
+}
+
+
+
+
+
+
+
+/*VISUALIZER*/
+div#visualizer-wrapper {
+  z-index: -1;
+  position: relative;
+  top: -500px;
+  height: 500px;
+  width: 100%;
+  background-color: #a6da49;
+}
+
+canvas#visualizer-canvas {
+  height: 500px;
+  width: 100%;
+  margin: auto;
+  background-color: #3b6ff7;
 }

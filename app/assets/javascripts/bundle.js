@@ -38996,52 +38996,68 @@
 /* 211 */
 /***/ function(module, exports) {
 
-	var ctx = new (window.AudioContext || window.webkitAudioContext)();
+	var vCtx, vCanvas;
+	
+	document.addEventListener("DOMContentLoaded", function () {
+	  vCanvas = document.getElementById("visualizer-canvas");
+	  vCtx = vCanvas.getContext("2d");
+	});
+	
+	var aCtx = new (window.AudioContext || window.webkitAudioContext)();
 	
 	var Note = function (freq) {
-	  // INSTRUMENT ONE
-	  this.osc1 = ctx.createOscillator();
+	  this.analyser = aCtx.createAnalyser();
+	  this.analyser.fftSize = 2048;
+	  this.bufferLength = this.analyser.frequencyBinCount;
+	  this.dataArray = new Uint8Array(this.bufferLength);
+	
+	  // INSTRUMENT 1
+	  this.osc1 = aCtx.createOscillator();
 	  this.osc1.type = "sine";
 	  this.osc1.frequency.value = freq;
-	  this.osc1.start(ctx.currentTime);
+	  this.osc1.start(aCtx.currentTime);
 	
-	  this.gain1 = ctx.createGain();
+	  this.gain1 = aCtx.createGain();
 	  this.gain1.gain.value = 0;
 	  this.osc1.connect(this.gain1);
-	  this.gain1.connect(ctx.destination);
 	
-	  // INSTRUMENT TWO
-	  this.osc2 = ctx.createOscillator();
+	  // INSTRUMENT 2
+	  this.osc2 = aCtx.createOscillator();
 	  this.osc2.type = "triangle";
 	  this.osc2.frequency.value = freq;
-	  this.osc2.start(ctx.currentTime);
+	  this.osc2.start(aCtx.currentTime);
 	
-	  this.gain2 = ctx.createGain();
+	  this.gain2 = aCtx.createGain();
 	  this.gain2.gain.value = 0;
 	  this.osc2.connect(this.gain2);
-	  this.gain2.connect(ctx.destination);
 	
 	  // INSTRUMENT 3
-	  this.osc3 = ctx.createOscillator();
+	  this.osc3 = aCtx.createOscillator();
 	  this.osc3.type = "sawtooth";
 	  this.osc3.frequency.value = freq;
-	  this.osc3.start(ctx.currentTime);
+	  this.osc3.start(aCtx.currentTime);
 	
-	  this.gain3 = ctx.createGain();
+	  this.gain3 = aCtx.createGain();
 	  this.gain3.gain.value = 0;
 	  this.osc3.connect(this.gain3);
-	  this.gain3.connect(ctx.destination);
 	
 	  // INSTRUMENT 4
-	  this.osc4 = ctx.createOscillator();
+	  this.osc4 = aCtx.createOscillator();
 	  this.osc4.type = "square";
 	  this.osc4.frequency.value = freq;
-	  this.osc4.start(ctx.currentTime);
+	  this.osc4.start(aCtx.currentTime);
 	
-	  this.gain4 = ctx.createGain();
+	  this.gain4 = aCtx.createGain();
 	  this.gain4.gain.value = 0;
 	  this.osc4.connect(this.gain4);
-	  this.gain4.connect(ctx.destination);
+	
+	  // ANALYSER
+	  this.gain1.connect(this.analyser);
+	  this.gain2.connect(this.analyser);
+	  this.gain3.connect(this.analyser);
+	  this.gain4.connect(this.analyser);
+	
+	  this.analyser.connect(aCtx.destination);
 	};
 	
 	Note.prototype = {
@@ -39050,6 +39066,8 @@
 	    this.gain2.gain.value = vols[1];
 	    this.gain3.gain.value = vols[2];
 	    this.gain4.gain.value = vols[3];
+	
+	    this.analyser.getByteTimeDomainData(this.dataArray);
 	  },
 	
 	  stop: function () {
@@ -39376,7 +39394,6 @@
 	  Wood: "0.05",
 	  Brass: "0.0375",
 	  String: "0.0250"
-	
 	};
 	
 	VolumeStore.__onDispatch = function (payload) {
@@ -39388,15 +39405,17 @@
 	  }
 	};
 	
-	VolumeStore.volumes = function (v) {
+	VolumeStore.volumes = function (category) {
 	  var instruments = [];
 	  var volumes = [];
 	  Object.keys(_volumes).forEach(function (i) {
 	    instruments.push(i);
 	    volumes.push(_volumes[i]);
 	  });
-	  if (v) {
+	  if (category === "v") {
 	    return volumes;
+	  } else if (category === "i") {
+	    return instruments;
 	  } else {
 	    return [instruments, volumes];
 	  }

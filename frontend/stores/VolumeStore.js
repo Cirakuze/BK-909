@@ -7,7 +7,6 @@ var _volumes = {
   Wood: "0.05",
   Brass: "0.0375",
   String: "0.0250",
-
 };
 
 VolumeStore.__onDispatch = function (payload) {
@@ -19,15 +18,17 @@ VolumeStore.__onDispatch = function (payload) {
   }
 };
 
-VolumeStore.volumes = function (v) {
+VolumeStore.volumes = function (category) {
   var instruments = [];
   var volumes = [];
   Object.keys(_volumes).forEach(function (i) {
     instruments.push(i);
     volumes.push(_volumes[i]);
   });
-  if (v) {
+  if (category === "v") {
     return volumes;
+  } else if (category === "i") {
+    return instruments;
   } else {
     return [instruments, volumes];
   }
