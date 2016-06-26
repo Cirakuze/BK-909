@@ -1015,12 +1015,20 @@ div#visualizer-wrapper {
   top: -500px;
   height: 500px;
   width: 100%;
-  /*background-color: #a6da49;*/
+  background-color: #a6da49;
 }
 
 canvas#visualizer-canvas {
   height: 500px;
   width: 100%;
   margin: auto;
-  /*background-color: #3b6ff7;*/
+  background-color: #3b6ff7;
+}
+
+canvas#visualizer-oscilloscope {
+  background: transparent;
+}
+
+canvas#visualizer-bargraph {
+  background: transparent;
 }

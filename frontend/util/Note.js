@@ -70,6 +70,8 @@ Note.prototype = {
     this.gain4.gain.value = vols[3];
 
     this.analyser.getByteTimeDomainData(this.dataArray);
+    this.drawLine();
+    this.drawGraph();
   },
 
   stop: function () {
@@ -77,6 +79,50 @@ Note.prototype = {
     this.gain2.gain.value = 0;
     this.gain3.gain.value = 0;
     this.gain4.gain.value = 0;
+  },
+  drawLine: function () {
+    vCtx.fillStyle = 'rgba(200, 200, 200, 0.5)';
+    vCtx.fillRect(0, 0, 400, 150);
+
+    vCtx.lineWidth = 2;
+    vCtx.strokeStyle = 'rgb(0, 0, 0)';
+
+    vCtx.beginPath();
+
+    var sliceWidth = 400 * 1.0 / this.bufferLength;
+    var x = 0;
+
+    for(var i = 0; i < this.bufferLength; i++) {
+
+      var v = this.dataArray[i] / 128.0;
+      var y = v * 150/2;
+
+      if(i === 0) {
+        vCtx.moveTo(x, y);
+      } else {
+        vCtx.lineTo(x, y);
+      }
+
+      x += sliceWidth;
+    }
+
+    vCtx.lineTo(400, 150/2);
+    vCtx.stroke();
+  },
+  drawGraph: function () {
+    vCtx.fillStyle = 'rgba(158, 117, 117, 0.5)';
+    vCtx.fillRect(0, 0, 400, 150);
+    var barWidth = (150 / this.bufferLength) * 2.5;
+    var barHeight;
+    var x = 0;
+    for(var i = 0; i < this.bufferLength; i++) {
+      barHeight = this.dataArray[i]/2;
+
+      vCtx.fillStyle = 'rgb(' + (barHeight+100) + ',50,50)';
+      vCtx.fillRect(x,150-barHeight/2,barWidth,barHeight);
+
+      x += barWidth + 1;
+    }
   }
 };
 
