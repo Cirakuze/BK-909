@@ -3,7 +3,7 @@ var ReactDom = require('react-dom');
 var Drumset = require('./components/Drumset');
 var Sequencer = require('./components/Sequencer');
 var Piano = require('./components/Piano');
-var vCtx, vCanvas;
+var vCtx, vCanvas, height, width;
 
 var App = React.createClass({
   getInitialState: function () {
@@ -19,16 +19,16 @@ var App = React.createClass({
     this.dataArray = new Uint8Array(this.bufferLength);
   },
   drawLine: function () {
-    vCtx.fillStyle = 'rgba(200, 200, 200, 0.5)';
-    vCtx.fillRect(0, 0, 400, 150);
+    vCtx.fillStyle = 'rgba(220, 221, 200, 0.5)';
+    vCtx.fillRect(0, 0, width, height);
     vCtx.lineWidth = 2;
     vCtx.strokeStyle = 'rgb(0, 0, 0)';
     vCtx.beginPath();
-    var sliceWidth = 400 * 1.0 / this.bufferLength;
+    var sliceWidth = width * 1.0 / this.bufferLength;
     var x = 0;
     for(var i = 0; i < this.bufferLength; i++) {
       var v = this.dataArray[i] / 128.0;
-      var y = v * 150/2;
+      var y = v * height/2;
       if(i === 0) {
         vCtx.moveTo(x, y);
       } else {
@@ -36,19 +36,19 @@ var App = React.createClass({
       }
       x += sliceWidth;
     }
-    vCtx.lineTo(400, 150/2);
+    vCtx.lineTo(width, height/2);
     vCtx.stroke();
   },
   drawGraph: function () {
-    vCtx.fillStyle = 'rgba(205, 182, 182, 0.5)';
-    vCtx.fillRect(0, 0, 400, 150);
-    var barWidth = (150 / this.bufferLength) * 2.5;
+    vCtx.fillStyle = 'rgba(220, 221, 200, 0.5)';
+    vCtx.fillRect(0, 0, width, height);
+    var barWidth = (width / this.bufferLength) * 2.5;
     var barHeight;
     var x = 0;
     for(var i = 0; i < this.bufferLength; i++) {
       barHeight = this.dataArray[i]/2;
-      vCtx.fillStyle = 'rgb(' + (barHeight+100) + ',50,50)';
-      vCtx.fillRect(x,150-barHeight/2,barWidth,barHeight);
+      vCtx.fillStyle = 'rgba(' + (barHeight+50) + ', 221, 200, 0.5)';
+      vCtx.fillRect(x,height-barHeight/2,barWidth,barHeight);
       x += barWidth + 1;
     }
   },
@@ -86,6 +86,7 @@ var App = React.createClass({
         <Piano
           aCtx={this.aCtx}
           analyser={this.analyser} />
+        <canvas id="visualizer-canvas"></canvas>
       </div>
     );
   }
@@ -99,4 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   vCanvas = document.getElementById("visualizer-canvas");
   vCtx = vCanvas.getContext("2d");
+
+  height = 150;
+  width = window.innerWidth;
 });
