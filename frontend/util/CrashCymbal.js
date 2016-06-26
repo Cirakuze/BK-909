@@ -1,6 +1,7 @@
-var CrashCymbal = function (ctx) {
+var CrashCymbal = function (ctx, analyser) {
   this.name = "crash";
   this.ctx = ctx;
+  this.analyser = analyser;
 };
 
 CrashCymbal.prototype.setup = function () {
@@ -19,6 +20,8 @@ CrashCymbal.prototype.setup = function () {
   this.mixGain.gain.value = 0.3;
   this.bandpass.connect(this.highpass);
   this.mixGain.connect(this.ctx.destination);
+
+  this.mixGain.connect(this.analyser);
 };
 
 CrashCymbal.prototype.trigger = function (now) {

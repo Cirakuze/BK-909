@@ -10,9 +10,10 @@ var names = {
   low: "lowtom"
 };
 
-var Toms = function (ctx, pitch) {
+var Toms = function (ctx, analyser, pitch) {
   this.name = names[pitch];
   this.ctx = ctx;
+  this.analyser = analyser;
   this.pitch = pitches[pitch];
 };
 
@@ -20,17 +21,17 @@ Toms.prototype.setup = function() {
   this.osc = this.ctx.createOscillator();
   this.gain = this.ctx.createGain();
   this.osc.connect(this.gain);
-  this.gain.connect(this.ctx.destination);
+  this.gain.connect(this.analyser);
 
   this.osc2 = this.ctx.createOscillator();
   this.gain2 = this.ctx.createGain();
   this.osc2.connect(this.gain2);
-  this.gain2.connect(this.ctx.destination);
+  this.gain2.connect(this.analyser);
 
   this.osc3 = this.ctx.createOscillator();
   this.gain3 = this.ctx.createGain();
   this.osc3.connect(this.gain3);
-  this.gain3.connect(this.ctx.destination);
+  this.gain3.connect(this.analyser);
 };
 
 Toms.prototype.trigger = function(time) {

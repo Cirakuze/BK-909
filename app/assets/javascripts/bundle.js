@@ -160,7 +160,9 @@
 	        React.createElement(Drumset, {
 	          aCtx: this.aCtx,
 	          analyser: this.analyser }),
-	        React.createElement(Sequencer, null)
+	        React.createElement(Sequencer, {
+	          aCtx: this.aCtx,
+	          analyser: this.analyser })
 	      ),
 	      React.createElement(Piano, {
 	        aCtx: this.aCtx,
@@ -20494,8 +20496,9 @@
 	    };
 	  },
 	  componentDidMount: function () {
-	    var ctx = this.props.aCtx;
-	    DrumActions.receiveDrum(new Bass(ctx));
+	    this.ctx = this.props.aCtx;
+	    this.analyser = this.props.analyser;
+	    DrumActions.receiveDrum(new Bass(this.ctx, this.analyser));
 	
 	    $(document).keydown(function (e) {
 	      if (e.keyCode === 39) {
@@ -20504,46 +20507,46 @@
 	        this.setState({ piano: false });
 	      } else {
 	        if (this.state.piano === false) {
-	          var now = ctx.currentTime;
+	          var now = this.ctx.currentTime;
 	          var drum;
 	
 	          if ([66, 78].includes(e.keyCode)) {
 	            // B, N
 	            if (e.keyCode === 66) {
 	              $('#Left-Bass').toggleClass('bfass-left-struck');
-	              drum = new Bass(ctx);
+	              drum = new Bass(this.ctx, this.analyser);
 	            } else if (e.keyCode === 78) {
 	              $('#Right-Bass').toggleClass('bass-right-struck');
-	              drum = new Bass(ctx);
+	              drum = new Bass(this.ctx, this.analyser);
 	            }
 	          } else if ([84, 89].includes(e.keyCode)) {
 	            // T, Y
 	            $('#Snare').toggleClass('snare-struck');
-	            drum = new Snare(ctx);
+	            drum = new Snare(this.ctx, this.analyser);
 	          } else if ([85, 73].includes(e.keyCode)) {
 	            // U, I
 	            $('#Hi-Hat').toggleClass('hi-hat-struck');
-	            drum = new HiHat(ctx);
+	            drum = new HiHat(this.ctx, this.analyser);
 	          } else if ([71, 72].includes(e.keyCode)) {
 	            // G, H
 	            $('#Hi-Tom').toggleClass('hi-tom-struck');
-	            drum = new Toms(ctx, "high");
+	            drum = new Toms(this.ctx, this.analyser, "high");
 	          } else if ([74, 75].includes(e.keyCode)) {
 	            // J, K
 	            $('#Mid-Tom').toggleClass('mid-tom-struck');
-	            drum = new Toms(ctx, "mid");
+	            drum = new Toms(this.ctx, this.analyser, "mid");
 	          } else if ([76, 186].includes(e.keyCode)) {
 	            // L, ;
 	            $('#Low-Tom').toggleClass('low-tom-struck');
-	            drum = new Toms(ctx, "low");
+	            drum = new Toms(this.ctx, this.analyser, "low");
 	          } else if ([79].includes(e.keyCode)) {
 	            // O
 	            $('#Ride-Cymbal').toggleClass('ride-cymbal-struck');
-	            drum = new RideCymbal(ctx);
+	            drum = new RideCymbal(this.ctx, this.analyser);
 	          } else if (e.keyCode === 80) {
 	            // P
 	            $('#Crash-Cymbal').toggleClass('crash-cymbal-struck');
-	            drum = new CrashCymbal(ctx);
+	            drum = new CrashCymbal(this.ctx, this.analyser);
 	          }
 	
 	          if (drum) {
@@ -20590,10 +20593,7 @@
 	  },
 	  render: function () {
 	    var drumPieces = Object.keys(DrumConstants).map(function (drum, key) {
-	      return React.createElement(Drumpiece, { ctx: this.props.aCtx,
-	        drumName: DrumConstants[drum],
-	        key: key
-	      });
+	      return React.createElement(Drumpiece, { drumName: DrumConstants[drum], key: key });
 	    }.bind(this));
 	
 	    return React.createElement(
@@ -31056,30 +31056,34 @@
 /* 177 */
 /***/ function(module, exports) {
 
-	var Bass = function (ctx) {
+	var Bass = function (ctx, analyser) {
 	  this.name = "bass";
 	  this.ctx = ctx;
+	  this.analyser = analyser;
 	};
 	
 	Bass.prototype.setup = function () {
 	  this.osc = this.ctx.createOscillator();
 	  this.osc.type = "sine";
-	  this.gain = this.ctx.createGain();
-	  this.osc.connect(this.gain);
-	  this.gain.connect(this.ctx.destination);
+	  this.gain1 = this.ctx.createGain();
+	  this.osc.connect(this.gain1);
+	  this.gain1.connect(this.ctx.destination);
 	
 	  this.osc2 = this.ctx.createOscillator();
 	  this.osc2.type = "sine";
 	  this.gain2 = this.ctx.createGain();
 	  this.osc2.connect(this.gain2);
 	  this.gain2.connect(this.ctx.destination);
+	
+	  this.gain1.connect(this.analyser);
+	  this.gain2.connect(this.analyser);
 	};
 	
 	Bass.prototype.trigger = function (time) {
 	  this.setup();
 	
-	  this.gain.gain.setValueAtTime(1, time);
-	  this.gain.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
+	  this.gain1.gain.setValueAtTime(1, time);
+	  this.gain1.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
 	  this.osc.frequency.setValueAtTime(60, time);
 	  this.osc.frequency.exponentialRampToValueAtTime(0.001, time + 0.5);
 	
@@ -31101,9 +31105,10 @@
 /* 178 */
 /***/ function(module, exports) {
 
-	var Snare = function (ctx) {
+	var Snare = function (ctx, analyser) {
 	  this.name = "snare";
 	  this.ctx = ctx;
+	  this.analyser = analyser;
 	};
 	
 	Snare.prototype.noiseBuffer = function () {
@@ -31126,14 +31131,14 @@
 	
 	  this.noiseEnvelope = this.ctx.createGain();
 	  this.noiseFilter.connect(this.noiseEnvelope);
-	  this.noiseEnvelope.connect(this.ctx.destination);
+	  this.noiseEnvelope.connect(this.analyser);
 	
 	  this.osc = this.ctx.createOscillator();
 	  this.osc.type = 'sine';
 	  this.oscEnvelope = this.ctx.createGain();
 	
 	  this.osc.connect(this.oscEnvelope);
-	  this.oscEnvelope.connect(this.ctx.destination);
+	  this.oscEnvelope.connect(this.analyser);
 	};
 	
 	Snare.prototype.trigger = function (time) {
@@ -31168,9 +31173,10 @@
 	  low: "lowtom"
 	};
 	
-	var Toms = function (ctx, pitch) {
+	var Toms = function (ctx, analyser, pitch) {
 	  this.name = names[pitch];
 	  this.ctx = ctx;
+	  this.analyser = analyser;
 	  this.pitch = pitches[pitch];
 	};
 	
@@ -31178,17 +31184,17 @@
 	  this.osc = this.ctx.createOscillator();
 	  this.gain = this.ctx.createGain();
 	  this.osc.connect(this.gain);
-	  this.gain.connect(this.ctx.destination);
+	  this.gain.connect(this.analyser);
 	
 	  this.osc2 = this.ctx.createOscillator();
 	  this.gain2 = this.ctx.createGain();
 	  this.osc2.connect(this.gain2);
-	  this.gain2.connect(this.ctx.destination);
+	  this.gain2.connect(this.analyser);
 	
 	  this.osc3 = this.ctx.createOscillator();
 	  this.gain3 = this.ctx.createGain();
 	  this.osc3.connect(this.gain3);
-	  this.gain3.connect(this.ctx.destination);
+	  this.gain3.connect(this.analyser);
 	};
 	
 	Toms.prototype.trigger = function (time) {
@@ -31225,9 +31231,10 @@
 /* 180 */
 /***/ function(module, exports) {
 
-	var HiHat = function (ctx) {
+	var HiHat = function (ctx, analyser) {
 	  this.name = "hihat";
 	  this.ctx = ctx;
+	  this.analyser = analyser;
 	};
 	
 	HiHat.prototype.setup = function () {
@@ -31246,6 +31253,8 @@
 	  this.mixGain.gain.value = 0.3;
 	  this.bandpass.connect(this.highpass);
 	  this.mixGain.connect(this.ctx.destination);
+	
+	  this.mixGain.connect(this.analyser);
 	};
 	
 	HiHat.prototype.trigger = function (now) {
@@ -31275,9 +31284,10 @@
 /* 181 */
 /***/ function(module, exports) {
 
-	var RideCymbal = function (ctx) {
+	var RideCymbal = function (ctx, analyser) {
 	  this.name = "ride";
 	  this.ctx = ctx;
+	  this.analyser = analyser;
 	};
 	
 	RideCymbal.prototype.setup = function () {
@@ -31296,6 +31306,8 @@
 	  this.mixGain.gain.value = 0.3;
 	  this.bandpass.connect(this.highpass);
 	  this.mixGain.connect(this.ctx.destination);
+	
+	  this.mixGain.connect(this.analyser);
 	};
 	
 	RideCymbal.prototype.trigger = function (now) {
@@ -31325,9 +31337,10 @@
 /* 182 */
 /***/ function(module, exports) {
 
-	var CrashCymbal = function (ctx) {
+	var CrashCymbal = function (ctx, analyser) {
 	  this.name = "crash";
 	  this.ctx = ctx;
+	  this.analyser = analyser;
 	};
 	
 	CrashCymbal.prototype.setup = function () {
@@ -31346,6 +31359,8 @@
 	  this.mixGain.gain.value = 0.3;
 	  this.bandpass.connect(this.highpass);
 	  this.mixGain.connect(this.ctx.destination);
+	
+	  this.mixGain.connect(this.analyser);
 	};
 	
 	CrashCymbal.prototype.trigger = function (now) {
@@ -31399,7 +31414,6 @@
 	var SequencerStore = __webpack_require__(205);
 	var $ = __webpack_require__(176);
 	var Drums = __webpack_require__(206);
-	var ctx = new (window.AudioContext || window.webkitAudioContext)();
 	
 	var steps = { 0: 1, 1: 2, 2: 3, 3: 4, 4: "Q", 5: "W", 6: "E", 7: "R", 8: "A", 9: "S", 10: "D", 11: "F", 12: "Z", 13: "X", 14: "C", 15: "V" };
 	
@@ -31581,7 +31595,9 @@
 	    Object.keys(this.bank).forEach(function (drum) {
 	
 	      if (this.bank[drum][this.state.currentStep - 1]) {
-	        Drums[drum](ctx).trigger(ctx.currentTime);
+	        // This creates a new drum instance for every time it is played
+	        // Look at Drums.js
+	        Drums[drum](this.props.aCtx, this.props.analyser).trigger(this.props.aCtx.currentTime);
 	        $(Drums.select[drum]).addClass(Drums.toggle[drum]);
 	      }
 	    }.bind(this));
@@ -38671,29 +38687,29 @@
 	var CrashCymbal = __webpack_require__(182);
 	
 	module.exports = {
-	  bass: function (ctx) {
-	    return new Bass(ctx);
+	  bass: function (ctx, analyser) {
+	    return new Bass(ctx, analyser);
 	  },
-	  snare: function (ctx) {
-	    return new Snare(ctx);
+	  snare: function (ctx, analyser) {
+	    return new Snare(ctx, analyser);
 	  },
-	  hitom: function (ctx) {
-	    return new Toms(ctx, "high");
+	  hitom: function (ctx, analyser) {
+	    return new Toms(ctx, analyser, "high");
 	  },
-	  midtom: function (ctx) {
-	    return new Toms(ctx, "mid");
+	  midtom: function (ctx, analyser) {
+	    return new Toms(ctx, analyser, "mid");
 	  },
-	  lowtom: function (ctx) {
-	    return new Toms(ctx, "low");
+	  lowtom: function (ctx, analyser) {
+	    return new Toms(ctx, analyser, "low");
 	  },
-	  hihat: function (ctx) {
-	    return new HiHat(ctx);
+	  hihat: function (ctx, analyser) {
+	    return new HiHat(ctx, analyser);
 	  },
-	  ride: function (ctx) {
-	    return new RideCymbal(ctx);
+	  ride: function (ctx, analyser) {
+	    return new RideCymbal(ctx, analyser);
 	  },
-	  crash: function (ctx) {
-	    return new CrashCymbal(ctx);
+	  crash: function (ctx, analyser) {
+	    return new CrashCymbal(ctx, analyser);
 	  },
 	  select: {
 	    bass: '#Right-Bass',

@@ -6,29 +6,29 @@ var RideCymbal = require('../util/RideCymbal.js');
 var CrashCymbal = require('../util/CrashCymbal.js');
 
 module.exports = {
-  bass: function (ctx) {
-    return new Bass(ctx);
+  bass: function (ctx, analyser) {
+    return new Bass(ctx, analyser);
   },
-  snare: function (ctx) {
-    return new Snare(ctx);
+  snare: function (ctx, analyser) {
+    return new Snare(ctx, analyser);
   },
-  hitom: function (ctx) {
-    return new Toms(ctx, "high");
+  hitom: function (ctx, analyser) {
+    return new Toms(ctx, analyser, "high");
   },
-  midtom: function (ctx) {
-    return new Toms(ctx, "mid");
+  midtom: function (ctx, analyser) {
+    return new Toms(ctx, analyser, "mid");
   },
-  lowtom: function (ctx) {
-    return new Toms(ctx, "low");
+  lowtom: function (ctx, analyser) {
+    return new Toms(ctx, analyser, "low");
   },
-  hihat: function (ctx) {
-    return new HiHat(ctx);
+  hihat: function (ctx, analyser) {
+    return new HiHat(ctx, analyser);
   },
-  ride: function (ctx) {
-    return new RideCymbal(ctx);
+  ride: function (ctx, analyser) {
+    return new RideCymbal(ctx, analyser);
   },
-  crash: function (ctx) {
-    return new CrashCymbal(ctx);
+  crash: function (ctx, analyser) {
+    return new CrashCymbal(ctx, analyser);
   },
   select: {
     bass: '#Right-Bass',

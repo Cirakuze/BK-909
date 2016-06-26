@@ -1,6 +1,7 @@
-var Snare = function (ctx) {
+var Snare = function (ctx, analyser) {
   this.name = "snare";
   this.ctx = ctx;
+  this.analyser = analyser;
 };
 
 Snare.prototype.noiseBuffer = function () {
@@ -23,14 +24,14 @@ Snare.prototype.setup = function () {
 
   this.noiseEnvelope = this.ctx.createGain();
   this.noiseFilter.connect(this.noiseEnvelope);
-  this.noiseEnvelope.connect(this.ctx.destination);
+  this.noiseEnvelope.connect(this.analyser);
 
   this.osc = this.ctx.createOscillator();
   this.osc.type = 'sine';
   this.oscEnvelope = this.ctx.createGain();
 
   this.osc.connect(this.oscEnvelope);
-  this.oscEnvelope.connect(this.ctx.destination);
+  this.oscEnvelope.connect(this.analyser);
 };
 
 Snare.prototype.trigger = function (time) {

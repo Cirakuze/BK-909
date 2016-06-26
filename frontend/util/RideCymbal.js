@@ -1,6 +1,7 @@
-var RideCymbal = function (ctx) {
+var RideCymbal = function (ctx, analyser) {
   this.name = "ride";
   this.ctx = ctx;
+  this.analyser = analyser;
 };
 
 RideCymbal.prototype.setup = function () {
@@ -19,6 +20,8 @@ RideCymbal.prototype.setup = function () {
   this.mixGain.gain.value = 0.3;
   this.bandpass.connect(this.highpass);
   this.mixGain.connect(this.ctx.destination);
+
+  this.mixGain.connect(this.analyser);
 };
 
 RideCymbal.prototype.trigger = function (now) {

@@ -17,8 +17,9 @@ module.exports = React.createClass({
     });
   },
   componentDidMount: function () {
-    var ctx = this.props.aCtx;
-    DrumActions.receiveDrum(new Bass(ctx));
+    this.ctx = this.props.aCtx;
+    this.analyser = this.props.analyser;
+    DrumActions.receiveDrum(new Bass(this.ctx, this.analyser));
 
     $(document).keydown(function (e) {
       if (e.keyCode === 39) {
@@ -27,38 +28,38 @@ module.exports = React.createClass({
         this.setState({piano: false});
       } else {
         if (this.state.piano === false) {
-          var now = ctx.currentTime;
+          var now = this.ctx.currentTime;
           var drum;
 
           if ([66, 78].includes(e.keyCode)) { // B, N
             if (e.keyCode === 66) {
               $('#Left-Bass').toggleClass('bfass-left-struck');
-              drum = new Bass(ctx);
+              drum = new Bass(this.ctx, this.analyser);
             } else if (e.keyCode === 78) {
               $('#Right-Bass').toggleClass('bass-right-struck');
-              drum = new Bass(ctx);
+              drum = new Bass(this.ctx, this.analyser);
             }
           } else if ([84, 89].includes(e.keyCode)) { // T, Y
             $('#Snare').toggleClass('snare-struck');
-            drum = new Snare(ctx);
+            drum = new Snare(this.ctx, this.analyser);
           } else if ([85, 73].includes(e.keyCode)) { // U, I
             $('#Hi-Hat').toggleClass('hi-hat-struck');
-            drum = new HiHat(ctx);
+            drum = new HiHat(this.ctx, this.analyser);
           } else if ([71, 72].includes(e.keyCode)) { // G, H
             $('#Hi-Tom').toggleClass('hi-tom-struck');
-            drum = new Toms(ctx, "high");
+            drum = new Toms(this.ctx, this.analyser, "high");
           } else if ([74, 75].includes(e.keyCode)) { // J, K
             $('#Mid-Tom').toggleClass('mid-tom-struck');
-            drum = new Toms(ctx, "mid");
+            drum = new Toms(this.ctx, this.analyser, "mid");
           } else if ([76, 186].includes(e.keyCode)) { // L, ;
             $('#Low-Tom').toggleClass('low-tom-struck');
-            drum = new Toms(ctx, "low");
+            drum = new Toms(this.ctx, this.analyser, "low");
           } else if ([79].includes(e.keyCode)) { // O
             $('#Ride-Cymbal').toggleClass('ride-cymbal-struck');
-            drum = new RideCymbal(ctx);
+            drum = new RideCymbal(this.ctx, this.analyser);
           } else if (e.keyCode === 80) { // P
             $('#Crash-Cymbal').toggleClass('crash-cymbal-struck');
-            drum = new CrashCymbal(ctx);
+            drum = new CrashCymbal(this.ctx, this.analyser);
           }
 
           if (drum) {
@@ -97,12 +98,9 @@ module.exports = React.createClass({
   },
   render: function () {
     var drumPieces = Object.keys(DrumConstants).map(function (drum, key) {
-      return <Drumpiece ctx={this.props.aCtx}
-        drumName={DrumConstants[drum]}
-        key={key}
-        />;
+      return <Drumpiece drumName={DrumConstants[drum]} key={key} />;
     }.bind(this));
-    
+
     return (
       <div className="drumset">
         {drumPieces}

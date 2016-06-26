@@ -79,7 +79,9 @@ var App = React.createClass({
           <Drumset
             aCtx={this.aCtx}
             analyser={this.analyser} />
-          <Sequencer />
+          <Sequencer
+            aCtx={this.aCtx}
+            analyser={this.analyser} />
         </div>
         <Piano
           aCtx={this.aCtx}

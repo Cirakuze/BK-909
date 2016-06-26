@@ -1,6 +1,7 @@
-var HiHat = function (ctx) {
+var HiHat = function (ctx, analyser) {
   this.name ="hihat";
   this.ctx = ctx;
+  this.analyser = analyser;
 };
 
 HiHat.prototype.setup = function () {
@@ -20,7 +21,7 @@ HiHat.prototype.setup = function () {
   this.bandpass.connect(this.highpass);
   this.mixGain.connect(this.ctx.destination);
 
-
+  this.mixGain.connect(this.analyser);
 };
 
 HiHat.prototype.trigger = function (now) {

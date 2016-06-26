@@ -6,7 +6,6 @@ var SequencerActions = require('../actions/SequencerActions');
 var SequencerStore = require('../stores/SequencerStore');
 var $ = require('jquery');
 var Drums = require('../constants/Drums');
-var ctx = new (window.AudioContext || window.webkitAudioContext);
 
 var steps = { 0: 1, 1: 2, 2: 3, 3: 4, 4: "Q", 5: "W", 6: "E", 7: "R", 8: "A", 9: "S", 10: "D", 11: "F", 12: "Z", 13: "X", 14: "C", 15: "V" };
 
@@ -188,7 +187,9 @@ module.exports = React.createClass({
     Object.keys(this.bank).forEach(function (drum) {
 
       if (this.bank[drum][this.state.currentStep - 1]) {
-        Drums[drum](ctx).trigger(ctx.currentTime);
+        // This creates a new drum instance for every time it is played
+        // Look at Drums.js
+        Drums[drum](this.props.aCtx, this.props.analyser).trigger(this.props.aCtx.currentTime);
         $(Drums.select[drum]).addClass(Drums.toggle[drum]);
       }
     }.bind(this));
