@@ -1,11 +1,11 @@
 module.exports = {
-  bassleft: "Left-Bass",
-  bassright: "Right-Bass",
-  snare: "Snare",
-  hihat: "Hi-Hat",
+  cymbalride: "Ride-Cymbal",
+  cymbalcrash: "Crash-Cymbal",
   tomhigh: "Hi-Tom",
   tommid: "Mid-Tom",
   tomlow: "Low-Tom",
-  cymbalride: "Ride-Cymbal",
-  cymbalcrash: "Crash-Cymbal"
+  hihat: "Hi-Hat",
+  snare: "Snare",
+  bassleft: "Left-Bass",
+  bassright: "Right-Bass"
 };

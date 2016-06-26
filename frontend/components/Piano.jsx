@@ -10,7 +10,7 @@ module.exports = React.createClass({
   getInitialState: function () {
     return ({
       piano: false,
-      sustain: false
+      sustain: false,
     });
   },
   componentDidMount: function () {
@@ -54,63 +54,28 @@ module.exports = React.createClass({
     }.bind(this));
   },
   render: function () {
+    var pianoKeys = [
+      ["F3","Gb3","G3","Ab3","A3","Bb3","B3"],
+      ["C4","Db4","D4","Eb4","E4","F4","Gb4","G4","Ab4","A4","Bb4","B4"],
+      ["C5","Db5","D5","Eb5","E5","F5","Gb5","G5","Ab5","A5","Bb5","B5"],
+      ["C6","Db6","D6","Eb6","E6","F6","Gb6","G6","Ab6","A6"]
+    ].map(function (octave, octaveIndex) {
+      var notes = octave.map(function (noteName, noteIndex) {
+        return <PianoKey
+          noteName={noteName}
+          key={noteIndex}
+          aCtx={this.props.aCtx}
+          analyser={this.props.analyser} />;
+      }.bind(this));
+      return <div className="octave clearfix" key={octaveIndex}>
+        {notes}
+      </div>;
+    }.bind(this));
     return (
       <div className="piano-wrapper" id="piano-wrapper">
         <div className="piano-label">ORGAN</div>
         <div className="piano clearfix">
-          <div className="octave clearfix">
-            <PianoKey noteName={"F3"} />
-            <PianoKey noteName={"Gb3"} />
-            <PianoKey noteName={"G3"} />
-            <PianoKey noteName={"Ab3"} />
-            <PianoKey noteName={"A3"} />
-            <PianoKey noteName={"Bb3"} />
-            <PianoKey noteName={"B3"} />
-          </div>
-
-          <div className="octave clearfix">
-            <PianoKey noteName={"C4"} />
-            <PianoKey noteName={"Db4"} />
-            <PianoKey noteName={"D4"} />
-            <PianoKey noteName={"Eb4"} />
-            <PianoKey noteName={"E4"} />
-            <PianoKey noteName={"F4"} />
-            <PianoKey noteName={"Gb4"} />
-            <PianoKey noteName={"G4"} />
-            <PianoKey noteName={"Ab4"} />
-            <PianoKey noteName={"A4"} />
-            <PianoKey noteName={"Bb4"} />
-            <PianoKey noteName={"B4"} />
-          </div>
-
-          <div className="octave clearfix">
-            <PianoKey noteName={"C5"} />
-            <PianoKey noteName={"Db5"} />
-            <PianoKey noteName={"D5"} />
-            <PianoKey noteName={"Eb5"} />
-            <PianoKey noteName={"E5"} />
-            <PianoKey noteName={"F5"} />
-            <PianoKey noteName={"Gb5"} />
-            <PianoKey noteName={"G5"} />
-            <PianoKey noteName={"Ab5"} />
-            <PianoKey noteName={"A5"} />
-            <PianoKey noteName={"Bb5"} />
-            <PianoKey noteName={"B5"} />
-          </div>
-
-          <div className="octave clearfix">
-            <PianoKey noteName={"C6"} />
-            <PianoKey noteName={"Db6"} />
-            <PianoKey noteName={"D6"} />
-            <PianoKey noteName={"Eb6"} />
-            <PianoKey noteName={"E6"} />
-            <PianoKey noteName={"F6"} />
-            <PianoKey noteName={"Gb6"} />
-            <PianoKey noteName={"G6"} />
-            <PianoKey noteName={"Ab6"} />
-            <PianoKey noteName={"A6"} />
-          </div>
-
+          {pianoKeys}
         </div>
         <Drawbars />
       </div>

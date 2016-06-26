@@ -12,7 +12,11 @@ module.exports = React.createClass({
     });
   },
   componentDidMount: function () {
-    this.note = new Note(Tones[this.props.noteName]);
+    this.note = new Note(
+      Tones[this.props.noteName],
+      this.props.aCtx,
+      this.props.analyser
+    );
     KeyStore.addListener(this.checkForNotes);
   },
   componentWillUnmount: function () {

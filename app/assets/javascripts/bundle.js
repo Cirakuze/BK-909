@@ -49,10 +49,64 @@
 	var Drumset = __webpack_require__(168);
 	var Sequencer = __webpack_require__(184);
 	var Piano = __webpack_require__(207);
+	var vCtx, vCanvas;
 	
 	var App = React.createClass({
 	  displayName: 'App',
 	
+	  getInitialState: function () {
+	    this.setup();
+	    return {};
+	  },
+	  setup: function () {
+	    this.aCtx = new (window.AudioContext || window.webkitAudioContext)();
+	    this.analyser = this.aCtx.createAnalyser();
+	    this.analyser.connect(this.aCtx.destination);
+	    this.analyser.fftSize = 2048;
+	    this.bufferLength = this.analyser.frequencyBinCount;
+	    this.dataArray = new Uint8Array(this.bufferLength);
+	  },
+	  drawLine: function () {
+	    vCtx.fillStyle = 'rgba(200, 200, 200, 0.5)';
+	    vCtx.fillRect(0, 0, 400, 150);
+	    vCtx.lineWidth = 2;
+	    vCtx.strokeStyle = 'rgb(0, 0, 0)';
+	    vCtx.beginPath();
+	    var sliceWidth = 400 * 1.0 / this.bufferLength;
+	    var x = 0;
+	    for (var i = 0; i < this.bufferLength; i++) {
+	      var v = this.dataArray[i] / 128.0;
+	      var y = v * 150 / 2;
+	      if (i === 0) {
+	        vCtx.moveTo(x, y);
+	      } else {
+	        vCtx.lineTo(x, y);
+	      }
+	      x += sliceWidth;
+	    }
+	    vCtx.lineTo(400, 150 / 2);
+	    vCtx.stroke();
+	  },
+	  drawGraph: function () {
+	    vCtx.fillStyle = 'rgba(205, 182, 182, 0.5)';
+	    vCtx.fillRect(0, 0, 400, 150);
+	    var barWidth = 150 / this.bufferLength * 2.5;
+	    var barHeight;
+	    var x = 0;
+	    for (var i = 0; i < this.bufferLength; i++) {
+	      barHeight = this.dataArray[i] / 2;
+	      vCtx.fillStyle = 'rgb(' + (barHeight + 100) + ',50,50)';
+	      vCtx.fillRect(x, 150 - barHeight / 2, barWidth, barHeight);
+	      x += barWidth + 1;
+	    }
+	  },
+	  componentDidMount: function () {
+	    setInterval(function () {
+	      this.analyser.getByteTimeDomainData(this.dataArray);
+	      this.drawLine();
+	      this.drawGraph();
+	    }.bind(this), 1);
+	  },
 	  render: function () {
 	    return React.createElement(
 	      'div',
@@ -103,16 +157,23 @@
 	            )
 	          )
 	        ),
-	        React.createElement(Drumset, null),
+	        React.createElement(Drumset, {
+	          aCtx: this.aCtx,
+	          analyser: this.analyser }),
 	        React.createElement(Sequencer, null)
 	      ),
-	      React.createElement(Piano, null)
+	      React.createElement(Piano, {
+	        aCtx: this.aCtx,
+	        analyser: this.analyser })
 	    );
 	  }
 	});
 	
 	document.addEventListener("DOMContentLoaded", function () {
 	  ReactDom.render(React.createElement(App, null), document.getElementById('root'));
+	
+	  vCanvas = document.getElementById("visualizer-canvas");
+	  vCtx = vCanvas.getContext("2d");
 	});
 
 /***/ },
@@ -20429,12 +20490,11 @@
 	
 	  getInitialState: function () {
 	    return {
-	      ctx: new (window.AudioContext || window.webkitAudioContext)(),
 	      piano: false
 	    };
 	  },
 	  componentDidMount: function () {
-	    var ctx = this.state.ctx;
+	    var ctx = this.props.aCtx;
 	    DrumActions.receiveDrum(new Bass(ctx));
 	
 	    $(document).keydown(function (e) {
@@ -20529,57 +20589,17 @@
 	    }.bind(this));
 	  },
 	  render: function () {
-	    var now = this.state.ctx.currentTime;
-	
-	    var BassedLeft = new Bass(this.state.ctx);
-	    var BassedRight = new Bass(this.state.ctx);
-	    var Snared = new Snare(this.state.ctx);
-	    var HiHatted = new HiHat(this.state.ctx);
-	    var TommedHi = new Toms(this.state.ctx, "high");
-	    var TommedMid = new Toms(this.state.ctx, "mid");
-	    var TommedLow = new Toms(this.state.ctx, "low");
-	    var RideCymballed = new RideCymbal(this.state.ctx);
-	    var CrashCymballed = new CrashCymbal(this.state.ctx);
+	    var drumPieces = Object.keys(DrumConstants).map(function (drum, key) {
+	      return React.createElement(Drumpiece, { ctx: this.props.aCtx,
+	        drumName: DrumConstants[drum],
+	        key: key
+	      });
+	    }.bind(this));
 	
 	    return React.createElement(
 	      'div',
 	      { className: 'drumset' },
-	      React.createElement(Drumpiece, {
-	        ctx: this.state.ctx,
-	        drumName: DrumConstants.cymbalride,
-	        drumType: RideCymballed }),
-	      React.createElement(Drumpiece, {
-	        ctx: this.state.ctx,
-	        drumName: DrumConstants.cymbalcrash,
-	        drumType: CrashCymballed }),
-	      React.createElement(Drumpiece, {
-	        ctx: this.state.ctx,
-	        drumName: DrumConstants.tomhigh,
-	        drumType: TommedHi }),
-	      React.createElement(Drumpiece, {
-	        ctx: this.state.ctx,
-	        drumName: DrumConstants.tommid,
-	        drumType: TommedMid }),
-	      React.createElement(Drumpiece, {
-	        ctx: this.state.ctx,
-	        drumName: DrumConstants.tomlow,
-	        drumType: TommedLow }),
-	      React.createElement(Drumpiece, {
-	        ctx: this.state.ctx,
-	        drumName: DrumConstants.hihat,
-	        drumType: HiHatted }),
-	      React.createElement(Drumpiece, {
-	        ctx: this.state.ctx,
-	        drumName: DrumConstants.snare,
-	        drumType: Snared }),
-	      React.createElement(Drumpiece, {
-	        ctx: this.state.ctx,
-	        drumName: DrumConstants.bassleft,
-	        drumType: BassedLeft }),
-	      React.createElement(Drumpiece, {
-	        ctx: this.state.ctx,
-	        drumName: DrumConstants.bassright,
-	        drumType: BassedRight }),
+	      drumPieces,
 	      React.createElement(
 	        'div',
 	        { className: 'cymbal-stand-legs' },
@@ -31356,15 +31376,15 @@
 /***/ function(module, exports) {
 
 	module.exports = {
-	  bassleft: "Left-Bass",
-	  bassright: "Right-Bass",
-	  snare: "Snare",
-	  hihat: "Hi-Hat",
+	  cymbalride: "Ride-Cymbal",
+	  cymbalcrash: "Crash-Cymbal",
 	  tomhigh: "Hi-Tom",
 	  tommid: "Mid-Tom",
 	  tomlow: "Low-Tom",
-	  cymbalride: "Ride-Cymbal",
-	  cymbalcrash: "Crash-Cymbal"
+	  hihat: "Hi-Hat",
+	  snare: "Snare",
+	  bassleft: "Left-Bass",
+	  bassright: "Right-Bass"
 	};
 
 /***/ },
@@ -38757,6 +38777,20 @@
 	    }.bind(this));
 	  },
 	  render: function () {
+	    var pianoKeys = [["F3", "Gb3", "G3", "Ab3", "A3", "Bb3", "B3"], ["C4", "Db4", "D4", "Eb4", "E4", "F4", "Gb4", "G4", "Ab4", "A4", "Bb4", "B4"], ["C5", "Db5", "D5", "Eb5", "E5", "F5", "Gb5", "G5", "Ab5", "A5", "Bb5", "B5"], ["C6", "Db6", "D6", "Eb6", "E6", "F6", "Gb6", "G6", "Ab6", "A6"]].map(function (octave, octaveIndex) {
+	      var notes = octave.map(function (noteName, noteIndex) {
+	        return React.createElement(PianoKey, {
+	          noteName: noteName,
+	          key: noteIndex,
+	          aCtx: this.props.aCtx,
+	          analyser: this.props.analyser });
+	      }.bind(this));
+	      return React.createElement(
+	        'div',
+	        { className: 'octave clearfix', key: octaveIndex },
+	        notes
+	      );
+	    }.bind(this));
 	    return React.createElement(
 	      'div',
 	      { className: 'piano-wrapper', id: 'piano-wrapper' },
@@ -38768,63 +38802,7 @@
 	      React.createElement(
 	        'div',
 	        { className: 'piano clearfix' },
-	        React.createElement(
-	          'div',
-	          { className: 'octave clearfix' },
-	          React.createElement(PianoKey, { noteName: "F3" }),
-	          React.createElement(PianoKey, { noteName: "Gb3" }),
-	          React.createElement(PianoKey, { noteName: "G3" }),
-	          React.createElement(PianoKey, { noteName: "Ab3" }),
-	          React.createElement(PianoKey, { noteName: "A3" }),
-	          React.createElement(PianoKey, { noteName: "Bb3" }),
-	          React.createElement(PianoKey, { noteName: "B3" })
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'octave clearfix' },
-	          React.createElement(PianoKey, { noteName: "C4" }),
-	          React.createElement(PianoKey, { noteName: "Db4" }),
-	          React.createElement(PianoKey, { noteName: "D4" }),
-	          React.createElement(PianoKey, { noteName: "Eb4" }),
-	          React.createElement(PianoKey, { noteName: "E4" }),
-	          React.createElement(PianoKey, { noteName: "F4" }),
-	          React.createElement(PianoKey, { noteName: "Gb4" }),
-	          React.createElement(PianoKey, { noteName: "G4" }),
-	          React.createElement(PianoKey, { noteName: "Ab4" }),
-	          React.createElement(PianoKey, { noteName: "A4" }),
-	          React.createElement(PianoKey, { noteName: "Bb4" }),
-	          React.createElement(PianoKey, { noteName: "B4" })
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'octave clearfix' },
-	          React.createElement(PianoKey, { noteName: "C5" }),
-	          React.createElement(PianoKey, { noteName: "Db5" }),
-	          React.createElement(PianoKey, { noteName: "D5" }),
-	          React.createElement(PianoKey, { noteName: "Eb5" }),
-	          React.createElement(PianoKey, { noteName: "E5" }),
-	          React.createElement(PianoKey, { noteName: "F5" }),
-	          React.createElement(PianoKey, { noteName: "Gb5" }),
-	          React.createElement(PianoKey, { noteName: "G5" }),
-	          React.createElement(PianoKey, { noteName: "Ab5" }),
-	          React.createElement(PianoKey, { noteName: "A5" }),
-	          React.createElement(PianoKey, { noteName: "Bb5" }),
-	          React.createElement(PianoKey, { noteName: "B5" })
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'octave clearfix' },
-	          React.createElement(PianoKey, { noteName: "C6" }),
-	          React.createElement(PianoKey, { noteName: "Db6" }),
-	          React.createElement(PianoKey, { noteName: "D6" }),
-	          React.createElement(PianoKey, { noteName: "Eb6" }),
-	          React.createElement(PianoKey, { noteName: "E6" }),
-	          React.createElement(PianoKey, { noteName: "F6" }),
-	          React.createElement(PianoKey, { noteName: "Gb6" }),
-	          React.createElement(PianoKey, { noteName: "G6" }),
-	          React.createElement(PianoKey, { noteName: "Ab6" }),
-	          React.createElement(PianoKey, { noteName: "A6" })
-	        )
+	        pianoKeys
 	      ),
 	      React.createElement(Drawbars, null)
 	    );
@@ -38851,7 +38829,7 @@
 	    };
 	  },
 	  componentDidMount: function () {
-	    this.note = new Note(Tones[this.props.noteName]);
+	    this.note = new Note(Tones[this.props.noteName], this.props.aCtx, this.props.analyser);
 	    KeyStore.addListener(this.checkForNotes);
 	  },
 	  componentWillUnmount: function () {
@@ -38996,58 +38974,47 @@
 /* 211 */
 /***/ function(module, exports) {
 
-	var vCtx, vCanvas;
-	
-	document.addEventListener("DOMContentLoaded", function () {
-	  vCanvas = document.getElementById("visualizer-canvas");
-	  vCtx = vCanvas.getContext("2d");
-	});
-	
-	var aCtx = new (window.AudioContext || window.webkitAudioContext)();
-	
-	var Note = function (freq) {
-	  this.analyser = aCtx.createAnalyser();
-	  this.analyser.fftSize = 2048;
-	  this.bufferLength = this.analyser.frequencyBinCount;
-	  this.dataArray = new Uint8Array(this.bufferLength);
+	var Note = function (freq, aCtx, analyser) {
+	  this.aCtx = aCtx;
+	  this.analyser = analyser;
 	
 	  // INSTRUMENT 1
-	  this.osc1 = aCtx.createOscillator();
+	  this.osc1 = this.aCtx.createOscillator();
 	  this.osc1.type = "sine";
 	  this.osc1.frequency.value = freq;
-	  this.osc1.start(aCtx.currentTime);
+	  this.osc1.start(this.aCtx.currentTime);
 	
-	  this.gain1 = aCtx.createGain();
+	  this.gain1 = this.aCtx.createGain();
 	  this.gain1.gain.value = 0;
 	  this.osc1.connect(this.gain1);
 	
 	  // INSTRUMENT 2
-	  this.osc2 = aCtx.createOscillator();
+	  this.osc2 = this.aCtx.createOscillator();
 	  this.osc2.type = "triangle";
 	  this.osc2.frequency.value = freq;
-	  this.osc2.start(aCtx.currentTime);
+	  this.osc2.start(this.aCtx.currentTime);
 	
-	  this.gain2 = aCtx.createGain();
+	  this.gain2 = this.aCtx.createGain();
 	  this.gain2.gain.value = 0;
 	  this.osc2.connect(this.gain2);
 	
 	  // INSTRUMENT 3
-	  this.osc3 = aCtx.createOscillator();
+	  this.osc3 = this.aCtx.createOscillator();
 	  this.osc3.type = "sawtooth";
 	  this.osc3.frequency.value = freq;
-	  this.osc3.start(aCtx.currentTime);
+	  this.osc3.start(this.aCtx.currentTime);
 	
-	  this.gain3 = aCtx.createGain();
+	  this.gain3 = this.aCtx.createGain();
 	  this.gain3.gain.value = 0;
 	  this.osc3.connect(this.gain3);
 	
 	  // INSTRUMENT 4
-	  this.osc4 = aCtx.createOscillator();
+	  this.osc4 = this.aCtx.createOscillator();
 	  this.osc4.type = "square";
 	  this.osc4.frequency.value = freq;
-	  this.osc4.start(aCtx.currentTime);
+	  this.osc4.start(this.aCtx.currentTime);
 	
-	  this.gain4 = aCtx.createGain();
+	  this.gain4 = this.aCtx.createGain();
 	  this.gain4.gain.value = 0;
 	  this.osc4.connect(this.gain4);
 	
@@ -39056,8 +39023,6 @@
 	  this.gain2.connect(this.analyser);
 	  this.gain3.connect(this.analyser);
 	  this.gain4.connect(this.analyser);
-	
-	  this.analyser.connect(aCtx.destination);
 	};
 	
 	Note.prototype = {
@@ -39066,10 +39031,6 @@
 	    this.gain2.gain.value = vols[1];
 	    this.gain3.gain.value = vols[2];
 	    this.gain4.gain.value = vols[3];
-	
-	    this.analyser.getByteTimeDomainData(this.dataArray);
-	    this.drawLine();
-	    this.drawGraph();
 	  },
 	
 	  stop: function () {
@@ -39077,50 +39038,6 @@
 	    this.gain2.gain.value = 0;
 	    this.gain3.gain.value = 0;
 	    this.gain4.gain.value = 0;
-	  },
-	  drawLine: function () {
-	    vCtx.fillStyle = 'rgba(200, 200, 200, 0.5)';
-	    vCtx.fillRect(0, 0, 400, 150);
-	
-	    vCtx.lineWidth = 2;
-	    vCtx.strokeStyle = 'rgb(0, 0, 0)';
-	
-	    vCtx.beginPath();
-	
-	    var sliceWidth = 400 * 1.0 / this.bufferLength;
-	    var x = 0;
-	
-	    for (var i = 0; i < this.bufferLength; i++) {
-	
-	      var v = this.dataArray[i] / 128.0;
-	      var y = v * 150 / 2;
-	
-	      if (i === 0) {
-	        vCtx.moveTo(x, y);
-	      } else {
-	        vCtx.lineTo(x, y);
-	      }
-	
-	      x += sliceWidth;
-	    }
-	
-	    vCtx.lineTo(400, 150 / 2);
-	    vCtx.stroke();
-	  },
-	  drawGraph: function () {
-	    vCtx.fillStyle = 'rgba(158, 117, 117, 0.5)';
-	    vCtx.fillRect(0, 0, 400, 150);
-	    var barWidth = 150 / this.bufferLength * 2.5;
-	    var barHeight;
-	    var x = 0;
-	    for (var i = 0; i < this.bufferLength; i++) {
-	      barHeight = this.dataArray[i] / 2;
-	
-	      vCtx.fillStyle = 'rgb(' + (barHeight + 100) + ',50,50)';
-	      vCtx.fillRect(x, 150 - barHeight / 2, barWidth, barHeight);
-	
-	      x += barWidth + 1;
-	    }
 	  }
 	};
 	

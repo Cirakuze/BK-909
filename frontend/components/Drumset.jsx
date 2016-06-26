@@ -13,12 +13,11 @@ var DrumConstants = require('../constants/DrumConstants');
 module.exports = React.createClass({
   getInitialState: function () {
     return ({
-      ctx: new (window.AudioContext || window.webkitAudioContext),
       piano: false
     });
   },
   componentDidMount: function () {
-    var ctx = this.state.ctx;
+    var ctx = this.props.aCtx;
     DrumActions.receiveDrum(new Bass(ctx));
 
     $(document).keydown(function (e) {
@@ -97,60 +96,16 @@ module.exports = React.createClass({
     }.bind(this));
   },
   render: function () {
-    var now = this.state.ctx.currentTime;
-
-    var BassedLeft = new Bass(this.state.ctx);
-    var BassedRight = new Bass(this.state.ctx);
-    var Snared = new Snare(this.state.ctx);
-    var HiHatted = new HiHat(this.state.ctx);
-    var TommedHi = new Toms(this.state.ctx, "high");
-    var TommedMid = new Toms(this.state.ctx, "mid");
-    var TommedLow = new Toms(this.state.ctx, "low");
-    var RideCymballed = new RideCymbal(this.state.ctx);
-    var CrashCymballed = new CrashCymbal(this.state.ctx);
-
+    var drumPieces = Object.keys(DrumConstants).map(function (drum, key) {
+      return <Drumpiece ctx={this.props.aCtx}
+        drumName={DrumConstants[drum]}
+        key={key}
+        />;
+    }.bind(this));
+    
     return (
       <div className="drumset">
-        <Drumpiece
-          ctx={this.state.ctx}
-          drumName={DrumConstants.cymbalride}
-          drumType={RideCymballed} />
-        <Drumpiece
-          ctx={this.state.ctx}
-          drumName={DrumConstants.cymbalcrash}
-          drumType={CrashCymballed} />
-
-        <Drumpiece
-          ctx={this.state.ctx}
-          drumName={DrumConstants.tomhigh}
-          drumType={TommedHi} />
-        <Drumpiece
-          ctx={this.state.ctx}
-          drumName={DrumConstants.tommid}
-          drumType={TommedMid} />
-        <Drumpiece
-          ctx={this.state.ctx}
-          drumName={DrumConstants.tomlow}
-          drumType={TommedLow} />
-
-        <Drumpiece
-          ctx={this.state.ctx}
-          drumName={DrumConstants.hihat}
-          drumType={HiHatted} />
-
-        <Drumpiece
-          ctx={this.state.ctx}
-          drumName={DrumConstants.snare}
-          drumType={Snared} />
-
-        <Drumpiece
-          ctx={this.state.ctx}
-          drumName={DrumConstants.bassleft}
-          drumType={BassedLeft} />
-        <Drumpiece
-          ctx={this.state.ctx}
-          drumName={DrumConstants.bassright}
-          drumType={BassedRight} />
+        {drumPieces}
 
         <div className="cymbal-stand-legs">
           <div className="cymbal-stand-legs-1"></div>
