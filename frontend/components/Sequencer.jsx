@@ -98,13 +98,19 @@ module.exports = React.createClass({
 
           this.setState({error:""});
           if (this.state.switching) {
+            // SWITCHING
             var newBank = SequencerConstants.codeToBeat[e.keyCode];
             if (!newBank) {
               // this.setState({error:"That bank does not exist!"});
             } else {
               SequencerActions.switchBank(newBank);
               this.manageLEDs();
-              this.setState({switching:false});
+              this.setState({
+                switching:false,
+                currentRow: 1,
+                rows: Math.floor(this.state.leds.length / 16)
+              });
+              this.displayCurrentRow();
             }
           } else {
             if (e.keyCode === 192) {

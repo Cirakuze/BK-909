@@ -31546,13 +31546,19 @@
 	
 	          this.setState({ error: "" });
 	          if (this.state.switching) {
+	            // SWITCHING
 	            var newBank = SequencerConstants.codeToBeat[e.keyCode];
 	            if (!newBank) {
 	              // this.setState({error:"That bank does not exist!"});
 	            } else {
 	                SequencerActions.switchBank(newBank);
 	                this.manageLEDs();
-	                this.setState({ switching: false });
+	                this.setState({
+	                  switching: false,
+	                  currentRow: 1,
+	                  rows: Math.floor(this.state.leds.length / 16)
+	                });
+	                this.displayCurrentRow();
 	              }
 	          } else {
 	            if (e.keyCode === 192) {
@@ -38529,15 +38535,15 @@
 	  Object.keys(_banks[_currentBank]).forEach(function (drum) {
 	    var oldBeats = _banks[_currentBank][drum].length;
 	    if (newBeats == oldBeats) {
-	      console.log("NO CHANGE");
+	      // console.log("NO CHANGE");
 	    } else if (newBeats > oldBeats) {
-	      var last16 = _banks[_currentBank][drum].slice(-16);
-	      _banks[_currentBank][drum] = _banks[_currentBank][drum].concat(last16);
-	      // console.log(_banks[_currentBank][drum]);
-	    } else if (newBeats < oldBeats) {
-	        _banks[_currentBank][drum].splice(-(oldBeats - newBeats));
+	        var last16 = _banks[_currentBank][drum].slice(-16);
+	        _banks[_currentBank][drum] = _banks[_currentBank][drum].concat(last16);
 	        // console.log(_banks[_currentBank][drum]);
-	      }
+	      } else if (newBeats < oldBeats) {
+	          _banks[_currentBank][drum].splice(-(oldBeats - newBeats));
+	          // console.log(_banks[_currentBank][drum]);
+	        }
 	  });
 	}
 	

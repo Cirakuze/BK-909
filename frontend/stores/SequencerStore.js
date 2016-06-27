@@ -56,7 +56,7 @@ function updateLength(length) {
   Object.keys(_banks[_currentBank]).forEach(function (drum) {
     var oldBeats = _banks[_currentBank][drum].length;
     if (newBeats == oldBeats) {
-      console.log("NO CHANGE");
+      // console.log("NO CHANGE");
     } else if (newBeats > oldBeats) {
       var last16 = _banks[_currentBank][drum].slice(-16);
       _banks[_currentBank][drum] =
