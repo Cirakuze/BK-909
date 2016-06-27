@@ -775,7 +775,7 @@ div.instructions {
   border-radius: 10px;
   padding-right: 15px;
   padding-left: 15px;
-  transition: all 2s ease;
+  transition: all 0.5s ease;
 }
 
 div.instructions,
@@ -1005,12 +1005,23 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 }
 
 
+
 /*VISUALIZER*/
-canvas#visualizer-canvas {
+canvas#oscilloscope {
   position: fixed;
   width: 100%;
   height: 100%;
   top: 0px;
   left: 0px;
   z-index: -1;
+  margin-top: 300px;
+}
+
+canvas#frequencyGraph {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: -2;
 }
