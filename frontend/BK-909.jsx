@@ -42,26 +42,26 @@ var App = React.createClass({
     this.times = new Uint8Array(this.analyser.frequencyBinCount);
   },
   drawLine: function () {
-    this.analyser.getByteTimeDomainData(this.times);
-
-    oscopeCtx.fillStyle = 'rgba(220, 221, 200, 0.5)';
-    oscopeCtx.fillRect(0, 0, linesWidth, linesHeight);
-    oscopeCtx.lineWidth = 1.5;
-    oscopeCtx.beginPath();
-    var sliceWidth = linesWidth * 1.0 / this.bufferLength;
-    var x = 0;
-    for(var i = 0; i < this.bufferLength; i++) {
-      var v = this.times[i] / 128.0;
-      var y = v * linesHeight/8;
-      if(i === 0) {
-        oscopeCtx.moveTo(x, y);
-      } else {
-        oscopeCtx.lineTo(x, y);
-      }
-      x += sliceWidth / 6;
-    }
-    oscopeCtx.lineTo(linesWidth, linesHeight/2);
-    oscopeCtx.stroke();
+    // this.analyser.getByteTimeDomainData(this.times);
+    //
+    // oscopeCtx.fillStyle = 'rgba(220, 221, 200, 0.5)';
+    // oscopeCtx.fillRect(0, 0, linesWidth, linesHeight);
+    // oscopeCtx.lineWidth = 1.5;
+    // oscopeCtx.beginPath();
+    // var sliceWidth = linesWidth * 1.0 / this.bufferLength;
+    // var x = 0;
+    // for(var i = 0; i < this.bufferLength; i++) {
+    //   var v = this.times[i] / 128.0;
+    //   var y = v * linesHeight/8;
+    //   if(i === 0) {
+    //     oscopeCtx.moveTo(x, y);
+    //   } else {
+    //     oscopeCtx.lineTo(x, y);
+    //   }
+    //   x += sliceWidth / 6;
+    // }
+    // oscopeCtx.lineTo(linesWidth, linesHeight/2);
+    // oscopeCtx.stroke();
   },
   drawGraph: function () {
     this.analyser.getByteFrequencyData(this.freqs);
@@ -109,7 +109,6 @@ var App = React.createClass({
     this.analyser.maxDecibels = 50;
 
     setInterval(function () {
-      this.drawLine();
       this.drawGraph();
     }.bind(this), 30);
   },
