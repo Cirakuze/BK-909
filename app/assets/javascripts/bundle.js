@@ -115,7 +115,7 @@
 	    var x = 0;
 	    for (var i = 0; i < this.bufferLength; i++) {
 	      barHeight = this.freqs[i] / 2;
-	      var rgb = this.rgbfy(barHeight);
+	      var rgb = this.rgbfy(i * 16);
 	      var roy = rgb[0],
 	          gee = rgb[1],
 	          biv = rgb[2];
@@ -125,6 +125,7 @@
 	    }
 	  },
 	  rgbfy: function (num) {
+	    // num *= Math.random() * 10;
 	    if (num > 1785) {
 	      num = num % 1785;
 	    }
@@ -166,7 +167,7 @@
 	    setInterval(function () {
 	      this.drawLine();
 	      this.drawGraph();
-	    }.bind(this), 10);
+	    }.bind(this), 25);
 	  },
 	  render: function () {
 	    return React.createElement(
