@@ -262,8 +262,7 @@ module.exports = React.createClass({
         <div className="instructions-wrapper">
           <div id="instructions-header">
             <h1>Instructions:</h1>
-            <h3 id="short">Short version</h3>
-            <p>Press the space bar! Enjoy :D</p>
+            <p>Press the space bar!</p>
             <p>Press the right arrow key to see the organ</p>
             <p>Left arrow to come back</p>
             <h3 onClick={this.showInstructions}>Long version (click to expand)</h3>

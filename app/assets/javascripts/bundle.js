@@ -31746,14 +31746,9 @@
 	            'Instructions:'
 	          ),
 	          React.createElement(
-	            'h3',
-	            { id: 'short' },
-	            'Short version'
-	          ),
-	          React.createElement(
 	            'p',
 	            null,
-	            'Press the space bar! Enjoy :D'
+	            'Press the space bar!'
 	          ),
 	          React.createElement(
 	            'p',
