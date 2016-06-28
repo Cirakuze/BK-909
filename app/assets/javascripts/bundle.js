@@ -39212,9 +39212,9 @@
 	
 	var _volumes = {
 	  Organ: "0.1",
-	  Wood: "0.05",
-	  Brass: "0.0375",
-	  String: "0.0250"
+	  Wood: "0.1",
+	  Brass: "0.1",
+	  String: "0.1"
 	};
 	
 	VolumeStore.__onDispatch = function (payload) {
