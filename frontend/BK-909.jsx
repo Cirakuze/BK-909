@@ -68,7 +68,7 @@ var App = React.createClass({
 
     freGraphCtx.fillStyle = 'rgba(220, 221, 200, 0.5)';
     freGraphCtx.fillRect(0, 0, graphWidth, graphHeight);
-    var barWidth = (graphWidth / this.bufferLength) * 2.5;
+    var barWidth = (graphWidth / this.bufferLength) * 1.0;
     var barHeight;
     var x = 0;
     for(var i = 0; i < this.bufferLength; i++) {
