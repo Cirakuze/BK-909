@@ -88,19 +88,19 @@
 	
 	    oscopeCtx.fillStyle = 'rgba(220, 221, 200, 0.5)';
 	    oscopeCtx.fillRect(0, 0, linesWidth, linesHeight);
-	    oscopeCtx.lineWidth = 0.25;
+	    oscopeCtx.lineWidth = 1.5;
 	    oscopeCtx.beginPath();
 	    var sliceWidth = linesWidth * 1.0 / this.bufferLength;
 	    var x = 0;
 	    for (var i = 0; i < this.bufferLength; i++) {
 	      var v = this.times[i] / 128.0;
-	      var y = v * linesHeight / 4;
+	      var y = v * linesHeight / 8;
 	      if (i === 0) {
 	        oscopeCtx.moveTo(x, y);
 	      } else {
 	        oscopeCtx.lineTo(x, y);
 	      }
-	      x += sliceWidth;
+	      x += sliceWidth / 6;
 	    }
 	    oscopeCtx.lineTo(linesWidth, linesHeight / 2);
 	    oscopeCtx.stroke();
@@ -115,17 +115,16 @@
 	    var x = 0;
 	    for (var i = 0; i < this.bufferLength; i++) {
 	      barHeight = this.freqs[i] / 2;
-	      var rgb = this.rgbfy(i * 16);
+	      var rgb = this.rgbfy(i * 10);
 	      var roy = rgb[0],
 	          gee = rgb[1],
 	          biv = rgb[2];
 	      freGraphCtx.fillStyle = 'rgba(' + roy + ', ' + gee + ', ' + biv + ', 0.5)';
 	      freGraphCtx.fillRect(x, graphHeight - barHeight / 2, barWidth, barHeight);
-	      x += barWidth + 1;
+	      x += barWidth + 0.025;
 	    }
 	  },
 	  rgbfy: function (num) {
-	    // num *= Math.random() * 10;
 	    if (num > 1785) {
 	      num = num % 1785;
 	    }
@@ -167,7 +166,7 @@
 	    setInterval(function () {
 	      this.drawLine();
 	      this.drawGraph();
-	    }.bind(this), 25);
+	    }.bind(this), 30);
 	  },
 	  render: function () {
 	    return React.createElement(
