@@ -44,7 +44,7 @@ var App = React.createClass({
   drawLine: function () {
     // this.analyser.getByteTimeDomainData(this.times);
     //
-    // oscopeCtx.fillStyle = 'rgba(220, 221, 200, 0.5)';
+    // oscopeCtx.fillwStyle = 'rgba(220, 221, 200, 0.5)';
     // oscopeCtx.fillRect(0, 0, linesWidth, linesHeight);
     // oscopeCtx.lineWidth = 1.5;
     // oscopeCtx.beginPath();
@@ -81,10 +81,14 @@ var App = React.createClass({
     }
   },
   rgbfy: function (num) {
-    if (num > 1785) {num = num % 1785;}
-    var roy = 0, gee = 0, biv = 0;
+    while (num > 2040) {
+      num = num % 2040;
+    }
 
-    if (num >= 1530) { // rgb(255, 0, 255);
+    var roy = 0, gee = 0, biv = 0;
+    if (num >= 1785) { // rgb(255, 255, 255);
+      roy = 255; gee = 255 - (Math.floor(num % 255)); biv = 255;
+    } else if (num >= 1530) { // rgb(255, 0, 255);
       roy = 255; gee = 0; biv = 255 - (Math.floor(num % 255));
     } else if (num >= 1275) { // rgb(0, 0, 255);
       roy = 0 + (Math.floor(num % 255)); gee = 0; biv = 255;

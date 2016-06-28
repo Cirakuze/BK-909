@@ -86,7 +86,7 @@
 	  drawLine: function () {
 	    // this.analyser.getByteTimeDomainData(this.times);
 	    //
-	    // oscopeCtx.fillStyle = 'rgba(220, 221, 200, 0.5)';
+	    // oscopeCtx.fillwStyle = 'rgba(220, 221, 200, 0.5)';
 	    // oscopeCtx.fillRect(0, 0, linesWidth, linesHeight);
 	    // oscopeCtx.lineWidth = 1.5;
 	    // oscopeCtx.beginPath();
@@ -125,14 +125,17 @@
 	    }
 	  },
 	  rgbfy: function (num) {
-	    if (num > 1785) {
-	      num = num % 1785;
+	    while (num > 2040) {
+	      num = num % 2040;
 	    }
+	
 	    var roy = 0,
 	        gee = 0,
 	        biv = 0;
-	
-	    if (num >= 1530) {
+	    if (num >= 1785) {
+	      // rgb(255, 255, 255);
+	      roy = 255;gee = 255 - Math.floor(num % 255);biv = 255;
+	    } else if (num >= 1530) {
 	      // rgb(255, 0, 255);
 	      roy = 255;gee = 0;biv = 255 - Math.floor(num % 255);
 	    } else if (num >= 1275) {
@@ -31138,12 +31141,12 @@
 	  this.setup();
 	
 	  this.gain1.gain.setValueAtTime(0.8, time);
-	  this.gain1.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
+	  this.gain1.gain.exponentialRampToValueAtTime(0.0000000001, time + 0.5);
 	  this.osc.frequency.setValueAtTime(60, time);
 	  this.osc.frequency.exponentialRampToValueAtTime(0.001, time + 0.5);
 	
 	  this.gain2.gain.setValueAtTime(0.75, time);
-	  this.gain2.gain.exponentialRampToValueAtTime(0.001, time + 0.55);
+	  this.gain2.gain.exponentialRampToValueAtTime(0.0000000001, time + 0.55);
 	  this.osc2.frequency.setValueAtTime(50, time);
 	  this.osc2.frequency.exponentialRampToValueAtTime(0.001, time + 0.55);
 	
@@ -31258,17 +31261,17 @@
 	  this.osc.frequency.setValueAtTime(this.pitch, time);
 	  this.gain.gain.setValueAtTime(0.1, time);
 	  this.osc.frequency.exponentialRampToValueAtTime(0.01, time + 1.00);
-	  this.gain.gain.exponentialRampToValueAtTime(0.01, time + 1.00);
+	  this.gain.gain.exponentialRampToValueAtTime(0.0000000001, time + 1.00);
 	
 	  this.osc2.frequency.setValueAtTime(this.pitch - 15, time);
 	  this.gain2.gain.setValueAtTime(0.1, time);
 	  this.osc2.frequency.exponentialRampToValueAtTime(0.01, time + 0.75);
-	  this.gain2.gain.exponentialRampToValueAtTime(0.01, time + 0.75);
+	  this.gain2.gain.exponentialRampToValueAtTime(0.0000000001, time + 0.75);
 	
 	  this.osc3.frequency.setValueAtTime(this.pitch - 25, time);
 	  this.gain3.gain.setValueAtTime(0.1, time);
 	  this.osc3.frequency.exponentialRampToValueAtTime(0.01, time + 0.5);
-	  this.gain3.gain.exponentialRampToValueAtTime(0.01, time + 0.5);
+	  this.gain3.gain.exponentialRampToValueAtTime(0.0000000001, time + 0.5);
 	
 	  this.osc.start(time);
 	  this.osc.stop(time + 1.00);
@@ -31750,17 +31753,17 @@
 	          React.createElement(
 	            'p',
 	            null,
-	            '1) Press the space bar and enjoy :D'
+	            'Press the space bar! Enjoy :D'
 	          ),
 	          React.createElement(
 	            'p',
 	            null,
-	            '2) Press the right arrow key to see the organ'
+	            'Press the right arrow key to see the organ'
 	          ),
 	          React.createElement(
 	            'p',
 	            null,
-	            '    Left arrow to come back'
+	            'Left arrow to come back'
 	          ),
 	          React.createElement(
 	            'h3',

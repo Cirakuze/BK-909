@@ -25,12 +25,12 @@ Bass.prototype.trigger = function(time) {
   this.setup();
 
   this.gain1.gain.setValueAtTime(0.8, time);
-  this.gain1.gain.exponentialRampToValueAtTime(0.001, time + 0.5);
+  this.gain1.gain.exponentialRampToValueAtTime(0.0000000001, time + 0.5);
   this.osc.frequency.setValueAtTime(60, time);
   this.osc.frequency.exponentialRampToValueAtTime(0.001, time + 0.5);
 
   this.gain2.gain.setValueAtTime(0.75, time);
-  this.gain2.gain.exponentialRampToValueAtTime(0.001, time + 0.55);
+  this.gain2.gain.exponentialRampToValueAtTime(0.0000000001, time + 0.55);
   this.osc2.frequency.setValueAtTime(50, time);
   this.osc2.frequency.exponentialRampToValueAtTime(0.001, time + 0.55);
 

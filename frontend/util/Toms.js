@@ -40,17 +40,17 @@ Toms.prototype.trigger = function(time) {
   this.osc.frequency.setValueAtTime(this.pitch, time);
   this.gain.gain.setValueAtTime(0.1, time);
   this.osc.frequency.exponentialRampToValueAtTime(0.01, time + 1.00);
-  this.gain.gain.exponentialRampToValueAtTime(0.01, time + 1.00);
+  this.gain.gain.exponentialRampToValueAtTime(0.0000000001, time + 1.00);
 
   this.osc2.frequency.setValueAtTime(this.pitch - 15, time);
   this.gain2.gain.setValueAtTime(0.1, time);
   this.osc2.frequency.exponentialRampToValueAtTime(0.01, time + 0.75);
-  this.gain2.gain.exponentialRampToValueAtTime(0.01, time + 0.75);
+  this.gain2.gain.exponentialRampToValueAtTime(0.0000000001, time + 0.75);
 
   this.osc3.frequency.setValueAtTime(this.pitch - 25, time);
   this.gain3.gain.setValueAtTime(0.1, time);
   this.osc3.frequency.exponentialRampToValueAtTime(0.01, time + 0.5);
-  this.gain3.gain.exponentialRampToValueAtTime(0.01, time + 0.5);
+  this.gain3.gain.exponentialRampToValueAtTime(0.0000000001, time + 0.5);
 
   this.osc.start(time);
   this.osc.stop(time + 1.00);
