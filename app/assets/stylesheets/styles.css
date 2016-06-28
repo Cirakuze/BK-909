@@ -1011,17 +1011,18 @@ canvas#oscilloscope {
   position: fixed;
   width: 100%;
   height: 100%;
-  top: 0px;
-  left: 0px;
+  top: 25%;
+  left: 0%;
   z-index: -1;
-  margin-top: 300px;
+  background: transparent;
 }
 
 canvas#frequencyGraph {
   position: fixed;
   width: 100%;
   height: 100%;
-  top: 0px;
-  left: 0px;
+  top: 67%;
+  left: 0%;
   z-index: -2;
+  background: transparent;
 }

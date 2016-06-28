@@ -49,7 +49,7 @@
 	var Drumset = __webpack_require__(168);
 	var Sequencer = __webpack_require__(184);
 	var Piano = __webpack_require__(207);
-	var height, width, oscope, oscopeCtx, freGraph, freGraphCtx;
+	var linesHeight, linesWidth, graphHeight, graphWidth, oscope, oscopeCtx, freGraph, freGraphCtx;
 	
 	document.addEventListener("DOMContentLoaded", function () {
 	  ReactDom.render(React.createElement(App, null), document.getElementById('root'));
@@ -59,8 +59,10 @@
 	  freGraph = document.getElementById("frequencyGraph");
 	  freGraphCtx = freGraph.getContext("2d");
 	
-	  height = 10;
-	  width = window.innerWidth;
+	  linesHeight = 75;
+	  linesWidth = window.innerWidth;
+	  graphHeight = 50;
+	  graphWidth = window.innerWidth;
 	});
 	
 	var App = React.createClass({
@@ -83,27 +85,16 @@
 	  },
 	  drawLine: function () {
 	    this.analyser.getByteTimeDomainData(this.times);
-	    // console.log(this.times);
-	    // for (var i = 0; i < this.analyser.frequencyBinCount; i++) {
-	    //   var value = this.times[i];
-	    //   var percent = value / 256;
-	    //   var height = height * percent;
-	    //   var offset = height - height - 1;
-	    //   var barWidth = width/this.analyser.frequencyBinCount;
-	    //   oscopeCtx.fillStyle = 'red';
-	    //   oscopeCtx.fillRect(i * barWidth, offset, 1, 2);
-	    // }
 	
 	    oscopeCtx.fillStyle = 'rgba(220, 221, 200, 0.5)';
-	    oscopeCtx.fillRect(0, 0, width, height);
-	    oscopeCtx.lineWidth = 2;
-	    oscopeCtx.strokeStyle = 'rgb(0, 0, 0)';
+	    oscopeCtx.fillRect(0, 0, linesWidth, linesHeight);
+	    oscopeCtx.lineWidth = 0.25;
 	    oscopeCtx.beginPath();
-	    var sliceWidth = width * 1.0 / this.bufferLength;
+	    var sliceWidth = linesWidth * 1.0 / this.bufferLength;
 	    var x = 0;
 	    for (var i = 0; i < this.bufferLength; i++) {
 	      var v = this.times[i] / 128.0;
-	      var y = v * height / 2;
+	      var y = v * linesHeight / 4;
 	      if (i === 0) {
 	        oscopeCtx.moveTo(x, y);
 	      } else {
@@ -111,45 +102,71 @@
 	      }
 	      x += sliceWidth;
 	    }
-	    oscopeCtx.lineTo(width, height / 2);
+	    oscopeCtx.lineTo(linesWidth, linesHeight / 2);
 	    oscopeCtx.stroke();
 	  },
 	  drawGraph: function () {
 	    this.analyser.getByteFrequencyData(this.freqs);
-	    // console.log(this.freqs);
-	    // for (var i = 0; i < this.analyser.frequencyBinCount; i++) {
-	    //   var value = this.freqs[i];
-	    //   var percent = value / 256;
-	    //   var height = height * percent;
-	    //   var offset = height - height - 1;
-	    //   var barWidth = width/this.analyser.frequencyBinCount;
-	    //   var hue = i/this.analyser.frequencyBinCount * 360;
-	    //   freGraphCtx.fillStyle = 'hsl(' + hue + ', 100%, 50%)';
-	    //   freGraphCtx.fillRect(i * barWidth, offset, barWidth, height);
-	    // }
 	
 	    freGraphCtx.fillStyle = 'rgba(220, 221, 200, 0.5)';
-	    freGraphCtx.fillRect(0, 0, width, height);
-	    var barWidth = width / this.bufferLength * 2.5;
+	    freGraphCtx.fillRect(0, 0, graphWidth, graphHeight);
+	    var barWidth = graphWidth / this.bufferLength * 2.5;
 	    var barHeight;
 	    var x = 0;
 	    for (var i = 0; i < this.bufferLength; i++) {
 	      barHeight = this.freqs[i] / 2;
-	      freGraphCtx.fillStyle = 'rgba(' + (barHeight + 50) + ', 221, 200, 0.5)';
-	      freGraphCtx.fillRect(x, height - barHeight / 2, barWidth, barHeight);
+	      var rgb = this.rgbfy(barHeight);
+	      var roy = rgb[0],
+	          gee = rgb[1],
+	          biv = rgb[2];
+	      freGraphCtx.fillStyle = 'rgba(' + roy + ', ' + gee + ', ' + biv + ', 0.5)';
+	      freGraphCtx.fillRect(x, graphHeight - barHeight / 2, barWidth, barHeight);
 	      x += barWidth + 1;
 	    }
 	  },
+	  rgbfy: function (num) {
+	    if (num > 1785) {
+	      num = num % 1785;
+	    }
+	    var roy = 0,
+	        gee = 0,
+	        biv = 0;
+	
+	    if (num >= 1530) {
+	      // rgb(255, 0, 255);
+	      roy = 255;gee = 0;biv = 255 - Math.floor(num % 255);
+	    } else if (num >= 1275) {
+	      // rgb(0, 0, 255);
+	      roy = 0 + Math.floor(num % 255);gee = 0;biv = 255;
+	    } else if (num >= 1020) {
+	      // rgb(0, 255, 255);
+	      roy = 0;gee = 255 - Math.floor(num % 255);biv = 255;
+	    } else if (num >= 765) {
+	      // rgb(0, 255, 0);
+	      roy = 0;gee = 255;biv = 0 + Math.floor(num % 255);
+	    } else if (num >= 510) {
+	      // rgb(255, 255, 0);
+	      roy = 255 - Math.floor(num % 255);gee = 255;biv = 0;
+	    } else if (num >= 255) {
+	      // rgb(255, 0, 0);
+	      roy = 255;gee = 0 + Math.floor(num % 255);biv = 0;
+	    } else if (num >= 0) {
+	      // rgb(0, 0, 0);
+	      roy = 0 + Math.floor(num % 255);gee = 0;biv = 0;
+	    }
+	
+	    return [roy, gee, biv];
+	  },
 	  componentDidMount: function () {
-	    // this.analyser.smoothingTimeConstant = 0.8;
-	    // this.analyser.fftSize = 2048;
-	    // this.analyser.minDecibels = -140;
-	    // this.analyser.maxDecibels = 0;
-	    //
-	    // setInterval(function () {
-	    //   this.drawLine();
-	    //   this.drawGraph();
-	    // }.bind(this), 1);
+	    this.analyser.smoothingTimeConstant = 0.8;
+	    this.analyser.fftSize = 1024;
+	    this.analyser.minDecibels = -140;
+	    this.analyser.maxDecibels = 50;
+	
+	    setInterval(function () {
+	      this.drawLine();
+	      this.drawGraph();
+	    }.bind(this), 10);
 	  },
 	  render: function () {
 	    return React.createElement(
@@ -38786,9 +38803,9 @@
 	var PianoKey = __webpack_require__(208);
 	var $ = __webpack_require__(176);
 	var KeyAction = __webpack_require__(212);
-	var Mapping = __webpack_require__(214);
+	var Mapping = __webpack_require__(215);
 	var KeyStore = __webpack_require__(209);
-	var Drawbars = __webpack_require__(215);
+	var Drawbars = __webpack_require__(216);
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -38879,7 +38896,7 @@
 	var Tones = __webpack_require__(210);
 	var Note = __webpack_require__(211);
 	var NoteToKey = __webpack_require__(213);
-	var VolumeStore = __webpack_require__(219);
+	var VolumeStore = __webpack_require__(214);
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -39088,17 +39105,19 @@
 	
 	Note.prototype = {
 	  start: function (vols) {
-	    this.gain1.gain.value = vols[0];
-	    this.gain2.gain.value = vols[1];
-	    this.gain3.gain.value = vols[2];
-	    this.gain4.gain.value = vols[3];
+	    var time = this.aCtx.currentTime;
+	    this.gain1.gain.setValueAtTime(vols[0], time);
+	    this.gain2.gain.setValueAtTime(vols[1], time);
+	    this.gain3.gain.setValueAtTime(vols[2], time);
+	    this.gain4.gain.setValueAtTime(vols[3], time);
 	  },
 	
 	  stop: function () {
-	    this.gain1.gain.value = 0;
-	    this.gain2.gain.value = 0;
-	    this.gain3.gain.value = 0;
-	    this.gain4.gain.value = 0;
+	    var time = this.aCtx.currentTime;
+	    this.gain1.gain.exponentialRampToValueAtTime(0.0000000001, time);
+	    this.gain2.gain.exponentialRampToValueAtTime(0.0000000001, time);
+	    this.gain3.gain.exponentialRampToValueAtTime(0.0000000001, time);
+	    this.gain4.gain.exponentialRampToValueAtTime(0.0000000001, time);
 	  }
 	};
 	
@@ -39185,6 +39204,54 @@
 
 /***/ },
 /* 214 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Store = __webpack_require__(186).Store;
+	var VolumeDispatcher = __webpack_require__(172);
+	var VolumeStore = new Store(VolumeDispatcher);
+	
+	var _volumes = {
+	  Organ: "0.1",
+	  Wood: "0.05",
+	  Brass: "0.0375",
+	  String: "0.0250"
+	};
+	
+	VolumeStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case "UPDATE_VOLUMES":
+	      updateVolumes(payload.volumes);
+	      this.__emitChange();
+	      break;
+	  }
+	};
+	
+	VolumeStore.volumes = function (category) {
+	  var instruments = [];
+	  var volumes = [];
+	  Object.keys(_volumes).forEach(function (i) {
+	    instruments.push(i);
+	    volumes.push(_volumes[i]);
+	  });
+	  if (category === "v") {
+	    return volumes;
+	  } else if (category === "i") {
+	    return instruments;
+	  } else {
+	    return [instruments, volumes];
+	  }
+	};
+	
+	function updateVolumes(volumes) {
+	  Object.keys(_volumes).forEach(function (i, idx) {
+	    _volumes[i] = volumes[idx];
+	  });
+	}
+	
+	module.exports = VolumeStore;
+
+/***/ },
+/* 215 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -39237,13 +39304,13 @@
 	};
 
 /***/ },
-/* 215 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
 	var $ = __webpack_require__(176);
-	var VolumeActions = __webpack_require__(218);
-	var VolumeStore = __webpack_require__(219);
+	var VolumeActions = __webpack_require__(217);
+	var VolumeStore = __webpack_require__(214);
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -39389,9 +39456,7 @@
 	});
 
 /***/ },
-/* 216 */,
-/* 217 */,
-/* 218 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var DrumDispatcher = __webpack_require__(172);
@@ -39404,54 +39469,6 @@
 	    });
 	  }
 	};
-
-/***/ },
-/* 219 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Store = __webpack_require__(186).Store;
-	var VolumeDispatcher = __webpack_require__(172);
-	var VolumeStore = new Store(VolumeDispatcher);
-	
-	var _volumes = {
-	  Organ: "0.1",
-	  Wood: "0.05",
-	  Brass: "0.0375",
-	  String: "0.0250"
-	};
-	
-	VolumeStore.__onDispatch = function (payload) {
-	  switch (payload.actionType) {
-	    case "UPDATE_VOLUMES":
-	      updateVolumes(payload.volumes);
-	      this.__emitChange();
-	      break;
-	  }
-	};
-	
-	VolumeStore.volumes = function (category) {
-	  var instruments = [];
-	  var volumes = [];
-	  Object.keys(_volumes).forEach(function (i) {
-	    instruments.push(i);
-	    volumes.push(_volumes[i]);
-	  });
-	  if (category === "v") {
-	    return volumes;
-	  } else if (category === "i") {
-	    return instruments;
-	  } else {
-	    return [instruments, volumes];
-	  }
-	};
-	
-	function updateVolumes(volumes) {
-	  Object.keys(_volumes).forEach(function (i, idx) {
-	    _volumes[i] = volumes[idx];
-	  });
-	}
-	
-	module.exports = VolumeStore;
 
 /***/ }
 /******/ ]);

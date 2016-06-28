@@ -51,17 +51,19 @@ var Note = function (freq, aCtx, analyser) {
 
 Note.prototype = {
   start: function (vols) {
-    this.gain1.gain.value = vols[0];
-    this.gain2.gain.value = vols[1];
-    this.gain3.gain.value = vols[2];
-    this.gain4.gain.value = vols[3];
+    var time = this.aCtx.currentTime;
+    this.gain1.gain.setValueAtTime(vols[0], time);
+    this.gain2.gain.setValueAtTime(vols[1], time);
+    this.gain3.gain.setValueAtTime(vols[2], time);
+    this.gain4.gain.setValueAtTime(vols[3], time);
   },
 
   stop: function () {
-    this.gain1.gain.value = 0;
-    this.gain2.gain.value = 0;
-    this.gain3.gain.value = 0;
-    this.gain4.gain.value = 0;
+    var time = this.aCtx.currentTime;
+    this.gain1.gain.exponentialRampToValueAtTime(0.0000000001, time);
+    this.gain2.gain.exponentialRampToValueAtTime(0.0000000001, time);
+    this.gain3.gain.exponentialRampToValueAtTime(0.0000000001, time);
+    this.gain4.gain.exponentialRampToValueAtTime(0.0000000001, time);
   }
 };
 
