@@ -138,9 +138,6 @@ var App = React.createClass({
           <Drumset
             aCtx={this.aCtx}
             analyser={this.analyser} />
-          <div id="color-buttons">
-
-          </div>
           <Sequencer
             aCtx={this.aCtx}
             analyser={this.analyser} />

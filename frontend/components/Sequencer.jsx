@@ -85,6 +85,7 @@ module.exports = React.createClass({
           }
 
           if (e.keyCode === 32) {
+            e.preventDefault();
             // spacebar
             this.togglePlayBack();
           } else if (e.keyCode === 13) {
@@ -176,9 +177,11 @@ module.exports = React.createClass({
   togglePlayBack: function () {
     if (!this.state.playing) {
       this.intervalID = setInterval(function () {
+        // set an interval ID to clear later
         this.stepTheSequence();
       }.bind(this), 15000 / this.state.tempo);
     } else {
+      // clear the interval
       clearInterval(this.intervalID);
     }
     this.setState({playing: !this.state.playing});
@@ -258,6 +261,11 @@ module.exports = React.createClass({
     }.bind(this));
     return (
       <div className="sequencer-wrapper">
+        <div id="buttons-wrapper">
+          <div id="buttons">
+            <div onClick={this.togglePlayBack} id="button">DEMO</div>
+          </div>
+        </div>
         <div className="instructions-wrapper">
           <div id="instructions-header">
             <h1>Instructions:</h1>

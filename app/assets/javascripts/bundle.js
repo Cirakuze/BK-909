@@ -225,7 +225,6 @@
 	        React.createElement(Drumset, {
 	          aCtx: this.aCtx,
 	          analyser: this.analyser }),
-	        React.createElement('div', { id: 'color-buttons' }),
 	        React.createElement(Sequencer, {
 	          aCtx: this.aCtx,
 	          analyser: this.analyser })
@@ -31555,6 +31554,7 @@
 	          }
 	
 	          if (e.keyCode === 32) {
+	            e.preventDefault();
 	            // spacebar
 	            this.togglePlayBack();
 	          } else if (e.keyCode === 13) {
@@ -31645,9 +31645,11 @@
 	  togglePlayBack: function () {
 	    if (!this.state.playing) {
 	      this.intervalID = setInterval(function () {
+	        // set an interval ID to clear later
 	        this.stepTheSequence();
 	      }.bind(this), 15000 / this.state.tempo);
 	    } else {
+	      // clear the interval
 	      clearInterval(this.intervalID);
 	    }
 	    this.setState({ playing: !this.state.playing });
@@ -31736,6 +31738,19 @@
 	    return React.createElement(
 	      'div',
 	      { className: 'sequencer-wrapper' },
+	      React.createElement(
+	        'div',
+	        { id: 'buttons-wrapper' },
+	        React.createElement(
+	          'div',
+	          { id: 'buttons' },
+	          React.createElement(
+	            'div',
+	            { onClick: this.togglePlayBack, id: 'button' },
+	            'DEMO'
+	          )
+	        )
+	      ),
 	      React.createElement(
 	        'div',
 	        { className: 'instructions-wrapper' },
