@@ -17,8 +17,8 @@ body {
 /*HEADER*/
 .app {
   width: 100%;
-  height: 100%;
-  position: fixed;
+  min-height: 500px;
+  position: absolute;
   top: 0px;
   left: 0px;
   /*background-color: #789a8d;*/
