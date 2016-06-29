@@ -70,7 +70,9 @@
 	
 	  getInitialState: function () {
 	    this.setup();
-	    return {};
+	    return {
+	      color: true
+	    };
 	  },
 	  setup: function () {
 	    this.aCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -115,7 +117,7 @@
 	    var x = 0;
 	    for (var i = 0; i < this.bufferLength; i++) {
 	      barHeight = this.freqs[i] / 2;
-	      var rgb = this.rgbfy(i * 10);
+	      var rgb = this.rgbfy(i * 8);
 	      var roy = rgb[0],
 	          gee = rgb[1],
 	          biv = rgb[2];
@@ -223,6 +225,7 @@
 	        React.createElement(Drumset, {
 	          aCtx: this.aCtx,
 	          analyser: this.analyser }),
+	        React.createElement('div', { id: 'color-buttons' }),
 	        React.createElement(Sequencer, {
 	          aCtx: this.aCtx,
 	          analyser: this.analyser })
@@ -31639,9 +31642,6 @@
 	      tempo: newTempo
 	    });
 	  },
-	  updateTempo: function (e) {
-	    SequencerActions.updateTempo(e.currentTarget.value);
-	  },
 	  togglePlayBack: function () {
 	    if (!this.state.playing) {
 	      this.intervalID = setInterval(function () {
@@ -31693,6 +31693,7 @@
 	    } else if (this.state.tempo === 240) {
 	      $('#tempo').addClass('tempo-limit');
 	    }
+	    SequencerActions.updateTempo(this.state.tempo);
 	  },
 	  tempoDown: function () {
 	    if (this.state.tempo > 40) {
@@ -31707,6 +31708,7 @@
 	    } else if (this.state.tempo === 40) {
 	      $('#tempo').addClass('tempo-limit');
 	    }
+	    SequencerActions.updateTempo(this.state.tempo);
 	  },
 	  showInstructions: function () {
 	    $('.instructions').toggleClass('show-instructions');
@@ -31881,8 +31883,7 @@
 	            id: 'tempo',
 	            type: 'text',
 	            disabled: 'disabled',
-	            value: this.state.tempo,
-	            onChange: this.updateTempo }),
+	            value: this.state.tempo }),
 	          React.createElement(
 	            'div',
 	            { className: 'tempo-controlls' },

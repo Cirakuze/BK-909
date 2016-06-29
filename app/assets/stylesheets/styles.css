@@ -629,6 +629,19 @@ div.step-led {
 }
 
 
+/*COLORBUTTONS*/
+div#color-buttons {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 999999999;
+  height: 15px;
+  width: 15px;
+  background-color: #6e7187;
+}
+
+
+
 
 /*CONTROLLS*/
 

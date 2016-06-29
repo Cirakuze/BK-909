@@ -28,7 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
 var App = React.createClass({
   getInitialState: function () {
     this.setup();
-    return ({});
+    return ({
+      color: true
+    });
   },
   setup: function () {
     this.aCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -73,7 +75,7 @@ var App = React.createClass({
     var x = 0;
     for(var i = 0; i < this.bufferLength; i++) {
       barHeight = this.freqs[i]/2;
-      var rgb = this.rgbfy(i * 10);
+      var rgb = this.rgbfy(i * 8);
       var roy = rgb[0], gee = rgb[1], biv = rgb[2];
       freGraphCtx.fillStyle = 'rgba(' + roy + ', ' + gee + ', ' + biv + ', 0.5)';
       freGraphCtx.fillRect(x,graphHeight-barHeight/2,barWidth,barHeight);
@@ -136,6 +138,9 @@ var App = React.createClass({
           <Drumset
             aCtx={this.aCtx}
             analyser={this.analyser} />
+          <div id="color-buttons">
+
+          </div>
           <Sequencer
             aCtx={this.aCtx}
             analyser={this.analyser} />

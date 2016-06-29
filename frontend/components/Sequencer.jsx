@@ -173,9 +173,6 @@ module.exports = React.createClass({
       tempo: newTempo
     });
   },
-  updateTempo: function (e) {
-    SequencerActions.updateTempo(e.currentTarget.value);
-  },
   togglePlayBack: function () {
     if (!this.state.playing) {
       this.intervalID = setInterval(function () {
@@ -227,6 +224,7 @@ module.exports = React.createClass({
     } else if (this.state.tempo === 240) {
       $('#tempo').addClass('tempo-limit');
     }
+    SequencerActions.updateTempo(this.state.tempo);
   },
   tempoDown: function () {
     if (this.state.tempo > 40) {
@@ -241,6 +239,7 @@ module.exports = React.createClass({
     } else if (this.state.tempo === 40) {
       $('#tempo').addClass('tempo-limit');
     }
+    SequencerActions.updateTempo(this.state.tempo);
   },
   showInstructions: function () {
     $('.instructions').toggleClass('show-instructions');
@@ -302,8 +301,7 @@ module.exports = React.createClass({
               id="tempo"
               type="text"
               disabled="disabled"
-              value={this.state.tempo}
-              onChange={this.updateTempo}/>
+              value={this.state.tempo} />
             <div className="tempo-controlls">
               <i className="fa fa-angle-up"
                 id="vol-up"
