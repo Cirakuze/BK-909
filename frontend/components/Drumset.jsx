@@ -22,6 +22,7 @@ module.exports = React.createClass({
     DrumActions.receiveDrum(new Bass(this.ctx, this.analyser));
 
     $(document).keydown(function (e) {
+      if (e.keyCode === 32) {e.preventDefault();}
       if (e.keyCode === 39) {
         // RIGHT ARROW
         this.setState({piano: true});

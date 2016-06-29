@@ -20561,6 +20561,9 @@
 	    DrumActions.receiveDrum(new Bass(this.ctx, this.analyser));
 	
 	    $(document).keydown(function (e) {
+	      if (e.keyCode === 32) {
+	        e.preventDefault();
+	      }
 	      if (e.keyCode === 39) {
 	        // RIGHT ARROW
 	        this.setState({ piano: true });
@@ -31517,6 +31520,9 @@
 	    this.sListener = SequencerStore.addListener(this.manageLEDs);
 	
 	    document.addEventListener('keydown', function (e) {
+	      if (e.keyCode === 32) {
+	        e.preventDefault();
+	      }
 	      if (e.keyCode === 39) {
 	        // RIGHT ARROW
 	        this.setState({ piano: true });
@@ -38727,6 +38733,9 @@
 	  },
 	  componentDidMount: function () {
 	    $(document).keydown(function (e) {
+	      if (e.keyCode === 32) {
+	        e.preventDefault();
+	      }
 	      if (e.keyCode === 39) {
 	        // RIGHT ARROW
 	        this.setState({ piano: true });
@@ -39284,6 +39293,9 @@
 	    this.receiveVolumes();
 	
 	    $(document).keydown(function (e) {
+	      if (e.keyCode === 32) {
+	        e.preventDefault();
+	      }
 	      if (e.keyCode === 13 || e.keyCode === 9) {
 	        // Enter key or Tab key
 	        e.preventDefault();

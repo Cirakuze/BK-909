@@ -16,6 +16,7 @@ module.exports = React.createClass({
     this.receiveVolumes();
 
     $(document).keydown(function (e) {
+      if (e.keyCode === 32) {e.preventDefault();}
       if (e.keyCode === 13 || e.keyCode === 9) {
         // Enter key or Tab key
         e.preventDefault();

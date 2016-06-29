@@ -44,6 +44,7 @@ module.exports = React.createClass({
     this.sListener = SequencerStore.addListener(this.manageLEDs);
 
     document.addEventListener('keydown', function (e) {
+      if (e.keyCode === 32) {e.preventDefault();}
       if (e.keyCode === 39) {
         // RIGHT ARROW
         this.setState({piano: true});
