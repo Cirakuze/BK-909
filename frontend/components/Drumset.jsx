@@ -23,9 +23,11 @@ module.exports = React.createClass({
 
     $(document).keydown(function (e) {
       if (e.keyCode === 39) {
+        // RIGHT ARROW
         this.setState({piano: true});
         $('.drumset').addClass('hidden');
       } else if (e.keyCode === 37) {
+        // LEFT ARROW
         this.setState({piano: false});
         $('.drumset').removeClass('hidden');
       } else {

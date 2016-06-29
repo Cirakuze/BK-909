@@ -16,9 +16,11 @@ module.exports = React.createClass({
   componentDidMount: function () {
     $(document).keydown(function(e){
       if (e.keyCode === 39) {
+        // RIGHT ARROW
         this.setState({piano: true});
         $('#piano-wrapper').addClass('shown');
       } else if (e.keyCode === 37) {
+        // LEFT ARROW
         this.setState({piano: false});
         $('#piano-wrapper').removeClass('shown');
       }

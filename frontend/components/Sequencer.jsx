@@ -45,16 +45,16 @@ module.exports = React.createClass({
 
     document.addEventListener('keydown', function (e) {
       if (e.keyCode === 39) {
+        // RIGHT ARROW
         this.setState({piano: true});
         $('.sequencer-wrapper').addClass('hidden');
       } else if (e.keyCode === 37) {
+        // LEFT ARROW
         this.setState({piano: false});
         $('.sequencer-wrapper').removeClass('hidden');
       } else {
         if (this.state.piano === false) {
           if (e.keyCode === 9) {
-            e.preventDefault();
-            // prevent tab from actually tabbing
             if (this.state.currentRow < this.state.rows) {
               // wrap row number
               this.setState({currentRow: this.state.currentRow + 1});
@@ -83,15 +83,16 @@ module.exports = React.createClass({
           }
 
           if (e.keyCode === 32) {
-            e.preventDefault();
             // spacebar
             this.togglePlayBack();
           } else if (e.keyCode === 13) {
             // enter
             this.resetSequence();
           } else if (e.keyCode === 38) {
+            e.preventDefault();
             this.tempoUp();
           } else if (e.keyCode == 40) {
+            e.preventDefault();
             this.tempoDown();
           }
 
@@ -287,9 +288,8 @@ module.exports = React.createClass({
             <p>&nbsp;&nbsp;&nbsp;-Switch between patterns by pressing tilde then a step key</p>
             <p>&nbsp;&nbsp;&nbsp;-Press +/- to lengthen/shorten pattern</p>
             <p>&nbsp;&nbsp;&nbsp;-Press tab to cycle through rows of pattern</p>
-            <p className="instructions-bullets">5) Patterns auto-save</p>
             <p>&nbsp;&nbsp;&nbsp;-Patterns 1, 2, 3, and 4 are presets</p>
-            <p className="instructions-bullets">6) Add organ</p>
+            <p className="instructions-bullets">5) Add organ</p>
             <p>&nbsp;&nbsp;&nbsp;-Press the right arrow key to access organ (left to come back)</p>
           </div>
         </div>

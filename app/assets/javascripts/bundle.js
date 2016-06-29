@@ -20562,9 +20562,11 @@
 	
 	    $(document).keydown(function (e) {
 	      if (e.keyCode === 39) {
+	        // RIGHT ARROW
 	        this.setState({ piano: true });
 	        $('.drumset').addClass('hidden');
 	      } else if (e.keyCode === 37) {
+	        // LEFT ARROW
 	        this.setState({ piano: false });
 	        $('.drumset').removeClass('hidden');
 	      } else {
@@ -31516,16 +31518,16 @@
 	
 	    document.addEventListener('keydown', function (e) {
 	      if (e.keyCode === 39) {
+	        // RIGHT ARROW
 	        this.setState({ piano: true });
 	        $('.sequencer-wrapper').addClass('hidden');
 	      } else if (e.keyCode === 37) {
+	        // LEFT ARROW
 	        this.setState({ piano: false });
 	        $('.sequencer-wrapper').removeClass('hidden');
 	      } else {
 	        if (this.state.piano === false) {
 	          if (e.keyCode === 9) {
-	            e.preventDefault();
-	            // prevent tab from actually tabbing
 	            if (this.state.currentRow < this.state.rows) {
 	              // wrap row number
 	              this.setState({ currentRow: this.state.currentRow + 1 });
@@ -31554,15 +31556,16 @@
 	          }
 	
 	          if (e.keyCode === 32) {
-	            e.preventDefault();
 	            // spacebar
 	            this.togglePlayBack();
 	          } else if (e.keyCode === 13) {
 	            // enter
 	            this.resetSequence();
 	          } else if (e.keyCode === 38) {
+	            e.preventDefault();
 	            this.tempoUp();
 	          } else if (e.keyCode == 40) {
+	            e.preventDefault();
 	            this.tempoDown();
 	          }
 	
@@ -31840,18 +31843,13 @@
 	          ),
 	          React.createElement(
 	            'p',
-	            { className: 'instructions-bullets' },
-	            '5) Patterns auto-save'
-	          ),
-	          React.createElement(
-	            'p',
 	            null,
 	            '   -Patterns 1, 2, 3, and 4 are presets'
 	          ),
 	          React.createElement(
 	            'p',
 	            { className: 'instructions-bullets' },
-	            '6) Add organ'
+	            '5) Add organ'
 	          ),
 	          React.createElement(
 	            'p',
@@ -38730,9 +38728,11 @@
 	  componentDidMount: function () {
 	    $(document).keydown(function (e) {
 	      if (e.keyCode === 39) {
+	        // RIGHT ARROW
 	        this.setState({ piano: true });
 	        $('#piano-wrapper').addClass('shown');
 	      } else if (e.keyCode === 37) {
+	        // LEFT ARROW
 	        this.setState({ piano: false });
 	        $('#piano-wrapper').removeClass('shown');
 	      }
