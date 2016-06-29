@@ -630,13 +630,13 @@ div.step-led {
 
 
 /*COLORBUTTONS*/
-div#buttons-wrapper {
+div.demo-buttons-wrapper {
   width: 100%;
   top: 0;
   position: absolute;
 }
 
-div#buttons {
+div.demo-buttons {
   width: 800px;
   margin: auto;
   height: 300px;
@@ -645,11 +645,18 @@ div#buttons {
   top: -450px;
 }
 
-div#button {
-  width: 100px;
-  height: 50px;
-  background-color: #a02cb3;
+div.demo-button {
+  display: inline-block;
+  padding: 5px;
+  border-radius: 15px;
+  background-color: #736C78;
   margin-bottom: 15px;
+  font-size: 36px;
+}
+
+div.demo-button:hover {
+  cursor: pointer;
+  background-color: #3a6fb6;
 }
 
 
@@ -771,8 +778,8 @@ div.instructions *:hover {
 
 div#instructions-header {
   position: absolute;
-  right: -385px;
-  top: -630px;
+  right: -290px;
+  top: -570px;
   /*background-color: #7893f2;*/
 }
 

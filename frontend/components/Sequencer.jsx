@@ -47,11 +47,9 @@ module.exports = React.createClass({
       if (e.keyCode === 39) {
         this.setState({piano: true});
         $('.sequencer-wrapper').addClass('hidden');
-        $('.drumset').addClass('hidden');
       } else if (e.keyCode === 37) {
         this.setState({piano: false});
         $('.sequencer-wrapper').removeClass('hidden');
-        $('.drumset').removeClass('hidden');
       } else {
         if (this.state.piano === false) {
           if (e.keyCode === 9) {
@@ -261,18 +259,19 @@ module.exports = React.createClass({
     }.bind(this));
     return (
       <div className="sequencer-wrapper">
-        <div id="buttons-wrapper">
-          <div id="buttons">
-            <div onClick={this.togglePlayBack} id="button">DEMO</div>
+        <div className="demo-buttons-wrapper">
+          <div className="demo-buttons">
+            <div
+              onClick={this.togglePlayBack}
+              className="demo-button">
+              DEMO
+            </div>
           </div>
         </div>
         <div className="instructions-wrapper">
-          <div id="instructions-header">
+          <div id="instructions-header" onClick={this.showInstructions}>
             <h1>Instructions:</h1>
-            <p>Press the space bar!</p>
-            <p>Press the right arrow key to see the organ</p>
-            <p>Left arrow to come back</p>
-            <h3 onClick={this.showInstructions}>Long version (click to expand)</h3>
+            <h3>(click to expand)</h3>
           </div>
           <div className="instructions">
             <p className="instructions-bullets">1) Pick a drum</p>

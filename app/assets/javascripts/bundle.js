@@ -20563,8 +20563,10 @@
 	    $(document).keydown(function (e) {
 	      if (e.keyCode === 39) {
 	        this.setState({ piano: true });
+	        $('.drumset').addClass('hidden');
 	      } else if (e.keyCode === 37) {
 	        this.setState({ piano: false });
+	        $('.drumset').removeClass('hidden');
 	      } else {
 	        if (this.state.piano === false) {
 	          var now = this.ctx.currentTime;
@@ -31516,11 +31518,9 @@
 	      if (e.keyCode === 39) {
 	        this.setState({ piano: true });
 	        $('.sequencer-wrapper').addClass('hidden');
-	        $('.drumset').addClass('hidden');
 	      } else if (e.keyCode === 37) {
 	        this.setState({ piano: false });
 	        $('.sequencer-wrapper').removeClass('hidden');
-	        $('.drumset').removeClass('hidden');
 	      } else {
 	        if (this.state.piano === false) {
 	          if (e.keyCode === 9) {
@@ -31740,13 +31740,15 @@
 	      { className: 'sequencer-wrapper' },
 	      React.createElement(
 	        'div',
-	        { id: 'buttons-wrapper' },
+	        { className: 'demo-buttons-wrapper' },
 	        React.createElement(
 	          'div',
-	          { id: 'buttons' },
+	          { className: 'demo-buttons' },
 	          React.createElement(
 	            'div',
-	            { onClick: this.togglePlayBack, id: 'button' },
+	            {
+	              onClick: this.togglePlayBack,
+	              className: 'demo-button' },
 	            'DEMO'
 	          )
 	        )
@@ -31756,31 +31758,16 @@
 	        { className: 'instructions-wrapper' },
 	        React.createElement(
 	          'div',
-	          { id: 'instructions-header' },
+	          { id: 'instructions-header', onClick: this.showInstructions },
 	          React.createElement(
 	            'h1',
 	            null,
 	            'Instructions:'
 	          ),
 	          React.createElement(
-	            'p',
-	            null,
-	            'Press the space bar!'
-	          ),
-	          React.createElement(
-	            'p',
-	            null,
-	            'Press the right arrow key to see the organ'
-	          ),
-	          React.createElement(
-	            'p',
-	            null,
-	            'Left arrow to come back'
-	          ),
-	          React.createElement(
 	            'h3',
-	            { onClick: this.showInstructions },
-	            'Long version (click to expand)'
+	            null,
+	            '(click to expand)'
 	          )
 	        ),
 	        React.createElement(
@@ -38743,11 +38730,11 @@
 	  componentDidMount: function () {
 	    $(document).keydown(function (e) {
 	      if (e.keyCode === 39) {
-	        $('#piano-wrapper').addClass('shown');
 	        this.setState({ piano: true });
+	        $('#piano-wrapper').addClass('shown');
 	      } else if (e.keyCode === 37) {
-	        $('#piano-wrapper').removeClass('shown');
 	        this.setState({ piano: false });
+	        $('#piano-wrapper').removeClass('shown');
 	      }
 	
 	      if (e.keyCode === 8) {
