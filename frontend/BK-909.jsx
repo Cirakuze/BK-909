@@ -41,7 +41,7 @@ var App = React.createClass({
     this.bufferLength = this.analyser.frequencyBinCount;
 
     this.freqs = new Uint8Array(this.analyser.frequencyBinCount);
-    this.times = new Uint8Array(this.analyser.frequencyBinCount);
+    // this.times = new Uint8Array(this.analyser.frequencyBinCount);
   },
   drawLine: function () {
     // this.analyser.getByteTimeDomainData(this.times);

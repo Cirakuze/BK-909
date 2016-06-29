@@ -83,7 +83,7 @@
 	    this.bufferLength = this.analyser.frequencyBinCount;
 	
 	    this.freqs = new Uint8Array(this.analyser.frequencyBinCount);
-	    this.times = new Uint8Array(this.analyser.frequencyBinCount);
+	    // this.times = new Uint8Array(this.analyser.frequencyBinCount);
 	  },
 	  drawLine: function () {
 	    // this.analyser.getByteTimeDomainData(this.times);
@@ -39175,9 +39175,9 @@
 	
 	var _volumes = {
 	  "Organ": "0.1",
-	  "Wood": "0.1",
-	  "Brass": "0.1",
-	  "String": "0.1",
+	  "Wood": "0.0125",
+	  "Brass": "0.0125",
+	  "String": "0.0125",
 	  "8va": "0.0125",
 	  "8vb": "0.025",
 	  "15mb": "0.05"
