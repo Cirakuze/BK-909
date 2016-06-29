@@ -83,9 +83,7 @@ var App = React.createClass({
     }
   },
   rgbfy: function (num) {
-    while (num > 2040) {
-      num = num % 2040;
-    }
+    while (num > 2040) {num = num % 2040;}
 
     var roy = 0, gee = 0, biv = 0;
     if (num >= 1785) { // rgb(255, 255, 255);

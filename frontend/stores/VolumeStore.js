@@ -3,10 +3,13 @@ var VolumeDispatcher = require('../dispatcher/Dispatcher');
 var VolumeStore = new Store(VolumeDispatcher);
 
 var _volumes = {
-  Organ: "0.1",
-  Wood: "0.1",
-  Brass: "0.1",
-  String: "0.1",
+  "Organ": "0.1",
+  "Wood": "0.1",
+  "Brass": "0.1",
+  "String": "0.1",
+  "8va": "0.0125",
+  "8vb": "0.025",
+  "15mb": "0.05"
 };
 
 VolumeStore.__onDispatch = function (payload) {
