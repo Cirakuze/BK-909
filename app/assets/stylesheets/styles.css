@@ -772,8 +772,7 @@ div.instructions-wrapper {
 
 div#instructions-header *:hover,
 div.instructions *:hover {
-  color: #283f42;
-  cursor: pointer;
+  cursor: default;
 }
 
 div#instructions-header {
